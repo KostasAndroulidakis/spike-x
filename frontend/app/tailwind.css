@@ -1,10 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  background-color: white;
+  @media (prefers-color-scheme: dark) {
+    background-color: #000000; /* Equivalent to dark:bg-gray-950 */
+  }
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
