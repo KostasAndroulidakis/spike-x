@@ -1,3 +1,5 @@
+import Navbar from "./components/Navbar";
+
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 
 import "./tailwind.css";
