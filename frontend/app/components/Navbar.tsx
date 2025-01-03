@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Menu, Brain, Activity, Eye, Monitor, Bug, Download, Settings, HelpCircle } from 'lucide-react';
 
 export default function Navbar() {
   const [isFileMenuOpen, setFileMenuOpen] = useState(false);
@@ -7,6 +8,15 @@ export default function Navbar() {
     setFileMenuOpen(!isFileMenuOpen);
   };
 
+  const menuItems = [
+    { Icon: Brain, text: 'Architecture' },
+    { Icon: Activity, text: 'Training' },
+    { Icon: Eye, text: 'Visualization' },
+    { Icon: Monitor, text: 'Monitor' },
+    { Icon: Bug, text: 'Debug' },
+    { Icon: Download, text: 'Export' }
+  ];
+
   return (
     <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
       <div className="relative">
@@ -14,8 +24,10 @@ export default function Navbar() {
           className="px-4 py-2 hover:bg-gray-700 rounded"
           onClick={toggleFileMenu}
         >
+          <Menu className="w-5 h-5 inline-block mr-2" />
           File
         </button>
+
         {isFileMenuOpen && (
           <ul className="absolute bg-gray-700 text-white mt-2 rounded shadow-lg p-2">
             <li className="hover:bg-gray-600 px-4 py-2 rounded">New Model</li>
@@ -29,9 +41,25 @@ export default function Navbar() {
           </ul>
         )}
       </div>
+
       <div className="flex space-x-4">
-        <button className="px-4 py-2 hover:bg-gray-700 rounded">Settings</button>
-        <button className="px-4 py-2 hover:bg-gray-700 rounded">Help</button>
+        {menuItems.map(({ Icon, text }) => (
+          <button key={text} className="px-4 py-2 hover:bg-gray-700 rounded">
+            <Icon className="w-5 h-5 inline-block mr-2" />
+            {text}
+          </button>
+        ))}
+      </div>
+
+      <div className="flex space-x-4">
+        <button className="px-4 py-2 hover:bg-gray-700 rounded">
+          <Settings className="w-5 h-5 inline-block mr-2" />
+          Settings
+        </button>
+        <button className="px-4 py-2 hover:bg-gray-700 rounded">
+          <HelpCircle className="w-5 h-5 inline-block mr-2" />
+          Help
+        </button>
       </div>
     </nav>
   );
