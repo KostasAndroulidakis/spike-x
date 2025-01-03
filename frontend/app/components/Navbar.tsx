@@ -29,15 +29,14 @@ export default function Navbar() {
         </button>
 
         {isFileMenuOpen && (
-          <ul className="absolute bg-gray-700 text-white mt-2 rounded shadow-lg p-2">
+          <ul className="absolute bg-gray-700 text-white mt-2 rounded shadow-lg p-2 min-w-max">
             <li className="hover:bg-gray-600 px-4 py-2 rounded">New Model</li>
             <li className="hover:bg-gray-600 px-4 py-2 rounded">Open Model</li>
             <li className="hover:bg-gray-600 px-4 py-2 rounded">Save Model</li>
             <li className="hover:bg-gray-600 px-4 py-2 rounded">Save Model As</li>
             <li className="hover:bg-gray-600 px-4 py-2 rounded">Rename Model</li>
             <li className="hover:bg-gray-600 px-4 py-2 rounded">Delete Model</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Recent Models</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Exit</li>
+            <li className="hover:bg-gray-600 px-4 py-2 rounded">Export Model</li>
           </ul>
         )}
       </div>
