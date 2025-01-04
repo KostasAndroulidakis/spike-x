@@ -14,8 +14,8 @@ export default function Architecture() {
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
-      axonsEnabled: true,
-      dendritesEnabled: true,
+      axonsEnabled: false,
+      dendritesEnabled: false,
     },
     {
       name: "Output Layer",
@@ -27,12 +27,12 @@ export default function Architecture() {
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
-      axonsEnabled: true,
-      dendritesEnabled: true,
+      axonsEnabled: false,
+      dendritesEnabled: false,
     },
   ]);
 
-  // Προσθήκη νέου layer
+  // Add a new layer
   const addLayer = () => {
     const updatedLayers = [...layers];
     if (updatedLayers.length > 1) {
@@ -51,21 +51,21 @@ export default function Architecture() {
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
-      axonsEnabled: true,
-      dendritesEnabled: true,
+      axonsEnabled: false,
+      dendritesEnabled: false,
     });
 
     setLayers(updatedLayers);
   };
 
-  // Ενημέρωση χαρακτηριστικών layer
+  // Update layer attributes
   const updateLayer = (index: number, key: string, value: any) => {
     const updatedLayers = [...layers];
     updatedLayers[index] = { ...updatedLayers[index], [key]: value };
     setLayers(updatedLayers);
   };
 
-  // Διαγραφή layer
+  // Delete a layer
   const deleteLayer = (index: number) => {
     if (layers.length <= 2) {
       alert("There must be at least two layers (Input and Output).");
@@ -91,11 +91,11 @@ export default function Architecture() {
         Add Layer
       </button>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {layers.map((layer, index) => (
           <div
             key={index}
-            className="p-4 border border-gray-300 rounded space-y-2"
+            className="p-4 border border-gray-300 rounded space-y-4"
           >
             <div className="flex justify-between items-center">
               <h2 className="text-lg font-semibold">{layer.name}</h2>
@@ -109,170 +109,178 @@ export default function Architecture() {
               )}
             </div>
 
-            <div className="grid grid-cols-4 gap-4">
-              {/* Total Neurons */}
-              <div>
-                <label className="block mb-1">Total Neurons:</label>
-                <input
-                  type="number"
-                  className="w-full p-1 border rounded"
-                  value={layer.neurons}
-                  onChange={(e) =>
-                    updateLayer(index, "neurons", parseInt(e.target.value, 10))
-                  }
-                />
-              </div>
-
-              {/* Neuron Type */}
-              <div>
-                <label className="block mb-1">Neuron Type:</label>
-                <select
-                  className="w-full p-1 border rounded"
-                  value={layer.neuronType}
-                  onChange={(e) =>
-                    updateLayer(index, "neuronType", e.target.value)
-                  }
-                >
-                  <option value="LIF">LIF</option>
-                  <option value="Izhikevich">Izhikevich</option>
-                  <option value="Hodgkin-Huxley">Hodgkin-Huxley</option>
-                </select>
-              </div>
-
-              {/* Total Synapses */}
-              <div>
-                <label className="block mb-1">Total Synapses:</label>
-                <input
-                  type="number"
-                  className="w-full p-1 border rounded"
-                  value={layer.synapses}
-                  onChange={(e) =>
-                    updateLayer(index, "synapses", parseInt(e.target.value, 10))
-                  }
-                />
-              </div>
-
-              {/* Synapse Type */}
-              <div>
-                <label className="block mb-1">Synapse Type:</label>
-                <select
-                  className="w-full p-1 border rounded"
-                  value={layer.synapseType}
-                  onChange={(e) =>
-                    updateLayer(index, "synapseType", e.target.value)
-                  }
-                >
-                  <option value="STDP">STDP</option>
-                  <option value="R-STDP">R-STDP</option>
-                  <option value="Hodgkin-Huxley">Hodgkin-Huxley</option>
-                  <option value="AdEx">AdEx</option>
-                  <option value="LIF">LIF</option>
-                  <option value="SRM">SRM</option>
-                </select>
-              </div>
-
-              {/* Total Axons with Toggle */}
-              <div className="flex items-end">
-                <Toggle
-                  checked={layer.axonsEnabled}
-                  onChange={() =>
-                    updateLayer(index, "axonsEnabled", !layer.axonsEnabled)
-                  }
-                  icons={false}
-                  className="mr-2"
-                />
-                <div className="flex-1">
-                  <label className="block mb-1">Total Axons:</label>
-                  <input
-                    type="number"
-                    className="w-full p-1 border rounded"
-                    value={layer.axons}
-                    onChange={(e) =>
-                      updateLayer(index, "axons", parseInt(e.target.value, 10))
-                    }
-                    disabled={!layer.axonsEnabled}
-                  />
+            {/* Neurons & Synapses Section */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Neurons */}
+              <div className="space-y-2">
+                <label className="block font-medium">Neurons</label>
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <label className="block mb-1">Total Neurons:</label>
+                    <input
+                      type="number"
+                      className="w-full p-2 border rounded"
+                      value={layer.neurons}
+                      onChange={(e) =>
+                        updateLayer(index, "neurons", parseInt(e.target.value, 10))
+                      }
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block mb-1">Neuron Type:</label>
+                    <select
+                      className="w-full p-2 border rounded"
+                      value={layer.neuronType}
+                      onChange={(e) =>
+                        updateLayer(index, "neuronType", e.target.value)
+                      }
+                    >
+                      <option value="LIF">LIF</option>
+                      <option value="Izhikevich">Izhikevich</option>
+                      <option value="Hodgkin-Huxley">Hodgkin-Huxley</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
-              {/* Axon Type */}
-              <div>
-                <label className="block mb-1">Axon Type:</label>
-                <select
-                  className="w-full p-1 border rounded"
-                  value={layer.axonType}
-                  onChange={(e) =>
-                    updateLayer(index, "axonType", e.target.value)
-                  }
-                  disabled={!layer.axonsEnabled}
-                >
-                  <option value="LIF">Leaky Integrate-and-Fire (LIF)</option>
-                  <option value="Hodgkin-Huxley">Hodgkin-Huxley Model</option>
-                  <option value="QIF">Quadratic Integrate-and-Fire (QIF)</option>
-                  <option value="Izhikevich">Izhikevich Model</option>
-                  <option value="SRM">Spike Response Model (SRM)</option>
-                </select>
-              </div>
-
-              {/* Total Dendrites with Toggle */}
-              <div className="flex items-center">
-                <Toggle
-                  checked={layer.dendritesEnabled}
-                  onChange={() =>
-                    updateLayer(
-                      index,
-                      "dendritesEnabled",
-                      !layer.dendritesEnabled
-                    )
-                  }
-                  icons={false}
-                  className="mr-2"
-                />
-                <div className="flex-1">
-                  <label className="block mb-1">Total Dendrites:</label>
-                  <input
-                    type="number"
-                    className="w-full p-1 border rounded"
-                    value={layer.dendrites}
-                    onChange={(e) =>
-                      updateLayer(
-                        index,
-                        "dendrites",
-                        parseInt(e.target.value, 10)
-                      )
-                    }
-                    disabled={!layer.dendritesEnabled}
-                  />
+              {/* Synapses */}
+              <div className="space-y-2">
+                <label className="block font-medium">Synapses</label>
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <label className="block mb-1">Total Synapses:</label>
+                    <input
+                      type="number"
+                      className="w-full p-2 border rounded"
+                      value={layer.synapses}
+                      onChange={(e) =>
+                        updateLayer(index, "synapses", parseInt(e.target.value, 10))
+                      }
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block mb-1">Synapse Type:</label>
+                    <select
+                      className="w-full p-2 border rounded"
+                      value={layer.synapseType}
+                      onChange={(e) =>
+                        updateLayer(index, "synapseType", e.target.value)
+                      }
+                    >
+                      <option value="STDP">STDP</option>
+                      <option value="R-STDP">R-STDP</option>
+                      <option value="Hodgkin-Huxley">Hodgkin-Huxley</option>
+                      <option value="AdEx">AdEx</option>
+                      <option value="LIF">LIF</option>
+                      <option value="SRM">SRM</option>
+                    </select>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Dendrite Type */}
-              <div>
-                <label className="block mb-1">Dendrite Type:</label>
-                <select
-                  className="w-full p-1 border rounded"
-                  value={layer.dendriteType}
-                  onChange={(e) =>
-                    updateLayer(index, "dendriteType", e.target.value)
-                  }
-                  disabled={!layer.dendritesEnabled}
-                >
-                  <option value="Multi-Compartment Models">
-                    Multi-Compartment Models
-                  </option>
-                  <option value="NLIF">
-                    Non-linear Integrate-and-Fire (NLIF)
-                  </option>
-                  <option value="AdEx">
-                    AdEx Model (Adaptive Exponential Integrate-and-Fire)
-                  </option>
-                  <option value="Theta Neuron Model">
-                    Theta Neuron Model
-                  </option>
-                  <option value="Branch-Specific Plasticity Models">
-                    Branch-Specific Plasticity Models
-                  </option>
-                </select>
+            {/* Axons & Dendrites Section */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Axons */}
+              <div className="space-y-2">
+                <label className="font-medium flex items-center">
+                  <Toggle
+                    checked={layer.axonsEnabled}
+                    onChange={() =>
+                      updateLayer(index, "axonsEnabled", !layer.axonsEnabled)
+                    }
+                    icons={false}
+                    className="mr-2"
+                  />
+                  Axons
+                </label>
+                {layer.axonsEnabled && (
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <label className="block mb-1">Total Axons:</label>
+                      <input
+                        type="number"
+                        className="w-full p-2 border rounded"
+                        value={layer.axons}
+                        onChange={(e) =>
+                          updateLayer(index, "axons", parseInt(e.target.value, 10))
+                        }
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <label className="block mb-1">Axon Type:</label>
+                      <select
+                        className="w-full p-2 border rounded"
+                        value={layer.axonType}
+                        onChange={(e) =>
+                          updateLayer(index, "axonType", e.target.value)
+                        }
+                      >
+                        <option value="LIF">Leaky Integrate-and-Fire (LIF)</option>
+                        <option value="Hodgkin-Huxley">Hodgkin-Huxley Model</option>
+                        <option value="QIF">Quadratic Integrate-and-Fire (QIF)</option>
+                        <option value="Izhikevich">Izhikevich Model</option>
+                        <option value="SRM">Spike Response Model (SRM)</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Dendrites */}
+              <div className="space-y-2">
+                <label className="font-medium flex items-center">
+                  <Toggle
+                    checked={layer.dendritesEnabled}
+                    onChange={() =>
+                      updateLayer(index, "dendritesEnabled", !layer.dendritesEnabled)
+                    }
+                    icons={false}
+                    className="mr-2"
+                  />
+                  Dendrites
+                </label>
+                {layer.dendritesEnabled && (
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <label className="block mb-1">Total Dendrites:</label>
+                      <input
+                        type="number"
+                        className="w-full p-2 border rounded"
+                        value={layer.dendrites}
+                        onChange={(e) =>
+                          updateLayer(index, "dendrites", parseInt(e.target.value, 10))
+                        }
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <label className="block mb-1">Dendrite Type:</label>
+                      <select
+                        className="w-full p-2 border rounded"
+                        value={layer.dendriteType}
+                        onChange={(e) =>
+                          updateLayer(index, "dendriteType", e.target.value)
+                        }
+                      >
+                        <option value="Multi-Compartment Models">
+                          Multi-Compartment Models
+                        </option>
+                        <option value="NLIF">
+                          Non-linear Integrate-and-Fire (NLIF)
+                        </option>
+                        <option value="AdEx">
+                          AdEx Model (Adaptive Exponential Integrate-and-Fire)
+                        </option>
+                        <option value="Theta Neuron Model">
+                          Theta Neuron Model
+                        </option>
+                        <option value="Branch-Specific Plasticity Models">
+                          Branch-Specific Plasticity Models
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
