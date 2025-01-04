@@ -4,9 +4,9 @@
 
 html,
 body {
-  @apply bg-black;
+  @apply bg-black text-white;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+@media (prefers-color-scheme: dark) {
+  color-scheme: dark;
 }
