@@ -17,7 +17,7 @@ export default function Navbar() {
   };
 
   const menuItems = [
-    { Icon: House, text: "Main", path: "/_index" },
+    { Icon: House, text: "Main", path: "/home" },
     { Icon: Brain, text: "Architecture", path: "/architecture" },
     { Icon: Activity, text: "Training", path: "/training" },
     { Icon: Eye, text: "Visualization", path: "/visualization" },
