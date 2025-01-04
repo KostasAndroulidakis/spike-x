@@ -4,6 +4,7 @@ import {
   House,
   Brain,
   Activity,
+  Library,
   Eye,
   Settings,
 } from "lucide-react";
@@ -21,6 +22,7 @@ export default function Navbar() {
     { Icon: Brain, text: "Architecture", path: "/architecture" },
     { Icon: Activity, text: "Training", path: "/training" },
     { Icon: Eye, text: "Visualization", path: "/visualization" },
+    { Icon: Library, text: "Library", path: "/library" },
   ];
 
   return (
