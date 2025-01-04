@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Menu,
+  House,
   Brain,
   Activity,
   Eye,
@@ -16,6 +17,7 @@ export default function Navbar() {
   };
 
   const menuItems = [
+    { Icon: House, text: "Main", path: "/_index" },
     { Icon: Brain, text: "Architecture", path: "/architecture" },
     { Icon: Activity, text: "Training", path: "/training" },
     { Icon: Eye, text: "Visualization", path: "/visualization" },
