@@ -10,12 +10,17 @@ export default function Architecture() {
       neuronType: "LIF",
       synapses: 20,
       synapseType: "STDP",
+      synapticConnectionType: "Excitation",
       axons: 10,
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
       axonsEnabled: false,
       dendritesEnabled: false,
+      membranePotentialEnabled: false,
+      membranePotential: 0,
+      synapticConstantsEnabled: false,
+      synapticConstants: 0,
     },
     {
       name: "Output Layer",
@@ -23,12 +28,17 @@ export default function Architecture() {
       neuronType: "LIF",
       synapses: 20,
       synapseType: "STDP",
+      synapticConnectionType: "Excitation",
       axons: 10,
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
       axonsEnabled: false,
       dendritesEnabled: false,
+      membranePotentialEnabled: false,
+      membranePotential: 0,
+      synapticConstantsEnabled: false,
+      synapticConstants: 0,
     },
   ]);
 
@@ -47,12 +57,17 @@ export default function Architecture() {
       neuronType: "LIF",
       synapses: 20,
       synapseType: "STDP",
+      synapticConnectionType: "Excitation",
       axons: 10,
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
       axonsEnabled: false,
       dendritesEnabled: false,
+      membranePotentialEnabled: false,
+      membranePotential: 0,
+      synapticConstantsEnabled: false,
+      synapticConstants: 0,
     });
 
     setLayers(updatedLayers);
@@ -176,10 +191,27 @@ export default function Architecture() {
                     </select>
                   </div>
                 </div>
+
+                {/* Synaptic Connection Type */}
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <label className="block mb-1">Synaptic Connection Type:</label>
+                    <select
+                      className="w-full p-2 border rounded"
+                      value={layer.synapticConnectionType}
+                      onChange={(e) =>
+                        updateLayer(index, "synapticConnectionType", e.target.value)
+                      }
+                    >
+                      <option value="Excitation">Excitation</option>
+                      <option value="Inhibition">Inhibition</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Axons & Dendrites Section */}
+            {/* Axons, Dendrites & Variables Section */}
             <div className="grid grid-cols-2 gap-4">
               {/* Axons */}
               <div className="space-y-2">
@@ -279,6 +311,73 @@ export default function Architecture() {
                         </option>
                       </select>
                     </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Variables Section */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Membrane Potential */}
+              <div className="space-y-2">
+                <label className="font-medium flex items-center">
+                  <Toggle
+                    checked={layer.membranePotentialEnabled}
+                    onChange={() =>
+                      updateLayer(
+                        index,
+                        "membranePotentialEnabled",
+                        !layer.membranePotentialEnabled
+                      )
+                    }
+                    icons={false}
+                    className="mr-2"
+                  />
+                  Membrane Potential
+                </label>
+                {layer.membranePotentialEnabled && (
+                  <div>
+                    <label className="block mb-1">Membrane Potential Value:</label>
+                    <input
+                      type="number"
+                      className="w-full p-2 border rounded"
+                      value={layer.membranePotential}
+                      onChange={(e) =>
+                        updateLayer(index, "membranePotential", parseFloat(e.target.value))
+                      }
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Synaptic Constants */}
+              <div className="space-y-2">
+                <label className="font-medium flex items-center">
+                  <Toggle
+                    checked={layer.synapticConstantsEnabled}
+                    onChange={() =>
+                      updateLayer(
+                        index,
+                        "synapticConstantsEnabled",
+                        !layer.synapticConstantsEnabled
+                      )
+                    }
+                    icons={false}
+                    className="mr-2"
+                  />
+                  Synaptic Constants
+                </label>
+                {layer.synapticConstantsEnabled && (
+                  <div>
+                    <label className="block mb-1">Synaptic Constants Value:</label>
+                    <input
+                      type="number"
+                      className="w-full p-2 border rounded"
+                      value={layer.synapticConstants}
+                      onChange={(e) =>
+                        updateLayer(index, "synapticConstants", parseFloat(e.target.value))
+                      }
+                    />
                   </div>
                 )}
               </div>
