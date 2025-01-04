@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-const Visualizer0: React.FC = () => {
+const visualizer0: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -101,4 +101,4 @@ const Visualizer0: React.FC = () => {
   return <div ref={mountRef} />;
 };
 
-export default Visualizer0;
+export default visualizer0;

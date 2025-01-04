@@ -1,4 +1,4 @@
-// spike-x/frontend/app/components/visualizer.tsx
+// spike-x/frontend/app/components/visualizer1.tsx
 
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -23,11 +23,11 @@ interface Layer {
   synapticConstant: number;
 }
 
-interface VisualizerProps {
+interface visualizer1Props {
   layers: Layer[];
 }
 
-const Visualizer: React.FC<VisualizerProps> = ({ layers }) => {
+const visualizer1: React.FC<visualizer1Props> = ({ layers }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -158,4 +158,4 @@ const Visualizer: React.FC<VisualizerProps> = ({ layers }) => {
   );
 };
 
-export default Visualizer;
+export default visualizer1;
