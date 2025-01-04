@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Brain, Activity, Eye, Monitor, Bug, Download, Settings, HelpCircle } from 'lucide-react';
 
+
 export default function Navbar() {
   const [isFileMenuOpen, setFileMenuOpen] = useState(false);
 
@@ -12,9 +13,6 @@ export default function Navbar() {
     { Icon: Brain, text: 'Architecture' },
     { Icon: Activity, text: 'Training' },
     { Icon: Eye, text: 'Visualization' },
-    { Icon: Monitor, text: 'Monitor' },
-    { Icon: Bug, text: 'Debug' },
-    { Icon: Download, text: 'Export' }
   ];
 
   return (
@@ -54,10 +52,6 @@ export default function Navbar() {
         <button className="px-4 py-2 hover:bg-gray-700 rounded">
           <Settings className="w-5 h-5 inline-block mr-2" />
           Settings
-        </button>
-        <button className="px-4 py-2 hover:bg-gray-700 rounded">
-          <HelpCircle className="w-5 h-5 inline-block mr-2" />
-          Help
         </button>
       </div>
     </nav>
