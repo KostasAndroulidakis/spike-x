@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
 
 export default function Architecture() {
   const [layers, setLayers] = useState([
@@ -12,6 +14,8 @@ export default function Architecture() {
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
+      axonsEnabled: true,
+      dendritesEnabled: true,
     },
     {
       name: "Output Layer",
@@ -23,6 +27,8 @@ export default function Architecture() {
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
+      axonsEnabled: true,
+      dendritesEnabled: true,
     },
   ]);
 
@@ -45,6 +51,8 @@ export default function Architecture() {
       axonType: "LIF",
       dendrites: 10,
       dendriteType: "Multi-Compartment Models",
+      axonsEnabled: true,
+      dendritesEnabled: true,
     });
 
     setLayers(updatedLayers);
@@ -163,17 +171,28 @@ export default function Architecture() {
                 </select>
               </div>
 
-              {/* Total Axons */}
-              <div>
-                <label className="block mb-1">Total Axons:</label>
-                <input
-                  type="number"
-                  className="w-full p-1 border rounded"
-                  value={layer.axons}
-                  onChange={(e) =>
-                    updateLayer(index, "axons", parseInt(e.target.value, 10))
+              {/* Total Axons with Toggle */}
+              <div className="flex items-end">
+                <Toggle
+                  checked={layer.axonsEnabled}
+                  onChange={() =>
+                    updateLayer(index, "axonsEnabled", !layer.axonsEnabled)
                   }
+                  icons={false}
+                  className="mr-2"
                 />
+                <div className="flex-1">
+                  <label className="block mb-1">Total Axons:</label>
+                  <input
+                    type="number"
+                    className="w-full p-1 border rounded"
+                    value={layer.axons}
+                    onChange={(e) =>
+                      updateLayer(index, "axons", parseInt(e.target.value, 10))
+                    }
+                    disabled={!layer.axonsEnabled}
+                  />
+                </div>
               </div>
 
               {/* Axon Type */}
@@ -185,6 +204,7 @@ export default function Architecture() {
                   onChange={(e) =>
                     updateLayer(index, "axonType", e.target.value)
                   }
+                  disabled={!layer.axonsEnabled}
                 >
                   <option value="LIF">Leaky Integrate-and-Fire (LIF)</option>
                   <option value="Hodgkin-Huxley">Hodgkin-Huxley Model</option>
@@ -194,17 +214,36 @@ export default function Architecture() {
                 </select>
               </div>
 
-              {/* Total Dendrites */}
-              <div>
-                <label className="block mb-1">Total Dendrites:</label>
-                <input
-                  type="number"
-                  className="w-full p-1 border rounded"
-                  value={layer.dendrites}
-                  onChange={(e) =>
-                    updateLayer(index, "dendrites", parseInt(e.target.value, 10))
+              {/* Total Dendrites with Toggle */}
+              <div className="flex items-center">
+                <Toggle
+                  checked={layer.dendritesEnabled}
+                  onChange={() =>
+                    updateLayer(
+                      index,
+                      "dendritesEnabled",
+                      !layer.dendritesEnabled
+                    )
                   }
+                  icons={false}
+                  className="mr-2"
                 />
+                <div className="flex-1">
+                  <label className="block mb-1">Total Dendrites:</label>
+                  <input
+                    type="number"
+                    className="w-full p-1 border rounded"
+                    value={layer.dendrites}
+                    onChange={(e) =>
+                      updateLayer(
+                        index,
+                        "dendrites",
+                        parseInt(e.target.value, 10)
+                      )
+                    }
+                    disabled={!layer.dendritesEnabled}
+                  />
+                </div>
               </div>
 
               {/* Dendrite Type */}
@@ -216,6 +255,7 @@ export default function Architecture() {
                   onChange={(e) =>
                     updateLayer(index, "dendriteType", e.target.value)
                   }
+                  disabled={!layer.dendritesEnabled}
                 >
                   <option value="Multi-Compartment Models">
                     Multi-Compartment Models
