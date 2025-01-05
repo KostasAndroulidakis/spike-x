@@ -48,6 +48,7 @@ export default function Training() {
   const [trainingAlgorithm, setTrainingAlgorithm] = useState<string>("STDP");
   const [learningRate, setLearningRate] = useState<number>(0.01);
   const [parameter, setParameter] = useState<number>(1.0);
+  const [numberOfEpochs, setNumberOfEpochs] = useState<number>(10); // New State for Number of Epochs
 
   // New: Select Processor State
   const [selectedProcessor, setSelectedProcessor] = useState<string>("CPU");
@@ -64,6 +65,11 @@ export default function Training() {
 
   // Training State
   const [isTraining, setIsTraining] = useState<boolean>(false);
+
+  // Epoch Metering States
+  const [currentEpoch, setCurrentEpoch] = useState<number>(0);
+  const [currentBatch, setCurrentBatch] = useState<number>(0);
+  const totalBatchesPerEpoch = 100; // Assuming 100 batches per epoch
 
   // Chart Data
   const accuracyChartData = {
@@ -128,11 +134,13 @@ export default function Training() {
     setAccuracyData([]);
     setLossData([]);
     setTrainedWeights(null);
+    setCurrentEpoch(0);
+    setCurrentBatch(0);
     // Simulate training weights after training completes
     setTimeout(() => {
       setTrainedWeights({ weights: "Sample Trained Weights Data" });
       setIsTraining(false);
-    }, 100000); // Example: 100 seconds for training
+    }, numberOfEpochs * 1000); // Example: 1 second per epoch for simulation
   };
 
   // Simulate Training Process (For Demonstration)
@@ -146,16 +154,29 @@ export default function Training() {
       setModelProgress((prev) => (prev < 100 ? prev + 1 : 100));
       setAccuracyData((prev) => [...prev, Math.random() * 100]);
       setLossData((prev) => [...prev, Math.random()]);
-    }, 1000);
+      
+      // Simulate batch progress
+      setCurrentBatch((prevBatch) => {
+        if (prevBatch < totalBatchesPerEpoch) {
+          return prevBatch + 1;
+        } else {
+          // If all batches in the current epoch are done, reset batch and increment epoch
+          setCurrentBatch(1);
+          setCurrentEpoch((prevEpoch) => prevEpoch + 1);
+          return 1;
+        }
+      });
 
-    // Cleanup interval on component unmount or when training stops
-    if (performanceRate >= 100) {
-      clearInterval(interval);
-      setIsTraining(false);
-    }
+      // Check if all epochs are completed
+      if (currentEpoch >= numberOfEpochs && currentBatch >= totalBatchesPerEpoch) {
+        clearInterval(interval);
+        setIsTraining(false);
+        setTrainedWeights({ weights: "Sample Trained Weights Data" });
+      }
+    }, 1000); // Update every second
 
     return () => clearInterval(interval);
-  }, [isTraining, performanceRate]);
+  }, [isTraining, currentEpoch, currentBatch, numberOfEpochs]);
 
   return (
     <div className="p-4 max-w-screen-2xl mx-auto">
@@ -225,7 +246,7 @@ export default function Training() {
               />
             </div>
             {/* Additional Parameter */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block font-medium mb-2">Parameter:</label>
               <input
                 type="number"
@@ -234,6 +255,18 @@ export default function Training() {
                 className="w-full p-2 border rounded"
                 value={parameter}
                 onChange={(e) => setParameter(parseFloat(e.target.value))}
+              />
+            </div>
+            {/* Number of Epochs */}
+            <div className="mb-6">
+              <label className="block font-medium mb-2">Number of Epochs:</label>
+              <input
+                type="number"
+                step="1"
+                min="1"
+                className="w-full p-2 border rounded"
+                value={numberOfEpochs}
+                onChange={(e) => setNumberOfEpochs(parseInt(e.target.value) || 1)}
               />
             </div>
           </div>
@@ -307,6 +340,43 @@ export default function Training() {
               <div className="w-full h-128 border border-gray-300 rounded overflow-hidden">
                 {is3D ? <Visualizer3D /> : <Visualizer2D layers={[]} />}
               </div>
+            </div>
+          </div>
+
+          {/* Epoch Metering */}
+          <div className="p-4 border border-gray-300 rounded">
+            <h2 className="text-xl font-semibold mb-4">Epoch Metering</h2>
+            {/* Batch Progress */}
+            <div className="mb-6">
+              <label className="block font-medium mb-2">Batch Progress:</label>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-yellow-600 h-4 rounded-full"
+                  style={{
+                    width: `${(currentBatch / totalBatchesPerEpoch) * 100}%`,
+                  }}
+                ></div>
+              </div>
+              <p className="mt-1 text-sm text-gray-700">
+                Batch {currentBatch} / {totalBatchesPerEpoch} (
+                {((currentBatch / totalBatchesPerEpoch) * 100).toFixed(1)}%)
+              </p>
+            </div>
+            {/* Total Training Progress */}
+            <div>
+              <label className="block font-medium mb-2">Total Training Progress:</label>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-purple-600 h-4 rounded-full"
+                  style={{
+                    width: `${(currentEpoch / numberOfEpochs) * 100}%`,
+                  }}
+                ></div>
+              </div>
+              <p className="mt-1 text-sm text-gray-700">
+                Epoch {currentEpoch} / {numberOfEpochs} (
+                {((currentEpoch / numberOfEpochs) * 100).toFixed(1)}%)
+              </p>
             </div>
           </div>
         </div>
