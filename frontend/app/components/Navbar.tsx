@@ -45,6 +45,20 @@ export default function Navbar() {
     if (isFileMenuOpen) setFileMenuOpen(false);
   };
 
+  // Close menus when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.file-menu') && !target.closest('.user-menu')) {
+        setFileMenuOpen(false);
+        setUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   const menuItems = [
     { Icon: House, text: "Main", path: "/home" },
     { Icon: Brain, text: "Architecture", path: "/architecture" },
@@ -57,7 +71,7 @@ export default function Navbar() {
   return (
     <nav className="bg-[var(--nav-bg)] text-[var(--text)] p-4 flex justify-between items-center transition-colors duration-200">
       {/* File Menu */}
-      <div className="relative">
+      <div className="relative file-menu">
         <button
           className="px-4 py-2 hover:bg-[var(--nav-hover)] rounded transition-colors duration-200"
           onClick={toggleFileMenu}
@@ -118,7 +132,7 @@ export default function Navbar() {
       </div>
 
       {/* User Profile */}
-      <div className="relative">
+      <div className="relative user-menu">
         <button
           onClick={toggleUserMenu}
           className="w-10 h-10 rounded-full overflow-hidden hover:ring-2 hover:ring-blue-500 transition-all duration-200"
