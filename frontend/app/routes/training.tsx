@@ -59,6 +59,9 @@ export default function Training() {
   const [errors, setErrors] = useState<number>(0);
   const [modelProgress, setModelProgress] = useState<number>(0);
 
+  // Training State
+  const [isTraining, setIsTraining] = useState<boolean>(false);
+
   // Chart Data
   const accuracyChartData = {
     labels: accuracyData.map((_, index) => index + 1),
@@ -108,8 +111,30 @@ export default function Training() {
     }
   };
 
+  // Handle Train Model Button Click
+  const handleTrainModel = () => {
+    if (isTraining) {
+      alert("Training is already in progress.");
+      return;
+    }
+    setIsTraining(true);
+    // Reset previous training data
+    setPerformanceRate(0);
+    setErrors(0);
+    setModelProgress(0);
+    setAccuracyData([]);
+    setLossData([]);
+    setTrainedWeights(null);
+    // Simulate training weights after training completes
+    setTimeout(() => {
+      setTrainedWeights({ weights: "Sample Trained Weights Data" });
+    }, 100000); // Example: 100 seconds for training
+  };
+
   // Simulate Training Process (For Demonstration)
   useEffect(() => {
+    if (!isTraining) return;
+
     // This effect simulates training by updating metrics every second
     const interval = setInterval(() => {
       setPerformanceRate((prev) => (prev < 100 ? prev + 1 : 100));
@@ -119,16 +144,21 @@ export default function Training() {
       setLossData((prev) => [...prev, Math.random()]);
     }, 1000);
 
-    // Cleanup interval on component unmount
+    // Cleanup interval on component unmount or when training stops
+    if (performanceRate >= 100) {
+      clearInterval(interval);
+      setIsTraining(false);
+    }
+
     return () => clearInterval(interval);
-  }, []);
+  }, [isTraining, performanceRate]);
 
   return (
     <div className="p-4 max-w-screen-2xl mx-auto">
       {/* Settings Sections */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Left Column */}
-        <div className="w-full lg:w-1/2 space-y-6">
+        <div className="w-full lg:w-1/4 space-y-6">
           {/* Data Integration */}
           <div className="p-4 border border-gray-300 rounded">
             <h2 className="text-xl font-semibold mb-4">Data Integration</h2>
@@ -191,7 +221,7 @@ export default function Training() {
               />
             </div>
             {/* Additional Parameter */}
-            <div>
+            <div className="mb-6">
               <label className="block font-medium mb-2">Parameter:</label>
               <input
                 type="number"
@@ -202,49 +232,23 @@ export default function Training() {
                 onChange={(e) => setParameter(parseFloat(e.target.value))}
               />
             </div>
-          </div>
-
-          {/* Training Visualization */}
-          <div className="p-4 border border-gray-300 rounded">
-            <h2 className="text-xl font-semibold mb-4">Training Visualization</h2>
-            {/* Performance Rate */}
-            <div className="mb-4">
-              <label className="block font-medium mb-2">Performance Rate:</label>
-              <div className="w-full bg-gray-200 rounded-full h-4">
-                <div
-                  className="bg-blue-600 h-4 rounded-full"
-                  style={{ width: `${performanceRate}%` }}
-                ></div>
-              </div>
-              <p className="mt-1 text-sm text-white">{performanceRate}%</p>
-            </div>
-            {/* Errors Overview */}
-            <div className="mb-4">
-              <label className="block font-medium mb-2">Errors:</label>
-              <div className="w-full bg-gray-200 rounded-full h-4">
-                <div
-                  className="bg-red-600 h-4 rounded-full"
-                  style={{ width: `${errors}%` }}
-                ></div>
-              </div>
-              <p className="mt-1 text-sm text-white">{errors} Errors</p>
-            </div>
-            {/* Model Progress */}
+            {/* TRAIN MODEL Button */}
             <div>
-              <label className="block font-medium mb-2">Model Progress:</label>
-              <div className="w-full bg-gray-200 rounded-full h-4">
-                <div
-                  className="bg-green-600 h-4 rounded-full"
-                  style={{ width: `${modelProgress}%` }}
-                ></div>
-              </div>
-              <p className="mt-1 text-sm text-white">{modelProgress}% Completed</p>
+              <button
+                onClick={handleTrainModel}
+                className={`w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
+                  isTraining ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={isTraining}
+              >
+                {isTraining ? "TRAINING..." : "TRAIN MODEL"}
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Right Column */}
-        <div className="w-full lg:w-1/2 space-y-6">
+        {/* Middle Column */}
+        <div className="w-full lg:w-2/4 space-y-6">
           {/* Real-time Visualization */}
           <div className="p-4 border border-gray-300 rounded">
             <h2 className="text-xl font-semibold mb-4">Real-time Visualization</h2>
@@ -268,12 +272,15 @@ export default function Training() {
                   <FaExpand size={20} />
                 </button>
               </div>
-              <div className="w-full h-96 border border-gray-300 rounded">
+              <div className="w-full h-128 border border-gray-300 rounded overflow-hidden">
                 {is3D ? <Visualizer3D /> : <Visualizer2D layers={[]} />}
               </div>
             </div>
           </div>
+        </div>
 
+        {/* Right Column */}
+        <div className="w-full lg:w-1/4 space-y-6">
           {/* Training Outcomes */}
           <div className="p-4 border border-gray-300 rounded">
             <h2 className="text-xl font-semibold mb-4">Training Outcomes</h2>
@@ -281,7 +288,7 @@ export default function Training() {
             <div className="mb-6">
               <button
                 onClick={handleDownloadWeights}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
               >
                 Download Trained Weights
               </button>
@@ -295,6 +302,44 @@ export default function Training() {
             <div>
               <h3 className="font-medium mb-2">Loss</h3>
               <Line data={lossChartData} />
+            </div>
+          </div>
+
+          {/* Training Visualization */}
+          <div className="p-4 border border-gray-300 rounded">
+            <h2 className="text-xl font-semibold mb-4">Training Visualization</h2>
+            {/* Performance Rate */}
+            <div className="mb-4">
+              <label className="block font-medium mb-2">Performance Rate:</label>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-blue-600 h-4 rounded-full"
+                  style={{ width: `${performanceRate}%` }}
+                ></div>
+              </div>
+              <p className="mt-1 text-sm text-gray-700">{performanceRate}%</p>
+            </div>
+            {/* Errors Overview */}
+            <div className="mb-4">
+              <label className="block font-medium mb-2">Errors:</label>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-red-600 h-4 rounded-full"
+                  style={{ width: `${errors}%` }}
+                ></div>
+              </div>
+              <p className="mt-1 text-sm text-gray-700">{errors} Errors</p>
+            </div>
+            {/* Model Progress */}
+            <div>
+              <label className="block font-medium mb-2">Model Progress:</label>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-green-600 h-4 rounded-full"
+                  style={{ width: `${modelProgress}%` }}
+                ></div>
+              </div>
+              <p className="mt-1 text-sm text-gray-700">{modelProgress}% Completed</p>
             </div>
           </div>
         </div>
