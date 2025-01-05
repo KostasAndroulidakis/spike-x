@@ -4,6 +4,7 @@ import {
   House,
   Brain,
   Activity,
+  ChartScatter,
   Library,
   Eye,
   Settings,
@@ -22,6 +23,7 @@ export default function Navbar() {
     { Icon: Brain, text: "Architecture", path: "/architecture" },
     { Icon: Activity, text: "Training", path: "/training" },
     { Icon: Eye, text: "Visualization", path: "/visualization" },
+    { Icon: ChartScatter, text: "Evaluation", path: "/evaluation" },
     { Icon: Library, text: "Library", path: "/library" },
   ];
 
