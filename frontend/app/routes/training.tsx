@@ -120,6 +120,12 @@ export default function Training() {
     }
   };
 
+  // Handle Save Results Button Click
+  const handleSaveResults = () => {
+    alert("SAVE RESULTS button clicked.");
+    // Implement the actual save results functionality here
+  };
+
   // Handle Train Model Button Click
   const handleTrainModel = () => {
     if (isTraining) {
@@ -154,7 +160,7 @@ export default function Training() {
       setModelProgress((prev) => (prev < 100 ? prev + 1 : 100));
       setAccuracyData((prev) => [...prev, Math.random() * 100]);
       setLossData((prev) => [...prev, Math.random()]);
-      
+
       // Simulate batch progress
       setCurrentBatch((prevBatch) => {
         if (prevBatch < totalBatchesPerEpoch) {
@@ -386,24 +392,33 @@ export default function Training() {
           {/* Training Outcomes */}
           <div className="p-4 border border-gray-300 rounded">
             <h2 className="text-xl font-semibold mb-4">Training Outcomes</h2>
-            {/* Download Trained Weights */}
-            <div className="mb-6">
-              <button
-                onClick={handleDownloadWeights}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
-              >
-                Download Trained Weights
-              </button>
-            </div>
             {/* Accuracy Graph */}
             <div className="mb-6">
               <h3 className="font-medium mb-2">Accuracy</h3>
               <Line data={accuracyChartData} />
             </div>
             {/* Loss Graph */}
-            <div>
+            <div className="mb-6">
               <h3 className="font-medium mb-2">Loss</h3>
               <Line data={lossChartData} />
+            </div>
+            {/* SAVE WEIGHTS */}
+            <div className="mb-6">
+              <button
+                onClick={handleDownloadWeights}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
+              >
+                SAVE WEIGHTS
+              </button>
+            </div>
+            {/* SAVE RESULTS */}
+            <div>
+              <button
+                onClick={handleSaveResults}
+                className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 w-full"
+              >
+                SAVE RESULTS
+              </button>
             </div>
           </div>
 
