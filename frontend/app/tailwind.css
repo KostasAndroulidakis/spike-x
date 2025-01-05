@@ -4,24 +4,9 @@
 
 html,
 body {
-  @apply bg-black;
-  @apply h-full m-0 p-0 overflow-x-hidden;
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+  @apply bg-black text-white;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
-
-#root, #app {
-  height: 100%;
+@media (prefers-color-scheme: dark) {
+  color-scheme: dark;
 }
