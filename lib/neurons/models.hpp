@@ -15,6 +15,9 @@ static const NeuronModel MODELS[] = {
     {"izhikevich", "Izhikevich"},
     {"hodgkin_huxley", "Hodgkin-Huxley"},
     {"adaptive_lif", "Adaptive LIF"},
+    {"adaptive_ex[", "Adaptive Exponential"},
+    {"morris_lecar[", "Morris-Lecar"},
+    {"fitz[", "FitzHugh-Nagumo"},
     {"qif", "Quadratic Integrate-and-Fire"}
 };
 

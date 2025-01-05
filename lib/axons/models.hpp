@@ -10,11 +10,20 @@ struct AxonModel {
 };
 
 static const AxonModel MODELS[] = {
+    {"lif", "Leaky Integrate-and-Fire (LIF)"},
     {"passive", "Passive Propagation"},
     {"hh_axon", "Hodgkin-Huxley Axon"},
     {"cable", "Cable Theory"},
     {"myelinated", "Myelinated Axon"},
-    {"adaptive", "Adaptive Conduction"}
+    {"unmyelinated", "UnMyelinated Axon"},
+    {"multi-comp", "Multi-compartment"},
+    {"cable", "Cable Model"},
+    {"adaptive", "Adaptive Conduction"},
+    {"qif", "Quadratic Integrate-and-Fire"},
+    {"izhikevich", "Izhikevich"},
+    {"srm", "Spike Response Model"},
+    {"salta", "Saltatory Conjuction"},
+    {"action", "Action Potential"}
 };
 
 } // namespace axons
