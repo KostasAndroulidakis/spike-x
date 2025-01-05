@@ -11,6 +11,7 @@ export default function Architecture() {
       synapses: 20,
       synapseType: "STDP",
       synapticConnectionType: "Excitation",
+      synapticConnectionTypeEnabled: false, // Added toggle state
       axons: 10,
       axonType: "LIF",
       dendrites: 10,
@@ -29,6 +30,7 @@ export default function Architecture() {
       synapses: 20,
       synapseType: "STDP",
       synapticConnectionType: "Excitation",
+      synapticConnectionTypeEnabled: false, // Added toggle state
       axons: 10,
       axonType: "LIF",
       dendrites: 10,
@@ -63,6 +65,7 @@ export default function Architecture() {
       synapses: 20,
       synapseType: "STDP",
       synapticConnectionType: "Excitation",
+      synapticConnectionTypeEnabled: false, // Added toggle state
       axons: 10,
       axonType: "LIF",
       dendrites: 10,
@@ -113,20 +116,11 @@ export default function Architecture() {
 
   return (
     <div className="p-4 max-w-screen-lg mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Architecture</h1>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
-        onClick={addLayer}
-      >
-        Add Layer
-      </button>
+      {/* Removed the "Architecture" heading */}
 
       <div className="space-y-6">
         {layers.map((layer, index) => (
-          <div
-            key={index}
-            className="p-4 border border-gray-300 rounded"
-          >
+          <div key={index} className="p-4 border border-gray-300 rounded">
             {/* Layer Header */}
             <div
               className="flex justify-between items-center cursor-pointer"
@@ -151,10 +145,11 @@ export default function Architecture() {
             {/* Layer Settings */}
             {openLayers[index] && (
               <div className="mt-4 space-y-6">
-                {/* 1st Line: Neurons */}
+                {/* Redesigned Neurons and Synapses */}
                 <div>
-                  <h3 className="font-medium mb-2">Neurons</h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <h3 className="font-medium mb-2">Neurons & Synapses</h3>
+                  <div className="grid grid-cols-4 gap-4">
+                    {/* Total Neurons */}
                     <div>
                       <label className="block mb-1">Total Neurons:</label>
                       <input
@@ -162,10 +157,15 @@ export default function Architecture() {
                         className="w-full p-2 border rounded"
                         value={layer.neurons}
                         onChange={(e) =>
-                          updateLayer(index, "neurons", parseInt(e.target.value, 10))
+                          updateLayer(
+                            index,
+                            "neurons",
+                            parseInt(e.target.value, 10)
+                          )
                         }
                       />
                     </div>
+                    {/* Neuron Type */}
                     <div>
                       <label className="block mb-1">Neuron Type:</label>
                       <select
@@ -180,13 +180,7 @@ export default function Architecture() {
                         <option value="Hodgkin-Huxley">Hodgkin-Huxley</option>
                       </select>
                     </div>
-                  </div>
-                </div>
-
-                {/* 2nd Line: Synapses */}
-                <div>
-                  <h3 className="font-medium mb-2">Synapses</h3>
-                  <div className="grid grid-cols-3 gap-4">
+                    {/* Total Synapses */}
                     <div>
                       <label className="block mb-1">Total Synapses:</label>
                       <input
@@ -194,10 +188,15 @@ export default function Architecture() {
                         className="w-full p-2 border rounded"
                         value={layer.synapses}
                         onChange={(e) =>
-                          updateLayer(index, "synapses", parseInt(e.target.value, 10))
+                          updateLayer(
+                            index,
+                            "synapses",
+                            parseInt(e.target.value, 10)
+                          )
                         }
                       />
                     </div>
+                    {/* Synapse Type */}
                     <div>
                       <label className="block mb-1">Synapse Type:</label>
                       <select
@@ -213,19 +212,6 @@ export default function Architecture() {
                         <option value="AdEx">AdEx</option>
                         <option value="LIF">LIF</option>
                         <option value="SRM">SRM</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block mb-1">Synaptic Connection Type:</label>
-                      <select
-                        className="w-full p-2 border rounded"
-                        value={layer.synapticConnectionType}
-                        onChange={(e) =>
-                          updateLayer(index, "synapticConnectionType", e.target.value)
-                        }
-                      >
-                        <option value="Excitation">Excitation</option>
-                        <option value="Inhibition">Inhibition</option>
                       </select>
                     </div>
                   </div>
@@ -257,7 +243,11 @@ export default function Architecture() {
                               className="w-full p-2 border rounded"
                               value={layer.axons}
                               onChange={(e) =>
-                                updateLayer(index, "axons", parseInt(e.target.value, 10))
+                                updateLayer(
+                                  index,
+                                  "axons",
+                                  parseInt(e.target.value, 10)
+                                )
                               }
                             />
                           </div>
@@ -270,11 +260,21 @@ export default function Architecture() {
                                 updateLayer(index, "axonType", e.target.value)
                               }
                             >
-                              <option value="LIF">Leaky Integrate-and-Fire (LIF)</option>
-                              <option value="Hodgkin-Huxley">Hodgkin-Huxley Model</option>
-                              <option value="QIF">Quadratic Integrate-and-Fire (QIF)</option>
-                              <option value="Izhikevich">Izhikevich Model</option>
-                              <option value="SRM">Spike Response Model (SRM)</option>
+                              <option value="LIF">
+                                Leaky Integrate-and-Fire (LIF)
+                              </option>
+                              <option value="Hodgkin-Huxley">
+                                Hodgkin-Huxley Model
+                              </option>
+                              <option value="QIF">
+                                Quadratic Integrate-and-Fire (QIF)
+                              </option>
+                              <option value="Izhikevich">
+                                Izhikevich Model
+                              </option>
+                              <option value="SRM">
+                                Spike Response Model (SRM)
+                              </option>
                             </select>
                           </div>
                         </div>
@@ -287,7 +287,11 @@ export default function Architecture() {
                         <Toggle
                           checked={layer.dendritesEnabled}
                           onChange={() =>
-                            updateLayer(index, "dendritesEnabled", !layer.dendritesEnabled)
+                            updateLayer(
+                              index,
+                              "dendritesEnabled",
+                              !layer.dendritesEnabled
+                            )
                           }
                           icons={false}
                           className="mr-2"
@@ -297,18 +301,26 @@ export default function Architecture() {
                       {layer.dendritesEnabled && (
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block mb-1">Total Dendrites:</label>
+                            <label className="block mb-1">
+                              Total Dendrites:
+                            </label>
                             <input
                               type="number"
                               className="w-full p-2 border rounded"
                               value={layer.dendrites}
                               onChange={(e) =>
-                                updateLayer(index, "dendrites", parseInt(e.target.value, 10))
+                                updateLayer(
+                                  index,
+                                  "dendrites",
+                                  parseInt(e.target.value, 10)
+                                )
                               }
                             />
                           </div>
                           <div>
-                            <label className="block mb-1">Dendrite Type:</label>
+                            <label className="block mb-1">
+                              Dendrite Type:
+                            </label>
                             <select
                               className="w-full p-2 border rounded"
                               value={layer.dendriteType}
@@ -339,7 +351,7 @@ export default function Architecture() {
                   </div>
                 </div>
 
-                {/* 4th Line: Membrane Potential & Synaptic Constants */}
+                {/* 4th Line: Variables */}
                 <div>
                   <h3 className="font-medium mb-2">Variables</h3>
                   <div className="flex space-x-4">
@@ -362,13 +374,19 @@ export default function Architecture() {
                       </label>
                       {layer.membranePotentialEnabled && (
                         <div>
-                          <label className="block mb-1">Membrane Potential Value:</label>
+                          <label className="block mb-1">
+                            Membrane Potential Value:
+                          </label>
                           <input
                             type="number"
                             className="w-full p-2 border rounded"
                             value={layer.membranePotential}
                             onChange={(e) =>
-                              updateLayer(index, "membranePotential", parseFloat(e.target.value))
+                              updateLayer(
+                                index,
+                                "membranePotential",
+                                parseFloat(e.target.value)
+                              )
                             }
                           />
                         </div>
@@ -394,15 +412,61 @@ export default function Architecture() {
                       </label>
                       {layer.synapticConstantsEnabled && (
                         <div>
-                          <label className="block mb-1">Synaptic Constants Value:</label>
+                          <label className="block mb-1">
+                            Synaptic Constants Value:
+                          </label>
                           <input
                             type="number"
                             className="w-full p-2 border rounded"
                             value={layer.synapticConstants}
                             onChange={(e) =>
-                              updateLayer(index, "synapticConstants", parseFloat(e.target.value))
+                              updateLayer(
+                                index,
+                                "synapticConstants",
+                                parseFloat(e.target.value)
+                              )
                             }
                           />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Synaptic Connection Type */}
+                    <div className="flex-1">
+                      <label className="font-medium flex items-center mb-2">
+                        <Toggle
+                          checked={layer.synapticConnectionTypeEnabled}
+                          onChange={() =>
+                            updateLayer(
+                              index,
+                              "synapticConnectionTypeEnabled",
+                              !layer.synapticConnectionTypeEnabled
+                            )
+                          }
+                          icons={false}
+                          className="mr-2"
+                        />
+                        Synaptic Connection Type
+                      </label>
+                      {layer.synapticConnectionTypeEnabled && (
+                        <div>
+                          <label className="block mb-1">
+                            Synaptic Connection Type:
+                          </label>
+                          <select
+                            className="w-full p-2 border rounded"
+                            value={layer.synapticConnectionType}
+                            onChange={(e) =>
+                              updateLayer(
+                                index,
+                                "synapticConnectionType",
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="Excitation">Excitation</option>
+                            <option value="Inhibition">Inhibition</option>
+                          </select>
                         </div>
                       )}
                     </div>
@@ -413,6 +477,14 @@ export default function Architecture() {
           </div>
         ))}
       </div>
+
+      {/* Moved "Add Layer" button to the bottom */}
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+        onClick={addLayer}
+      >
+        Add Layer
+      </button>
     </div>
   );
 }
