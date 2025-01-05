@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/local/include",
+                "/opt/homebrew/Cellar/drogon/1.9.9/include",
+                "/opt/homebrew/Cellar/jsoncpp/1.9.6/include"
+            ]
+        }
+    ],
+    "version": 4
+}
