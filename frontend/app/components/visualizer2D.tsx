@@ -1,4 +1,4 @@
-// spike-x/frontend/app/components/visualizer1.tsx
+// spike-x/frontend/app/components/visualizer2d.tsx
 
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -23,11 +23,11 @@ interface Layer {
   synapticConstant: number;
 }
 
-interface visualizer1Props {
+interface visualizer2dProps {
   layers: Layer[];
 }
 
-const visualizer1: React.FC<visualizer1Props> = ({ layers }) => {
+const visualizer2d: React.FC<visualizer2dProps> = ({ layers }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -158,4 +158,4 @@ const visualizer1: React.FC<visualizer1Props> = ({ layers }) => {
   );
 };
 
-export default visualizer1;
+export default visualizer2d;
