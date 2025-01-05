@@ -49,12 +49,15 @@ export default function Training() {
   const [learningRate, setLearningRate] = useState<number>(0.01);
   const [parameter, setParameter] = useState<number>(1.0);
 
+  // New: Select Processor State
+  const [selectedProcessor, setSelectedProcessor] = useState<string>("CPU");
+
   // Training Outcomes States
   const [trainedWeights, setTrainedWeights] = useState<any>(null);
   const [accuracyData, setAccuracyData] = useState<number[]>([]);
   const [lossData, setLossData] = useState<number[]>([]);
 
-  // Training Visualization States
+  // Training Meters States
   const [performanceRate, setPerformanceRate] = useState<number>(0);
   const [errors, setErrors] = useState<number>(0);
   const [modelProgress, setModelProgress] = useState<number>(0);
@@ -128,6 +131,7 @@ export default function Training() {
     // Simulate training weights after training completes
     setTimeout(() => {
       setTrainedWeights({ weights: "Sample Trained Weights Data" });
+      setIsTraining(false);
     }, 100000); // Example: 100 seconds for training
   };
 
@@ -232,6 +236,34 @@ export default function Training() {
                 onChange={(e) => setParameter(parseFloat(e.target.value))}
               />
             </div>
+          </div>
+
+          {/* New: Processor Selection and Train Model */}
+          <div className="p-4 border border-gray-300 rounded">
+            <h2 className="text-xl font-semibold mb-4">Training Controls</h2>
+            {/* Select Processor and Advanced Settings */}
+            <div className="mb-6">
+              <label className="block font-medium mb-2">Select Processor:</label>
+              <div className="flex items-center">
+                <select
+                  className="w-full p-2 border rounded"
+                  value={selectedProcessor}
+                  onChange={(e) => setSelectedProcessor(e.target.value)}
+                >
+                  <option value="CPU">CPU</option>
+                  <option value="GPU">GPU</option>
+                  <option value="TPU">TPU</option>
+                  {/* Add more processors as needed */}
+                </select>
+                <button
+                  onClick={() => alert("Advanced Processor Settings clicked")}
+                  className="ml-2 text-sm text-blue-500 hover:underline"
+                  title="Advanced Processor Settings"
+                >
+                  Advanced Processor Settings
+                </button>
+              </div>
+            </div>
             {/* TRAIN MODEL Button */}
             <div>
               <button
@@ -305,9 +337,9 @@ export default function Training() {
             </div>
           </div>
 
-          {/* Training Visualization */}
+          {/* Training Meters */}
           <div className="p-4 border border-gray-300 rounded">
-            <h2 className="text-xl font-semibold mb-4">Training Visualization</h2>
+            <h2 className="text-xl font-semibold mb-4">Training Meters</h2>
             {/* Performance Rate */}
             <div className="mb-4">
               <label className="block font-medium mb-2">Performance Rate:</label>
