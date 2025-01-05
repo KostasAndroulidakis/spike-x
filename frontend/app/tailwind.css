@@ -2,11 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #ffffff;
+  --text: #000000;
+  --nav-bg: #f3f4f6;
+  --nav-hover: #e5e7eb;
+  --menu-bg: #f3f4f6;
+  --menu-hover: #e5e7eb;
+}
+
+[data-theme='dark'] {
+  --background: #000000;
+  --text: #ffffff;
+  --nav-bg: #1f2937;
+  --nav-hover: #374151;
+  --menu-bg: #374151;
+  --menu-hover: #4b5563;
+}
+
 html,
 body {
-  @apply bg-black text-white;
+  @apply bg-[var(--background)] text-[var(--text)] transition-colors duration-200;
 }
 
 @media (prefers-color-scheme: dark) {
-  color-scheme: dark;
+  input[type="text"],
+  input[type="search"] {
+    @apply bg-gray-800 text-gray-200 border-gray-700;
+  }
+
+  input[type="text"]::placeholder,
+  input[type="search"]::placeholder {
+    @apply text-gray-500;
+  }
 }
