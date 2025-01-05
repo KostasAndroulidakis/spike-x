@@ -9,15 +9,29 @@
   --nav-hover: #e5e7eb;
   --menu-bg: #f3f4f6;
   --menu-hover: #e5e7eb;
+  --primary: #2563eb;
+  --secondary: #4b5563;
+  --accent: #3b82f6;
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #ef4444;
+  --code-bg: #f8fafc;
 }
 
 [data-theme='dark'] {
-  --background: #000000;
+  --background: #111827;
   --text: #ffffff;
   --nav-bg: #1f2937;
   --nav-hover: #374151;
-  --menu-bg: #374151;
-  --menu-hover: #4b5563;
+  --menu-bg: #1f2937;
+  --menu-hover: #374151;
+  --primary: #3b82f6;
+  --secondary: #9ca3af;
+  --accent: #60a5fa;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #f87171;
+  --code-bg: #1e293b;
 }
 
 html,
@@ -25,14 +39,24 @@ body {
   @apply bg-[var(--background)] text-[var(--text)] transition-colors duration-200;
 }
 
-@media (prefers-color-scheme: dark) {
-  input[type="text"],
-  input[type="search"] {
-    @apply bg-gray-800 text-gray-200 border-gray-700;
-  }
+input[type="text"],
+input[type="search"] {
+  @apply bg-[var(--background)] border-gray-300 dark:border-gray-700;
+}
 
-  input[type="text"]::placeholder,
-  input[type="search"]::placeholder {
-    @apply text-gray-500;
-  }
+/* Scientific UI elements */
+.neuron-node {
+  @apply bg-[var(--primary)] dark:bg-[var(--accent)] rounded-full shadow-lg;
+}
+
+.synapse-connection {
+  @apply stroke-[var(--secondary)] dark:stroke-[var(--secondary)] stroke-2;
+}
+
+.visualization-canvas {
+  @apply bg-[var(--code-bg)] rounded-lg shadow-md;
+}
+
+.data-graph {
+  @apply border border-gray-200 dark:border-gray-700 rounded-lg p-4;
 }
