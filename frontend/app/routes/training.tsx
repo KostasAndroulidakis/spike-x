@@ -216,7 +216,7 @@ export default function Training() {
                   style={{ width: `${performanceRate}%` }}
                 ></div>
               </div>
-              <p className="mt-1 text-sm text-gray-700">{performanceRate}%</p>
+              <p className="mt-1 text-sm text-white">{performanceRate}%</p>
             </div>
             {/* Errors Overview */}
             <div className="mb-4">
@@ -227,7 +227,7 @@ export default function Training() {
                   style={{ width: `${errors}%` }}
                 ></div>
               </div>
-              <p className="mt-1 text-sm text-gray-700">{errors} Errors</p>
+              <p className="mt-1 text-sm text-white">{errors} Errors</p>
             </div>
             {/* Model Progress */}
             <div>
@@ -238,7 +238,7 @@ export default function Training() {
                   style={{ width: `${modelProgress}%` }}
                 ></div>
               </div>
-              <p className="mt-1 text-sm text-gray-700">{modelProgress}% Completed</p>
+              <p className="mt-1 text-sm text-white">{modelProgress}% Completed</p>
             </div>
           </div>
         </div>
