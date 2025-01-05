@@ -1,78 +1,83 @@
-// File: spike-x/frontend/app/routes/library.tsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBrain, FaProjectDiagram, FaStream, FaShareAlt, FaSearch, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+interface Model {
+  id: string;
+  name: string;
+}
+
+interface Column {
+  icon: React.ReactNode;
+  title: string;
+  items: Model[];
+  endpoint: string;
+}
 
 interface Section {
   title: string;
   columns: Column[];
 }
 
-interface Column {
-  icon: React.ReactNode;
-  title: string;
-  items: string[];
-}
-
 export default function Library() {
-  const sections: Section[] = [
+  const [loading, setLoading] = useState(true);
+  const [sections, setSections] = useState<Section[]>([
     {
       title: "Neural Components",
       columns: [
         {
           icon: <FaBrain className="text-4xl text-blue-500" />,
           title: "Neurons",
-          items: [
-            "Leaky Integrate-and-Fire",
-            "Hodgkin-Huxley",
-            "Izhikevich",
-            "Adaptive Exponential",
-            "Morris-Lecar",
-            "FitzHugh-Nagumo"
-          ]
+          items: [],
+          endpoint: "/api/models/neurons"
         },
         {
           icon: <FaProjectDiagram className="text-4xl text-green-500" />,
           title: "Synapses",
-          items: [
-            "AMPA Receptor",
-            "NMDA Receptor",
-            "GABA Receptor",
-            "Gap Junction",
-            "Chemical Synapse",
-            "Electrical Synapse"
-          ]
+          items: [],
+          endpoint: "/api/models/synapses"
         },
         {
           icon: <FaStream className="text-4xl text-purple-500" />,
           title: "Axons",
-          items: [
-            "Myelinated",
-            "Unmyelinated",
-            "Multi-compartment",
-            "Cable Model",
-            "Saltatory Conduction",
-            "Action Potential"
-          ]
+          items: [],
+          endpoint: "/api/models/axons"
         },
         {
           icon: <FaShareAlt className="text-4xl text-red-500" />,
           title: "Dendrites",
-          items: [
-            "Branching Dendrite",
-            "Dendritic Spine",
-            "Active Dendrite",
-            "Passive Dendrite",
-            "Dendritic Integration",
-            "Calcium Dynamics"
-          ]
+          items: [],
+          endpoint: "/api/models/dendrites"
         }
       ]
     }
-  ];
+  ]);
 
   const [currentSection, setCurrentSection] = useState(0);
   const [searchTerms, setSearchTerms] = useState<{ [key: string]: string }>({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('Fetching data...');
+      try {
+        const updatedSections = [...sections];
+        
+        // Fetch data for each column
+        for (let i = 0; i < sections[0].columns.length; i++) {
+          const response = await fetch(`http://127.0.0.1:5173${sections[0].columns[i].endpoint}`);
+          const data = await response.json();
+          updatedSections[0].columns[i].items = data.models;
+        }
+        
+        setSections(updatedSections);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSearch = (columnIndex: number, term: string) => {
     setSearchTerms(prev => ({ ...prev, [columnIndex]: term }));
@@ -88,10 +93,18 @@ export default function Library() {
     });
   };
 
-  const filteredItems = (items: string[], columnIndex: number) => {
+  const filteredItems = (items: Model[], columnIndex: number) => {
     const searchTerm = searchTerms[columnIndex]?.toLowerCase() || '';
-    return items.filter(item => item.toLowerCase().includes(searchTerm));
+    return items.filter(item => item.name.toLowerCase().includes(searchTerm));
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <div className="text-xl text-gray-400">Loading models...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen p-4 bg-black">
@@ -138,7 +151,7 @@ export default function Library() {
                       key={itemIdx}
                       className="p-2 text-gray-300 hover:bg-gray-800 rounded cursor-pointer transition-colors duration-200"
                     >
-                      {item}
+                      {item.name}
                     </li>
                   ))}
                 </ul>
