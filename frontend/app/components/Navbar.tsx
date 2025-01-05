@@ -9,10 +9,11 @@ import {
   Eye,
   Settings,
 } from "lucide-react";
-import { Link } from "@remix-run/react"; // Εισαγωγή του Link
+import { Link, useLocation } from "@remix-run/react";
 
 export default function Navbar() {
   const [isFileMenuOpen, setFileMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleFileMenu = () => {
     setFileMenuOpen(!isFileMenuOpen);
@@ -32,7 +33,7 @@ export default function Navbar() {
       {/* File Menu */}
       <div className="relative">
         <button
-          className="px-4 py-2 hover:bg-gray-700 rounded"
+          className="px-4 py-2 hover:bg-gray-700 rounded transition-colors duration-200"
           onClick={toggleFileMenu}
         >
           <Menu className="w-5 h-5 inline-block mr-2" />
@@ -40,35 +41,60 @@ export default function Navbar() {
         </button>
 
         {isFileMenuOpen && (
-          <ul className="absolute bg-gray-700 text-white mt-2 rounded shadow-lg p-2 min-w-max">
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">New Model</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Open Model</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Save Model</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Save Model As</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Rename Model</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Delete Model</li>
-            <li className="hover:bg-gray-600 px-4 py-2 rounded">Export Model</li>
+          <ul className="absolute bg-gray-700 text-white mt-2 rounded shadow-lg p-2 min-w-max z-50">
+            <li className="hover:bg-gray-600 px-4 py-2 rounded cursor-pointer">
+              New Model
+            </li>
+            <li className="hover:bg-gray-600 px-4 py-2 rounded cursor-pointer">
+              Open Model
+            </li>
+            <li className="hover:bg-gray-600 px-4 py-2 rounded cursor-pointer">
+              Save Model
+            </li>
+            <li className="hover:bg-gray-600 px-4 py-2 rounded cursor-pointer">
+              Save Model As
+            </li>
+            <li className="hover:bg-gray-600 px-4 py-2 rounded cursor-pointer">
+              Rename Model
+            </li>
+            <li className="hover:bg-gray-600 px-4 py-2 rounded cursor-pointer">
+              Delete Model
+            </li>
+            <li className="hover:bg-gray-600 px-4 py-2 rounded cursor-pointer">
+              Export Model
+            </li>
           </ul>
         )}
       </div>
 
       {/* Main Menu */}
       <div className="flex space-x-4">
-        {menuItems.map(({ Icon, text, path }) => (
-          <Link
-            key={text}
-            to={path} // Χρήση του Link για να ορίσουμε τη διαδρομή
-            className="px-4 py-2 hover:bg-gray-700 rounded flex items-center"
-          >
-            <Icon className="w-5 h-5 inline-block mr-2" />
-            {text}
-          </Link>
-        ))}
+        {menuItems.map(({ Icon, text, path }) => {
+          const isSelected = location.pathname === path;
+          return (
+            <Link
+              key={text}
+              to={path}
+              className={`px-4 py-2 rounded flex items-center transition-colors duration-200 ${
+                isSelected
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-gray-700 text-gray-300 hover:text-white"
+              }`}
+            >
+              <Icon
+                className={`w-5 h-5 inline-block mr-2 ${
+                  isSelected ? "text-white" : "text-gray-300"
+                }`}
+              />
+              {text}
+            </Link>
+          );
+        })}
       </div>
 
       {/* Settings Button */}
       <div className="flex space-x-4">
-        <button className="px-4 py-2 hover:bg-gray-700 rounded flex items-center">
+        <button className="px-4 py-2 hover:bg-gray-700 rounded flex items-center transition-colors duration-200 text-gray-300 hover:text-white">
           <Settings className="w-5 h-5 inline-block mr-2" />
           Settings
         </button>
