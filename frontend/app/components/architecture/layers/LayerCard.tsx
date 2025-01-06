@@ -6,6 +6,7 @@ import "react-toggle/style.css";
 import NeuronControls from '../controls/NeuronControls';
 import SynapsesControls from '../controls/SynapseControls';
 import AxonControls from '../controls/AxonControls';
+import DendritesControls from '../controls/DendriteControls';
 
 interface LayerProps {
   layer: {
@@ -80,52 +81,12 @@ const LayerCard: React.FC<LayerProps> = ({
               axonsEnabled={layer.axonsEnabled}
               onUpdate={onUpdate}
             />
-
-            {/* Dendrites */}
-            <div className="flex-1">
-              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
-                <Toggle
-                  checked={layer.dendritesEnabled}
-                  onChange={() =>
-                    onUpdate("dendritesEnabled", !layer.dendritesEnabled)
-                  }
-                  icons={false}
-                  className="mr-2"
-                />
-                Dendrites
-              </label>
-              {layer.dendritesEnabled && (
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block mb-1 text-[var(--text)]">Total Dendrites:</label>
-                    <input
-                      type="number"
-                      className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
-                      value={layer.dendrites}
-                      onChange={(e) =>
-                        onUpdate("dendrites", parseInt(e.target.value, 10))
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label className="block mb-1 text-[var(--text)]">Dendrite Type:</label>
-                    <select
-                      className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
-                      value={layer.dendriteType}
-                      onChange={(e) =>
-                        onUpdate("dendriteType", e.target.value)
-                      }
-                    >
-                      <option value="Multi-Compartment Models">Multi-Compartment Models</option>
-                      <option value="NLIF">Non-linear Integrate-and-Fire (NLIF)</option>
-                      <option value="AdEx">AdEx Model</option>
-                      <option value="Theta Neuron Model">Theta Neuron Model</option>
-                      <option value="Branch-Specific Plasticity Models">Branch-Specific Plasticity Models</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-            </div>
+            <DendritesControls
+              dendrites={layer.dendrites}
+              dendriteType={layer.dendriteType}
+              dendritesEnabled={layer.dendritesEnabled}
+              onUpdate={onUpdate}
+            />
           </div>
 
           {/* Variables */}
