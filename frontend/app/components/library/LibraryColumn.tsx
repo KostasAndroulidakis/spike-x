@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaSearch } from 'react-icons/fa';
+import SearchBar from './SearchBar';
 
 interface Model {
   id: string;
@@ -28,15 +28,7 @@ export default function LibraryColumn({
         <h2 className="text-2xl font-semibold text-[var(--text)]">{title}</h2>
       </div>
 
-      <div className="relative mb-4">
-        <input
-          type="search"
-          placeholder="Search..."
-          className="w-full px-4 py-2 pr-10 rounded border focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent"
-          onChange={(e) => onSearch(e.target.value)}
-        />
-        <FaSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--secondary)]" />
-      </div>
+      <SearchBar onSearch={onSearch} />
 
       <div className="flex-grow overflow-y-auto">
         <ul className="space-y-2">
