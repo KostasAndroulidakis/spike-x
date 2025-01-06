@@ -44,7 +44,7 @@ const LayerCard: React.FC<LayerProps> = ({
   onDelete
 }) => {
   return (
-    <div className="p-4 border border-[var(--secondary)] rounded bg-[var(--background)]">
+    <div className="p-4 border border-[var(--nav-bg)] rounded bg-[var(--nav-bg)] transition-colors duration-200 shadow-lg">
       <LayerHeader 
         name={layer.name}
         isOpen={isOpen}
