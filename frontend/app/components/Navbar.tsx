@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Menu,
   House,
   Brain,
   Activity,
@@ -11,9 +10,9 @@ import {
   Moon,
 } from "lucide-react";
 import { Link, useLocation } from "@remix-run/react";
+import FileMenu from "./navbar/FileMenu";
 
 export default function Navbar() {
-  const [isFileMenuOpen, setFileMenuOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const location = useLocation();
@@ -35,22 +34,15 @@ export default function Navbar() {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
-  const toggleFileMenu = () => {
-    setFileMenuOpen(!isFileMenuOpen);
-    if (isUserMenuOpen) setUserMenuOpen(false);
-  };
-
   const toggleUserMenu = () => {
     setUserMenuOpen(!isUserMenuOpen);
-    if (isFileMenuOpen) setFileMenuOpen(false);
   };
 
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (!target.closest('.file-menu') && !target.closest('.user-menu')) {
-        setFileMenuOpen(false);
+      if (!target.closest('.user-menu')) {
         setUserMenuOpen(false);
       }
     };
@@ -70,47 +62,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[var(--nav-bg)] text-[var(--text)] p-4 flex justify-between items-center transition-colors duration-200">
-      {/* File Menu */}
-      <div className="relative file-menu">
-        <button
-          className="px-4 py-2 hover:bg-[var(--nav-hover)] rounded transition-colors duration-200"
-          onClick={toggleFileMenu}
-        >
-          <Menu className="w-5 h-5 inline-block mr-2" />
-          File
-        </button>
-        {isFileMenuOpen && (
-          <ul className="absolute bg-[var(--menu-bg)] text-[var(--text)] mt-2 rounded shadow-lg p-2 min-w-max z-50">
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              New model
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Open model...
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Save model
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Save model As...
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Save new version of model
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Model templates
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Recent models
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Close model
-            </li>
-            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Export...
-            </li>
-          </ul>
-        )}
-      </div>
+      <FileMenu />
 
       {/* Main Menu */}
       <div className="flex space-x-4">
