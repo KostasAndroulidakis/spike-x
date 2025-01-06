@@ -1,10 +1,12 @@
 # spike-x
-A research-driven platform for experimenting with Spiking Neural Networks.
+R&D platform for Spiking Neural Networks and Neuromorphic Computing
 
 ## Overview
-- **C++ Library**: Implements core neuron, synapse, axon, and dendrite models, along with multiple learning methods (e.g. STDP, BPTT).  
-- **Python/Flask Backend**: Orchestrates model building, training workflows, and data handling.  
-- **React + Three.js Frontend**: Provides an interactive interface to configure architectures, visualize 3D topologies, and track training progress.
+- `lib`: written in C++, contains different models of neurons, synapses, axons, dendrites, architectures, learning methods, etc.
+- `data`: contains various training datasets and various types of files.
+- `backend`: written in C++, orchestrates model building, training workflows, and data handling.  
+- `frontend`: written in TypeScript, JavaScript, CSS (Remix, React, Theee.js etc), it’s a user-friendly and interactive interface for building SNN models with real-time 3D visualization for architecture and track training progress.
+- `api`: written in C++, it's used to connect `lib`, `data`, `backend` and `frontend` together so that they can all communicate with each other.
 
 ## Features
 - Modular design for rapid experimentation with different neuron/synapse models.  
