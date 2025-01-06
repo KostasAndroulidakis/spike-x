@@ -3,6 +3,9 @@
 import React from 'react';
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
+import NeuronControls from '../controls/NeuronControls';
+import SynapsesControls from '../controls/SynapseControls';
+import AxonControls from '../controls/AxonControls';
 
 interface LayerProps {
   layer: {
@@ -40,14 +43,14 @@ const LayerCard: React.FC<LayerProps> = ({
   onDelete
 }) => {
   return (
-    <div className="p-4 border border-gray-300 rounded">
+    <div className="p-4 border border-[var(--secondary)] rounded bg-[var(--background)]">
       {/* Layer Header */}
       <div
         className="flex justify-between items-center cursor-pointer"
         onClick={onToggle}
       >
-        <h2 className="text-lg font-semibold">{layer.name}</h2>
-        <span className="text-gray-500">
+        <h2 className="text-lg font-semibold text-[var(--text)]">{layer.name}</h2>
+        <span className="text-[var(--secondary)]">
           {isOpen ? "▲" : "▼"}
         </span>
       </div>
@@ -56,117 +59,31 @@ const LayerCard: React.FC<LayerProps> = ({
       {isOpen && (
         <div className="mt-4 space-y-6">
           {/* Neurons & Synapses */}
-          <div className="grid grid-cols-4 gap-4">
-            {/* Total Neurons */}
-            <div>
-              <label className="block mb-1">Total Neurons:</label>
-              <input
-                type="number"
-                className="w-full p-2 border rounded"
-                value={layer.neurons}
-                onChange={(e) =>
-                  onUpdate("neurons", parseInt(e.target.value, 10))
-                }
-              />
-            </div>
-            {/* Neuron Type */}
-            <div>
-              <label className="block mb-1">Neuron Type:</label>
-              <select
-                className="w-full p-2 border rounded"
-                value={layer.neuronType}
-                onChange={(e) =>
-                  onUpdate("neuronType", e.target.value)
-                }
-              >
-                <option value="LIF">LIF</option>
-                <option value="Izhikevich">Izhikevich</option>
-                <option value="Hodgkin-Huxley">Hodgkin-Huxley</option>
-              </select>
-            </div>
-            {/* Total Synapses */}
-            <div>
-              <label className="block mb-1">Total Synapses:</label>
-              <input
-                type="number"
-                className="w-full p-2 border rounded"
-                value={layer.synapses}
-                onChange={(e) =>
-                  onUpdate("synapses", parseInt(e.target.value, 10))
-                }
-              />
-            </div>
-            {/* Synapse Type */}
-            <div>
-              <label className="block mb-1">Synapse Type:</label>
-              <select
-                className="w-full p-2 border rounded"
-                value={layer.synapseType}
-                onChange={(e) =>
-                  onUpdate("synapseType", e.target.value)
-                }
-              >
-                <option value="STDP">STDP</option>
-                <option value="R-STDP">R-STDP</option>
-                <option value="Hodgkin-Huxley">Hodgkin-Huxley</option>
-                <option value="AdEx">AdEx</option>
-                <option value="LIF">LIF</option>
-                <option value="SRM">SRM</option>
-              </select>
-            </div>
+          <div className="grid grid-cols-2 gap-4">
+            <NeuronControls
+              neurons={layer.neurons}
+              neuronType={layer.neuronType}
+              onUpdate={onUpdate}
+            />
+            <SynapsesControls
+              synapses={layer.synapses}
+              synapseType={layer.synapseType}
+              onUpdate={onUpdate}
+            />
           </div>
 
           {/* Axons & Dendrites */}
           <div className="flex space-x-4">
-            {/* Axons */}
-            <div className="flex-1">
-              <label className="font-medium flex items-center mb-2">
-                <Toggle
-                  checked={layer.axonsEnabled}
-                  onChange={() =>
-                    onUpdate("axonsEnabled", !layer.axonsEnabled)
-                  }
-                  icons={false}
-                  className="mr-2"
-                />
-                Axons
-              </label>
-              {layer.axonsEnabled && (
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block mb-1">Total Axons:</label>
-                    <input
-                      type="number"
-                      className="w-full p-2 border rounded"
-                      value={layer.axons}
-                      onChange={(e) =>
-                        onUpdate("axons", parseInt(e.target.value, 10))
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label className="block mb-1">Axon Type:</label>
-                    <select
-                      className="w-full p-2 border rounded"
-                      value={layer.axonType}
-                      onChange={(e) =>
-                        onUpdate("axonType", e.target.value)
-                      }
-                    >
-                      <option value="LIF">Leaky Integrate-and-Fire (LIF)</option>
-                      <option value="Hodgkin-Huxley">Hodgkin-Huxley Model</option>
-                      <option value="QIF">Quadratic Integrate-and-Fire (QIF)</option>
-                      <option value="Izhikevich">Izhikevich Model</option>
-                      <option value="SRM">Spike Response Model (SRM)</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-            </div>
+            <AxonControls
+              axons={layer.axons}
+              axonType={layer.axonType}
+              axonsEnabled={layer.axonsEnabled}
+              onUpdate={onUpdate}
+            />
 
             {/* Dendrites */}
             <div className="flex-1">
-              <label className="font-medium flex items-center mb-2">
+              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
                 <Toggle
                   checked={layer.dendritesEnabled}
                   onChange={() =>
@@ -180,10 +97,10 @@ const LayerCard: React.FC<LayerProps> = ({
               {layer.dendritesEnabled && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block mb-1">Total Dendrites:</label>
+                    <label className="block mb-1 text-[var(--text)]">Total Dendrites:</label>
                     <input
                       type="number"
-                      className="w-full p-2 border rounded"
+                      className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
                       value={layer.dendrites}
                       onChange={(e) =>
                         onUpdate("dendrites", parseInt(e.target.value, 10))
@@ -191,9 +108,9 @@ const LayerCard: React.FC<LayerProps> = ({
                     />
                   </div>
                   <div>
-                    <label className="block mb-1">Dendrite Type:</label>
+                    <label className="block mb-1 text-[var(--text)]">Dendrite Type:</label>
                     <select
-                      className="w-full p-2 border rounded"
+                      className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
                       value={layer.dendriteType}
                       onChange={(e) =>
                         onUpdate("dendriteType", e.target.value)
@@ -215,7 +132,7 @@ const LayerCard: React.FC<LayerProps> = ({
           <div className="flex space-x-4">
             {/* Membrane Potential */}
             <div className="flex-1">
-              <label className="font-medium flex items-center mb-2">
+              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
                 <Toggle
                   checked={layer.membranePotentialEnabled}
                   onChange={() =>
@@ -228,10 +145,10 @@ const LayerCard: React.FC<LayerProps> = ({
               </label>
               {layer.membranePotentialEnabled && (
                 <div>
-                  <label className="block mb-1">Membrane Potential Value:</label>
+                  <label className="block mb-1 text-[var(--text)]">Membrane Potential Value:</label>
                   <input
                     type="number"
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
                     value={layer.membranePotential}
                     onChange={(e) =>
                       onUpdate("membranePotential", parseFloat(e.target.value))
@@ -243,7 +160,7 @@ const LayerCard: React.FC<LayerProps> = ({
 
             {/* Synaptic Constants */}
             <div className="flex-1">
-              <label className="font-medium flex items-center mb-2">
+              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
                 <Toggle
                   checked={layer.synapticConstantsEnabled}
                   onChange={() =>
@@ -256,10 +173,10 @@ const LayerCard: React.FC<LayerProps> = ({
               </label>
               {layer.synapticConstantsEnabled && (
                 <div>
-                  <label className="block mb-1">Synaptic Constants Value:</label>
+                  <label className="block mb-1 text-[var(--text)]">Synaptic Constants Value:</label>
                   <input
                     type="number"
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
                     value={layer.synapticConstants}
                     onChange={(e) =>
                       onUpdate("synapticConstants", parseFloat(e.target.value))
@@ -271,7 +188,7 @@ const LayerCard: React.FC<LayerProps> = ({
 
             {/* Synaptic Connection Type */}
             <div className="flex-1">
-              <label className="font-medium flex items-center mb-2">
+              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
                 <Toggle
                   checked={layer.synapticConnectionTypeEnabled}
                   onChange={() =>
@@ -284,9 +201,9 @@ const LayerCard: React.FC<LayerProps> = ({
               </label>
               {layer.synapticConnectionTypeEnabled && (
                 <div>
-                  <label className="block mb-1">Synaptic Connection Type:</label>
+                  <label className="block mb-1 text-[var(--text)]">Connection Type:</label>
                   <select
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
                     value={layer.synapticConnectionType}
                     onChange={(e) =>
                       onUpdate("synapticConnectionType", e.target.value)
@@ -304,7 +221,7 @@ const LayerCard: React.FC<LayerProps> = ({
           {showDeleteButton && onDelete && (
             <div className="flex justify-end">
               <button
-                className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+                className="mt-4 bg-[var(--error)] text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors"
                 onClick={onDelete}
               >
                 Delete Layer
