@@ -1,6 +1,14 @@
 // app/components/navbar/MainMenu.tsx
-import { House, Brain, Activity, Eye, ChartScatter, Library } from "lucide-react";
+import React from "react";
 import { Link, useLocation } from "@remix-run/react";
+import {
+  House,
+  Brain,
+  Activity,
+  ChartScatter,
+  Library,
+  Eye,
+} from "lucide-react";
 
 export default function MainMenu() {
   const location = useLocation();
