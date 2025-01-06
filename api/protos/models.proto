@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package spike_x;
+
+// Το βασικό μοντέλο που θα χρησιμοποιούμε
+message Model {
+    string id = 1;
+    string name = 2;
+}
+
+// Request message - μπορεί να είναι άδειο προς το παρόν
+message ModelsRequest {
+}
+
+// Response message που περιέχει λίστα από μοντέλα
+message ModelsResponse {
+    repeated Model models = 1;
+}
+
+// Το κεντρικό service για τα μοντέλα
+service ModelsService {
+    rpc GetNeuronModels(ModelsRequest) returns (ModelsResponse) {}
+    rpc GetSynapseModels(ModelsRequest) returns (ModelsResponse) {}
+    rpc GetAxonModels(ModelsRequest) returns (ModelsResponse) {}
+    rpc GetDendriteModels(ModelsRequest) returns (ModelsResponse) {}
+}
