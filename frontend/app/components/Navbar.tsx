@@ -82,25 +82,31 @@ export default function Navbar() {
         {isFileMenuOpen && (
           <ul className="absolute bg-[var(--menu-bg)] text-[var(--text)] mt-2 rounded shadow-lg p-2 min-w-max z-50">
             <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              New Model
+              New model
             </li>
             <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Open Model
+              Open model...
             </li>
             <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Save Model
+              Save model
             </li>
             <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Save Model As
+              Save model As...
             </li>
             <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Rename Model
+              Save new version of model
             </li>
             <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Delete Model
+              Model templates
             </li>
             <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-              Export Model
+              Recent models
+            </li>
+            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
+              Close model
+            </li>
+            <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
+              Export...
             </li>
           </ul>
         )}
