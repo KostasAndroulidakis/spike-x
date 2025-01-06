@@ -5,9 +5,16 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/local/include",
-                "/opt/homebrew/Cellar/drogon/1.9.9/include",
-                "/opt/homebrew/Cellar/jsoncpp/1.9.6/include"
-            ]
+                "/opt/homebrew/include"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "intelliSenseMode": "macos-clang-x64"
         }
     ],
     "version": 4

@@ -1,21 +1,29 @@
-cmake_minimum_required(VERSION 3.5)
-project(spike_x_api CXX)
+cmake_minimum_required(VERSION 3.13)
+project(spike_x_api)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Find required packages
+find_package(gRPC CONFIG REQUIRED)
+find_package(Protobuf CONFIG REQUIRED)
 
-# Προσθέτουμε τις διαδρομές για Drogon και JsonCpp
-set(CMAKE_PREFIX_PATH 
-    "/opt/homebrew/Cellar/drogon/1.9.9"
-    "/opt/homebrew/Cellar/jsoncpp/1.9.6"
+# Define source files
+set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+# Add executable
+add_executable(models_server
+    src/models.cpp
+    ${PROTO_SRC_DIR}/models.pb.cc
+    ${PROTO_SRC_DIR}/models.grpc.pb.cc
 )
 
-find_package(Drogon CONFIG REQUIRED)
-find_package(jsoncpp REQUIRED)
+# Add include directories
+target_include_directories(models_server PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${Protobuf_INCLUDE_DIRS}
+    ${GRPC_INCLUDE_DIRS}
+)
 
-add_executable(${PROJECT_NAME} api/models.cpp)
-target_link_libraries(${PROJECT_NAME} 
-    PRIVATE 
-    Drogon::Drogon
-    jsoncpp
+# Link libraries
+target_link_libraries(models_server PRIVATE
+    gRPC::grpc++
+    protobuf::libprotobuf
 )
