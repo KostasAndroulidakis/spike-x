@@ -1,8 +1,10 @@
+// app/routes/architecture.tsx
 import LayerCard from "../components/architecture/layers/LayerCard";
 import { useLayerManager } from "../components/architecture/hooks/useLayerManager";
+import AddLayerButton from "../components/architecture/layers/AddLayerButton";
 
 export default function Architecture() {
-  const { layers, openLayers, addLayer, updateLayer, deleteLayer, toggleLayer } =
+  const { layers, openLayers, addLayer, updateLayer, deleteLayer, toggleLayer } = 
     useLayerManager();
 
   return (
@@ -16,23 +18,12 @@ export default function Architecture() {
             onToggle={() => toggleLayer(index)}
             onUpdate={(key, value) => updateLayer(index, key, value)}
             showDeleteButton={index !== 0 && index !== layers.length - 1}
-            onDelete={
-              index !== 0 && index !== layers.length - 1
-                ? () => deleteLayer(index)
-                : undefined
-            }
+            onDelete={() => deleteLayer(index)}
           />
         ))}
       </div>
 
-      <div className="flex justify-center">
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-          onClick={addLayer}
-        >
-          Add Layer
-        </button>
-      </div>
+      <AddLayerButton onClick={addLayer} />
     </div>
   );
-}
+};

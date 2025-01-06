@@ -1,12 +1,12 @@
 // components/architecture/layers/LayerCard.tsx
-
 import React from 'react';
-import Toggle from "react-toggle";
-import "react-toggle/style.css";
 import NeuronControls from '../controls/NeuronControls';
 import SynapsesControls from '../controls/SynapseControls';
 import AxonControls from '../controls/AxonControls';
 import DendritesControls from '../controls/DendriteControls';
+import LayerVariables from '../controls/LayerVariables';
+import LayerHeader from './LayerHeader';
+import DeleteLayerButton from './DeleteLayerButton';
 
 interface LayerProps {
   layer: {
@@ -45,16 +45,11 @@ const LayerCard: React.FC<LayerProps> = ({
 }) => {
   return (
     <div className="p-4 border border-[var(--secondary)] rounded bg-[var(--background)]">
-      {/* Layer Header */}
-      <div
-        className="flex justify-between items-center cursor-pointer"
-        onClick={onToggle}
-      >
-        <h2 className="text-lg font-semibold text-[var(--text)]">{layer.name}</h2>
-        <span className="text-[var(--secondary)]">
-          {isOpen ? "▲" : "▼"}
-        </span>
-      </div>
+      <LayerHeader 
+        name={layer.name}
+        isOpen={isOpen}
+        onToggle={onToggle}
+      />
 
       {/* Layer Settings */}
       {isOpen && (
@@ -89,105 +84,20 @@ const LayerCard: React.FC<LayerProps> = ({
             />
           </div>
 
-          {/* Variables */}
-          <div className="flex space-x-4">
-            {/* Membrane Potential */}
-            <div className="flex-1">
-              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
-                <Toggle
-                  checked={layer.membranePotentialEnabled}
-                  onChange={() =>
-                    onUpdate("membranePotentialEnabled", !layer.membranePotentialEnabled)
-                  }
-                  icons={false}
-                  className="mr-2"
-                />
-                Membrane Potential
-              </label>
-              {layer.membranePotentialEnabled && (
-                <div>
-                  <label className="block mb-1 text-[var(--text)]">Membrane Potential Value:</label>
-                  <input
-                    type="number"
-                    className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
-                    value={layer.membranePotential}
-                    onChange={(e) =>
-                      onUpdate("membranePotential", parseFloat(e.target.value))
-                    }
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Synaptic Constants */}
-            <div className="flex-1">
-              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
-                <Toggle
-                  checked={layer.synapticConstantsEnabled}
-                  onChange={() =>
-                    onUpdate("synapticConstantsEnabled", !layer.synapticConstantsEnabled)
-                  }
-                  icons={false}
-                  className="mr-2"
-                />
-                Synaptic Constants
-              </label>
-              {layer.synapticConstantsEnabled && (
-                <div>
-                  <label className="block mb-1 text-[var(--text)]">Synaptic Constants Value:</label>
-                  <input
-                    type="number"
-                    className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
-                    value={layer.synapticConstants}
-                    onChange={(e) =>
-                      onUpdate("synapticConstants", parseFloat(e.target.value))
-                    }
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Synaptic Connection Type */}
-            <div className="flex-1">
-              <label className="font-medium flex items-center mb-2 text-[var(--text)]">
-                <Toggle
-                  checked={layer.synapticConnectionTypeEnabled}
-                  onChange={() =>
-                    onUpdate("synapticConnectionTypeEnabled", !layer.synapticConnectionTypeEnabled)
-                  }
-                  icons={false}
-                  className="mr-2"
-                />
-                Synaptic Connection Type
-              </label>
-              {layer.synapticConnectionTypeEnabled && (
-                <div>
-                  <label className="block mb-1 text-[var(--text)]">Connection Type:</label>
-                  <select
-                    className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
-                    value={layer.synapticConnectionType}
-                    onChange={(e) =>
-                      onUpdate("synapticConnectionType", e.target.value)
-                    }
-                  >
-                    <option value="Excitation">Excitation</option>
-                    <option value="Inhibition">Inhibition</option>
-                  </select>
-                </div>
-              )}
-            </div>
-          </div>
+          {/* Layer Variables */}
+          <LayerVariables
+            membranePotential={layer.membranePotential}
+            membranePotentialEnabled={layer.membranePotentialEnabled}
+            synapticConstants={layer.synapticConstants}
+            synapticConstantsEnabled={layer.synapticConstantsEnabled}
+            synapticConnectionType={layer.synapticConnectionType}
+            synapticConnectionTypeEnabled={layer.synapticConnectionTypeEnabled}
+            onUpdate={onUpdate}
+          />
 
           {/* Delete Layer Button */}
           {showDeleteButton && onDelete && (
-            <div className="flex justify-end">
-              <button
-                className="mt-4 bg-[var(--error)] text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors"
-                onClick={onDelete}
-              >
-                Delete Layer
-              </button>
-            </div>
+            <DeleteLayerButton onDelete={onDelete} />
           )}
         </div>
       )}
