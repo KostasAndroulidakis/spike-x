@@ -44,7 +44,7 @@ export default function FileMenu() {
             Save model
           </li>
           <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
-            Save model As...
+            Save model as...
           </li>
           <li className="hover:bg-[var(--menu-hover)] px-4 py-2 rounded cursor-pointer">
             Save new version of model

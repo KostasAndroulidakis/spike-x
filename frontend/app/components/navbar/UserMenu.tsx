@@ -1,29 +1,34 @@
+// UserMenu.tsx
+
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Settings, LogOut, UserCircle } from 'lucide-react';
+import { Sun, Moon, Settings, LogOut, UserCircle, ChevronRight, ChevronLeft } from 'lucide-react';
 
 export default function UserMenu() {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [isThemeSubMenuOpen, setThemeSubMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark' | 'brain'>('dark');
 
   useEffect(() => {
     // Initialize theme from localStorage or system preference
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'brain' | null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initialTheme = savedTheme || systemTheme;
-    
+
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
+  const handleThemeChange = (selectedTheme: 'light' | 'dark' | 'brain') => {
+    setTheme(selectedTheme);
+    localStorage.setItem('theme', selectedTheme);
+    document.documentElement.setAttribute('data-theme', selectedTheme);
+    setThemeSubMenuOpen(false);
+    setUserMenuOpen(false);
   };
 
   const toggleUserMenu = () => {
     setUserMenuOpen(!isUserMenuOpen);
+    setThemeSubMenuOpen(false);
   };
 
   // Close menu when clicking outside
@@ -32,6 +37,7 @@ export default function UserMenu() {
       const target = event.target as HTMLElement;
       if (!target.closest('.user-menu')) {
         setUserMenuOpen(false);
+        setThemeSubMenuOpen(false);
       }
     };
 
@@ -42,11 +48,13 @@ export default function UserMenu() {
   const handleSettings = () => {
     // Add settings functionality here
     console.log('Settings clicked');
+    setUserMenuOpen(false);
   };
 
   const handleLogout = () => {
     // Add logout functionality here
     console.log('Logout clicked');
+    setUserMenuOpen(false);
   };
 
   return (
@@ -65,23 +73,54 @@ export default function UserMenu() {
             <p className="text-sm text-gray-500">user@example.com</p>
           </div>
           
-          <button
-            onClick={toggleTheme}
-            className="w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200"
-          >
-            {theme === 'light' ? (
-              <>
-                <Moon className="w-5 h-5 mr-2" />
-                Dark theme
-              </>
-            ) : (
-              <>
-                <Sun className="w-5 h-5 mr-2" />
-                Light theme
-              </>
-            )}
-          </button>
+          {/* Theme Submenu */}
+          <div className="relative">
+            <button
+              onClick={() => setThemeSubMenuOpen(!isThemeSubMenuOpen)}
+              className="w-full flex items-center justify-between px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200"
+            >
+              <span className="flex items-center">
+                <Settings className="w-5 h-5 mr-2" />
+                Theme
+              </span>
+              {isThemeSubMenuOpen ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+            </button>
 
+            {isThemeSubMenuOpen && (
+              <div className="absolute right-full top-0 mt-0 bg-[var(--menu-bg)] rounded shadow-lg p-2 min-w-[150px] z-50">
+                <button
+                  onClick={() => handleThemeChange('light')}
+                  className={`w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200 ${
+                    theme === 'light' ? 'bg-[var(--nav-hover)]' : ''
+                  }`}
+                >
+                  <Sun className="w-5 h-5 mr-2" />
+                  Light
+                </button>
+
+                <button
+                  onClick={() => handleThemeChange('dark')}
+                  className={`w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200 ${
+                    theme === 'dark' ? 'bg-[var(--nav-hover)]' : ''
+                  }`}
+                >
+                  <Moon className="w-5 h-5 mr-2" />
+                  Dark
+                </button>
+
+                <button
+                  onClick={() => handleThemeChange('brain')}
+                  className={`w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200 ${
+                    theme === 'brain' ? 'bg-[var(--nav-hover)]' : ''
+                  }`}
+                >
+                  <Settings className="w-5 h-5 mr-2" />
+                  Brain
+                </button>
+              </div>
+            )}
+          </div>
+          
           <button
             onClick={handleSettings}
             className="w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200"

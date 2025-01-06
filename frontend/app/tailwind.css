@@ -34,6 +34,22 @@
   --code-bg: #1e293b;
 }
 
+[data-theme='brain'] {
+  --background: #f5f5dc; /* Beige */
+  --text: #5b4636; /* Dark Brown */
+  --nav-bg: #ede6d6; /* Light Beige */
+  --nav-hover: #e1d7c6; /* Slightly Darker Beige */
+  --menu-bg: #ede6d6; /* Light Beige */
+  --menu-hover: #e1d7c6; /* Slightly Darker Beige */
+  --primary: #d2b48c; /* Tan */
+  --secondary: #a0522d; /* Sienna */
+  --accent: #deb887; /* Burlywood */
+  --success: #8fbc8f; /* Dark Sea Green */
+  --warning: #f0e68c; /* Khaki */
+  --error: #cd5c5c; /* Indian Red */
+  --code-bg: #faf0e6; /* Linen */
+}
+
 html,
 body {
   @apply bg-[var(--background)] text-[var(--text)] transition-colors duration-200;
