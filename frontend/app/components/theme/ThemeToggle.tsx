@@ -1,23 +1,32 @@
-// app/components/ThemeToggle.tsx
+// ThemeToggle.tsx
+import { Moon, Sun, Brain } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
-import { Moon, Sun } from 'lucide-react';
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
+  const cycleTheme = () => {
+    const themes: Array<'light' | 'dark' | 'brain'> = ['light', 'dark', 'brain'];
+    const currentIndex = themes.indexOf(theme);
+    const nextTheme = themes[(currentIndex + 1) % themes.length];
+    setTheme(nextTheme);
+  };
 
   return (
     <button
-      onClick={toggleTheme}
-      className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 dark:focus:ring-offset-gray-900"
-      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      onClick={cycleTheme}
+      className="p-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-[var(--nav-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary)]"
+      aria-label={`Current theme: ${theme}. Click to cycle theme.`}
     >
       {theme === 'dark' ? (
-        <Sun className="w-5 h-5 text-gray-200" />
+        <Sun className="w-5 h-5" />
+      ) : theme === 'brain' ? (
+        <Brain className="w-5 h-5" />
       ) : (
-        <Moon className="w-5 h-5 text-gray-700" />
+        <Moon className="w-5 h-5" />
       )}
       <span className="sr-only">
-        {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        Switch theme (currently {theme})
       </span>
     </button>
   );
