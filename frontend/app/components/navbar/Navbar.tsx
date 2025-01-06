@@ -1,7 +1,7 @@
 import React from "react";
-import FileMenu from "./navbar/FileMenu";
-import MainMenu from "./navbar/MainMenu";
-import UserMenu from "./navbar/UserMenu";
+import FileMenu from "./FileMenu";
+import MainMenu from "./MainMenu";
+import UserMenu from "./UserMenu";
 
 export default function Navbar() {
   return (
