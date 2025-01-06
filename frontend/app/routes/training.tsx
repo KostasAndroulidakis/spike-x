@@ -29,10 +29,10 @@ ChartJS.register(
 );
 
 // Dynamically import visualizer components to prevent SSR issues
-const Visualizer2D = dynamic(() => import("../components/visualizer2D"), {
+const Visualizer2D = dynamic(() => import("../components/visualizers/visualizer2D"), {
   ssr: false,
 });
-const Visualizer3D = dynamic(() => import("../components/visualizer3D"), {
+const Visualizer3D = dynamic(() => import("../components/visualizers/visualizer3D"), {
   ssr: false,
 });
 

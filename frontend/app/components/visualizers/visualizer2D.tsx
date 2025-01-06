@@ -1,4 +1,4 @@
-// spike-x/frontend/app/components/visualizer2d.tsx
+// spike-x/frontend/app/components/visualizers/visualizer2d.tsx
 
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
