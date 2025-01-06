@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from './SearchBar';
+import ModelList from './ModelList';
 
 interface Model {
   id: string;
@@ -12,13 +13,15 @@ interface LibraryColumnProps {
   items: Model[];
   onSearch: (term: string) => void;
   filteredItems: Model[];
+  onItemClick?: (item: Model) => void;
 }
 
 export default function LibraryColumn({
   icon,
   title,
   onSearch,
-  filteredItems
+  filteredItems,
+  onItemClick
 }: LibraryColumnProps) {
   return (
     <div className="flex flex-col p-6 border rounded shadow hover:shadow-lg transition-shadow duration-300 
@@ -30,18 +33,10 @@ export default function LibraryColumn({
 
       <SearchBar onSearch={onSearch} />
 
-      <div className="flex-grow overflow-y-auto">
-        <ul className="space-y-2">
-          {filteredItems.map((item, itemIdx) => (
-            <li 
-              key={itemIdx}
-              className="p-2 rounded cursor-pointer transition-colors duration-200 text-[var(--text)] hover:bg-[var(--menu-hover)]"
-            >
-              {item.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ModelList 
+        items={filteredItems}
+        onItemClick={onItemClick}
+      />
     </div>
   );
 }

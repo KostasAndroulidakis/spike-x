@@ -120,6 +120,11 @@ export default function Library() {
     return items.filter(item => item.name.toLowerCase().includes(searchTerm));
   };
 
+  const handleItemClick = (item: Model) => {
+    console.log('Item clicked:', item);
+    // Add your item click handling logic here
+  };
+
   return (
     <LibraryLayout
       theme={theme}
@@ -138,6 +143,7 @@ export default function Library() {
             items={column.items}
             onSearch={(term) => handleSearch(idx, term)}
             filteredItems={filteredItems(column.items, idx)}
+            onItemClick={handleItemClick}
           />
         ))}
       </div>
