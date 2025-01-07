@@ -1,8 +1,5 @@
-// UserMenu.tsx
-
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, SunMoon, Brain, Settings, LogOut, UserCircle, ChevronRight, ChevronLeft } from 'lucide-react';
-
+import { Sun, Moon, Palette, Brain, Settings, LogOut, UserCircle, ChevronRight, ChevronLeft } from 'lucide-react';
 
 export default function UserMenu() {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
@@ -10,7 +7,6 @@ export default function UserMenu() {
   const [theme, setTheme] = useState<'light' | 'dark' | 'brain'>('dark');
 
   useEffect(() => {
-    // Initialize theme from localStorage or system preference
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'brain' | null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initialTheme = savedTheme || systemTheme;
@@ -23,16 +19,12 @@ export default function UserMenu() {
     setTheme(selectedTheme);
     localStorage.setItem('theme', selectedTheme);
     document.documentElement.setAttribute('data-theme', selectedTheme);
-    setThemeSubMenuOpen(false);
-    setUserMenuOpen(false);
   };
 
   const toggleUserMenu = () => {
     setUserMenuOpen(!isUserMenuOpen);
-    setThemeSubMenuOpen(false);
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -47,13 +39,11 @@ export default function UserMenu() {
   }, []);
 
   const handleSettings = () => {
-    // Add settings functionality here
     console.log('Settings clicked');
     setUserMenuOpen(false);
   };
 
   const handleLogout = () => {
-    // Add logout functionality here
     console.log('Logout clicked');
     setUserMenuOpen(false);
   };
@@ -71,24 +61,24 @@ export default function UserMenu() {
         <div className="absolute right-0 mt-2 bg-[var(--menu-bg)] rounded shadow-lg p-2 min-w-[200px] z-50">
           <div className="px-4 py-2 border-b border-[var(--nav-hover)]">
             <p className="font-semibold">User Name</p>
-            <p className="text-sm text-gray-500">user@example.com</p>
+            <p className="text-sm text-gray-500">@usename</p>
           </div>
           
-          {/* Theme Submenu */}
-          <div className="relative">
+          {/* Appearance Section */}
+          <div>
             <button
               onClick={() => setThemeSubMenuOpen(!isThemeSubMenuOpen)}
               className="w-full flex items-center justify-between px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200"
             >
               <span className="flex items-center">
-                <SunMoon className="w-5 h-5 mr-2" />
-                Theme
+                <Palette className="w-5 h-5 mr-2" />
+                Appearance
               </span>
               {isThemeSubMenuOpen ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </button>
 
             {isThemeSubMenuOpen && (
-              <div className="absolute right-full top-0 mt-0 bg-[var(--menu-bg)] rounded shadow-lg p-2 min-w-[150px] z-50">
+              <div className="px-2 py-1">
                 <button
                   onClick={() => handleThemeChange('light')}
                   className={`w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200 ${
@@ -96,7 +86,7 @@ export default function UserMenu() {
                   }`}
                 >
                   <Sun className="w-5 h-5 mr-2" />
-                  Light
+                  Light theme
                 </button>
 
                 <button
@@ -106,7 +96,7 @@ export default function UserMenu() {
                   }`}
                 >
                   <Moon className="w-5 h-5 mr-2" />
-                  Dark
+                  Dark theme
                 </button>
 
                 <button
@@ -116,11 +106,14 @@ export default function UserMenu() {
                   }`}
                 >
                   <Brain className="w-5 h-5 mr-2" />
-                  Brain
+                  Brain theme
                 </button>
               </div>
             )}
           </div>
+
+          {/* First Separator */}
+          <div className="border-b border-[var(--nav-hover)] my-2"></div>
           
           <button
             onClick={handleSettings}
@@ -129,6 +122,9 @@ export default function UserMenu() {
             <Settings className="w-5 h-5 mr-2" />
             Settings
           </button>
+
+          {/* Second Separator */}
+          <div className="border-b border-[var(--nav-hover)] my-2"></div>
 
           <button
             onClick={handleLogout}
