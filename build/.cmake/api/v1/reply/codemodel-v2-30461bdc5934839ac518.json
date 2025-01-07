@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "spike_x_api",
+					"name" : "models_server",
 					"targetIndexes" : 
 					[
 						0
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "models_server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-models_server-Debug-e160f2c11a3a1facd3b1.json",
+					"jsonFile" : "target-models_server-Debug-755f92dc929458aeffa7.json",
 					"name" : "models_server",
 					"projectIndex" : 0
 				}

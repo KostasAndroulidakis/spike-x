@@ -146,7 +146,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=spike_x_api
+CMAKE_PROJECT_NAME:STATIC=models_server
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ranlib
@@ -249,6 +249,15 @@ c-ares_DIR:PATH=/opt/homebrew/lib/cmake/c-ares
 //The directory containing a CMake configuration file for gRPC.
 gRPC_DIR:PATH=/opt/homebrew/lib/cmake/grpc
 
+//Value Computed by CMake
+models_server_BINARY_DIR:STATIC=/Users/kanon/projects/spike-x/api/build
+
+//Value Computed by CMake
+models_server_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+models_server_SOURCE_DIR:STATIC=/Users/kanon/projects/spike-x/api
+
 //CMake built-in FindProtobuf.cmake module compatible
 protobuf_MODULE_COMPATIBLE:BOOL=OFF
 
@@ -257,15 +266,6 @@ protobuf_VERBOSE:BOOL=OFF
 
 //The directory containing a CMake configuration file for re2.
 re2_DIR:PATH=/opt/homebrew/lib/cmake/re2
-
-//Value Computed by CMake
-spike_x_api_BINARY_DIR:STATIC=/Users/kanon/projects/spike-x/api/build
-
-//Value Computed by CMake
-spike_x_api_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-spike_x_api_SOURCE_DIR:STATIC=/Users/kanon/projects/spike-x/api
 
 //The directory containing a CMake configuration file for utf8_range.
 utf8_range_DIR:PATH=/opt/homebrew/lib/cmake/utf8_range

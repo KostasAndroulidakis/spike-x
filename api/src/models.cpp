@@ -4,6 +4,7 @@
 #include <regex>
 #include <fstream>
 #include <filesystem>
+#include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include "models.grpc.pb.h"  // Θα παραχθεί από το protobuf
 
 using grpc::Server;
@@ -92,6 +93,8 @@ public:
 int main() {
     std::string server_address("0.0.0.0:5173");
     ModelsServiceImpl service;
+
+    grpc::reflection::InitProtoReflectionServerBuilderPlugin();
 
     ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());

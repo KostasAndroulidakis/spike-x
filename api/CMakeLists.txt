@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.13)
-project(spike_x_api)
+project(models_server)
+
+set(CMAKE_CXX_STANDARD 14)
+
+# Add Homebrew paths for M1 Mac
+list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/lib/cmake")
+include_directories("/opt/homebrew/include")
+link_directories("/opt/homebrew/lib")
 
 # Find required packages
 find_package(gRPC CONFIG REQUIRED)
@@ -25,5 +32,7 @@ target_include_directories(models_server PRIVATE
 # Link libraries
 target_link_libraries(models_server PRIVATE
     gRPC::grpc++
+    grpc++
+    grpc++_reflection
     protobuf::libprotobuf
 )
