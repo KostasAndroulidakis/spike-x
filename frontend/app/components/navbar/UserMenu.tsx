@@ -1,7 +1,8 @@
 // UserMenu.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Settings, LogOut, UserCircle, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Sun, Moon, SunMoon, Brain, Settings, LogOut, UserCircle, ChevronRight, ChevronLeft } from 'lucide-react';
+
 
 export default function UserMenu() {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
@@ -80,7 +81,7 @@ export default function UserMenu() {
               className="w-full flex items-center justify-between px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200"
             >
               <span className="flex items-center">
-                <Settings className="w-5 h-5 mr-2" />
+                <SunMoon className="w-5 h-5 mr-2" />
                 Theme
               </span>
               {isThemeSubMenuOpen ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
@@ -114,7 +115,7 @@ export default function UserMenu() {
                     theme === 'brain' ? 'bg-[var(--nav-hover)]' : ''
                   }`}
                 >
-                  <Settings className="w-5 h-5 mr-2" />
+                  <Brain className="w-5 h-5 mr-2" />
                   Brain
                 </button>
               </div>
