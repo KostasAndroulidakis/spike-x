@@ -1,0 +1,20 @@
+{
+    "neurons": {
+      "lif": {
+        "compatible_synapses": ["lif", "stdp", "rstdp", "dynamic"],
+        "compatible_dendrites": ["passive", "active"],
+        "compatible_axons": ["unmyelinated", "myelinated", "cable"]
+      },
+      "izhikevich": {
+        "compatible_synapses": ["stdp", "hebbian", "nmda"],
+        "compatible_dendrites": ["compartmental", "spine", "theta"],
+        "compatible_axons": ["adaptive", "unmyelinated"]
+      },
+      "hodgkin_huxley": {
+        "compatible_synapses": ["hodgkin_huxley", "gap_jun", "chem"],
+        "compatible_dendrites": ["calcium", "branch_specific"],
+        "compatible_axons": ["myelinated", "unmyelinated"]
+      }
+    }
+  }
+  
