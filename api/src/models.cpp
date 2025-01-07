@@ -41,7 +41,8 @@ private:
     }
 
     std::vector<spike_x::Model> getModels(const std::string& category) {
-        auto basePath = fs::current_path().parent_path() / "lib/core";
+        // Updated basePath to match the correct file structure
+        auto basePath = fs::current_path().parent_path().parent_path() / "lib/core";
         auto filepath = basePath / category / "models.hpp";
         return readCppModels(filepath.string());
     }
