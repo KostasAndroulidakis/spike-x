@@ -1,4 +1,4 @@
-// File: spike-x/frontend/app/routes/training.tsx
+// File: spike-x/frontend/app/routes/training.tsx - start
 
 import { useState, useEffect } from "react";
 import Toggle from "react-toggle";
@@ -464,3 +464,5 @@ export default function Training() {
     </div>
   );
 }
+
+// File: spike-x/frontend/app/routes/training.tsx - start

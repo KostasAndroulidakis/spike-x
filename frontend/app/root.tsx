@@ -1,3 +1,5 @@
+// File: spike-x/frontend/app/root.tsx - start
+
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import Navbar from "./components/navbar/Navbar";
@@ -26,3 +28,5 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return <Outlet />;
 }
+
+// File: spike-x/frontend/app/root.tsx - end

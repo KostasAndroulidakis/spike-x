@@ -1,4 +1,5 @@
-// ThemeToggle.tsx
+// File: spike-x/frontend/app/components/theme/ThemeToggle.tsx - start
+
 import { Moon, Sun, Brain } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
@@ -31,3 +32,5 @@ export function ThemeToggle() {
     </button>
   );
 }
+
+// File: spike-x/frontend/app/components/theme/ThemeToggle.tsx - end

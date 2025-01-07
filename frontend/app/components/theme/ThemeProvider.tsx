@@ -1,4 +1,5 @@
-// ThemeProvider.tsx
+// File: spike-x/frontend/app/components/theme/ThemeProvider.tsx - start
+
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
 type Theme = 'light' | 'dark' | 'brain';
@@ -60,3 +61,5 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 }
 
 export const useTheme = () => useContext(ThemeContext);
+
+// File: spike-x/frontend/app/components/theme/ThemeProvider.tsx - end
