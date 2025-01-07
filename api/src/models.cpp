@@ -1,11 +1,9 @@
-// api/src/models.cpp
-
 #include <grpcpp/grpcpp.h>
 #include <regex>
 #include <fstream>
 #include <filesystem>
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
-#include "models.grpc.pb.h"  // Θα παραχθεί από το protobuf
+#include "models.grpc.pb.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -18,14 +16,14 @@ private:
     std::vector<spike_x::Model> readCppModels(const std::string& filepath) {
         std::vector<spike_x::Model> models;
         std::ifstream file(filepath);
-        
+
         if (!file.is_open()) {
             std::cerr << "Warning: " << filepath << " not found" << std::endl;
             return models;
         }
 
         std::string content((std::istreambuf_iterator<char>(file)),
-                          std::istreambuf_iterator<char>());
+                            std::istreambuf_iterator<char>());
 
         std::regex pattern("\\{\\s*\"([^\"]+)\",\\s*\"([^\"]+)\"\\s*\\}");
         std::smatch match;
@@ -43,15 +41,15 @@ private:
     }
 
     std::vector<spike_x::Model> getModels(const std::string& category) {
-        auto basePath = fs::current_path().parent_path() / "lib";
+        auto basePath = fs::current_path().parent_path() / "lib/core";
         auto filepath = basePath / category / "models.hpp";
         return readCppModels(filepath.string());
     }
 
 public:
     Status GetNeuronModels(ServerContext* context,
-                          const spike_x::ModelsRequest* request,
-                          spike_x::ModelsResponse* response) override {
+                           const spike_x::ModelsRequest* request,
+                           spike_x::ModelsResponse* response) override {
         auto models = getModels("neurons");
         for (const auto& model : models) {
             *response->add_models() = model;
@@ -60,8 +58,8 @@ public:
     }
 
     Status GetSynapseModels(ServerContext* context,
-                           const spike_x::ModelsRequest* request,
-                           spike_x::ModelsResponse* response) override {
+                            const spike_x::ModelsRequest* request,
+                            spike_x::ModelsResponse* response) override {
         auto models = getModels("synapses");
         for (const auto& model : models) {
             *response->add_models() = model;
@@ -70,8 +68,8 @@ public:
     }
 
     Status GetAxonModels(ServerContext* context,
-                        const spike_x::ModelsRequest* request,
-                        spike_x::ModelsResponse* response) override {
+                         const spike_x::ModelsRequest* request,
+                         spike_x::ModelsResponse* response) override {
         auto models = getModels("axons");
         for (const auto& model : models) {
             *response->add_models() = model;
@@ -80,8 +78,8 @@ public:
     }
 
     Status GetDendriteModels(ServerContext* context,
-                            const spike_x::ModelsRequest* request,
-                            spike_x::ModelsResponse* response) override {
+                             const spike_x::ModelsRequest* request,
+                             spike_x::ModelsResponse* response) override {
         auto models = getModels("dendrites");
         for (const auto& model : models) {
             *response->add_models() = model;
