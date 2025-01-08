@@ -1,0 +1,3 @@
+/Users/kanon/projects/spike-x/api/build/CMakeFiles/test_setup.dir
+/Users/kanon/projects/spike-x/api/build/CMakeFiles/edit_cache.dir
+/Users/kanon/projects/spike-x/api/build/CMakeFiles/rebuild_cache.dir
