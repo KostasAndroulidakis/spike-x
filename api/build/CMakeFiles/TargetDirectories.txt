@@ -1,3 +1,0 @@
-/Users/kanon/projects/spike-x/api/build/CMakeFiles/models_server.dir
-/Users/kanon/projects/spike-x/api/build/CMakeFiles/edit_cache.dir
-/Users/kanon/projects/spike-x/api/build/CMakeFiles/rebuild_cache.dir
