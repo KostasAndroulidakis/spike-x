@@ -98,8 +98,8 @@ test_setup: CMakeFiles/test_setup.dir/build.make
 test_setup: /opt/homebrew/lib/libgrpc++.dylib
 test_setup: /opt/homebrew/lib/libnghttp3.dylib
 test_setup: /opt/homebrew/lib/libnghttp2.dylib
-test_setup: /opt/homebrew/lib/libssl.dylib
-test_setup: /opt/homebrew/lib/libcrypto.dylib
+test_setup: /opt/homebrew/Cellar/openssl@3/3.4.0/lib/libssl.dylib
+test_setup: /opt/homebrew/Cellar/openssl@3/3.4.0/lib/libcrypto.dylib
 test_setup: CMakeFiles/test_setup.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kanon/projects/spike-x/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_setup"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_setup.dir/link.txt --verbose=$(VERBOSE)
