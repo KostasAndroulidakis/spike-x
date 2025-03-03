@@ -18,6 +18,8 @@
     "@remix-run/react": "^2.15.2",
     "@remix-run/serve": "^2.15.2",
     "chart.js": "^4.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "google-protobuf": "^3.21.4",
     "grpc-web": "^1.5.0",
     "isbot": "^4.1.0",

@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Toggle from "react-toggle";
-import "react-toggle/style.css";
 import dynamic from "next/dynamic";
-import { FaExpand } from "react-icons/fa";
 
 // Dynamically import visualizer components to prevent SSR issues
 const Visualizer2D = dynamic(() => import("../components/visualizers/visualizer2D"), {
@@ -18,24 +15,28 @@ export default function Visualization() {
 
   return (
     <div className="p-4 max-w-screen-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Neural Network Visualization</h1>
-      
       {/* Real-time Visualization */}
       <div className="panel">
-        <h2 className="panel-header">Real-time Visualization</h2>
-        <div className="relative">
-          <div className="flex items-center mb-2">
-            <Toggle
-              checked={is3D}
-              onChange={() => setIs3D(!is3D)}
-              icons={{
-                checked: <span className="text-xs">3D</span>,
-                unchecked: <span className="text-xs">2D</span>,
-              }}
-              className="mr-2"
-            />
-            <span className="font-medium">Visualization Mode</span>
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="panel-header m-0">Real-time Visualization</h2>
+          
+          <div className="flex items-center gap-2">
+            <button
+              className={`px-3 py-1 rounded text-sm font-medium ${!is3D ? 'bg-[var(--primary)] text-white' : 'bg-[var(--card-bg)] text-[var(--text)]'}`}
+              onClick={() => setIs3D(false)}
+            >
+              2D View
+            </button>
+            <button
+              className={`px-3 py-1 rounded text-sm font-medium ${is3D ? 'bg-[var(--primary)] text-white' : 'bg-[var(--card-bg)] text-[var(--text)]'}`}
+              onClick={() => setIs3D(true)}
+            >
+              3D View
+            </button>
           </div>
+        </div>
+        
+        <div className="relative">
           <div className="w-full h-128 border-[var(--border)] rounded overflow-hidden visualization-canvas">
             {is3D ? <Visualizer3D /> : <Visualizer2D layers={[]} />}
           </div>

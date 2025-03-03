@@ -4,11 +4,28 @@
 
 ## Development
 
-Run the dev server:
+First, start the API server that parses models from the C++ library:
+
+```shellscript
+npm run api
+```
+
+Then in a separate terminal, run the dev server:
 
 ```shellscript
 npm run dev
 ```
+
+### Library Component
+
+The Library page fetches components directly from the C++ header files in the `lib/core` directory. The API server parses these files to extract the available models for:
+
+- Neurons
+- Synapses
+- Axons
+- Dendrites
+
+When you add new model types to the C++ header files, they will automatically appear in the library UI.
 
 ## Deployment
 

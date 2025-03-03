@@ -25,18 +25,23 @@ export default function LibraryColumn({
   onItemClick
 }: LibraryColumnProps) {
   return (
-    <div className="panel flex flex-col hover:shadow-md transition-shadow duration-300">
+    <div className="panel flex flex-col hover:shadow-md transition-shadow duration-300 h-full max-h-[calc(100vh-120px)]">
       <ColumnHeader 
         icon={icon}
         title={title}
+        className="flex-shrink-0"
       />
       
-      <SearchBar onSearch={onSearch} />
+      <SearchBar onSearch={onSearch} className="flex-shrink-0 mb-2" />
 
-      <ModelList 
-        items={filteredItems}
-        onItemClick={onItemClick}
-      />
+      <div className="flex-grow overflow-hidden">
+        <ModelList 
+          items={filteredItems}
+          onItemClick={onItemClick}
+        />
+        {/* Add some empty space at the bottom for better scrolling */}
+        <div className="h-6"></div>
+      </div>
     </div>
   );
 }
