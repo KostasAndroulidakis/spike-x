@@ -20,8 +20,8 @@ export function TrainingOutcomes({
     datasets: [{
       label: "Accuracy",
       data: accuracyData,
-      borderColor: "rgb(75, 192, 192)",
-      backgroundColor: "rgba(75, 192, 192, 0.1)",
+      borderColor: "var(--chart-accuracy)",
+      backgroundColor: "var(--chart-accuracy-bg)",
       fill: true,
       tension: 0.4
     }]
@@ -32,8 +32,8 @@ export function TrainingOutcomes({
     datasets: [{
       label: "Loss",
       data: lossData,
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.1)",
+      borderColor: "var(--chart-loss)",
+      backgroundColor: "var(--chart-loss-bg)",
       fill: true,
       tension: 0.4
     }]

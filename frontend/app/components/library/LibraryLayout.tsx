@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useTheme } from '../theme/ThemeProvider';
 
 interface LibraryLayoutProps {
   children: ReactNode;
-  theme: 'light' | 'dark';
   currentSection: number;
   totalSections: number;
   onNavigateSection: (direction: 'prev' | 'next') => void;
@@ -13,16 +13,16 @@ interface LibraryLayoutProps {
 
 export default function LibraryLayout({
   children,
-  theme,
   currentSection,
   totalSections,
   onNavigateSection,
   onSectionSelect,
   loading = false
 }: LibraryLayoutProps) {
+  const { theme } = useTheme();
   if (loading) {
     return (
-      <div className={`flex items-center justify-center min-h-screen ${theme === 'dark' ? 'bg-[var(--background)]' : 'bg-[var(--background)]'}`}>
+      <div className="flex items-center justify-center bg-[var(--background)]" style={{height: "calc(100vh - 65px)"}}>
         <div className="text-xl text-[var(--text)]">
           Loading models...
         </div>
@@ -31,8 +31,8 @@ export default function LibraryLayout({
   }
 
   return (
-    <div className="relative min-h-screen p-4 bg-[var(--background)]">
-      <div className="max-w-screen-2xl mx-auto h-[80vh] relative">
+    <div className="relative p-4 bg-[var(--background)] text-[var(--text)]" style={{height: "calc(100vh - 65px)"}}>
+      <div className="max-w-screen-2xl mx-auto h-full relative">
         <button 
           onClick={() => onNavigateSection('prev')}
           className="absolute left-0 top-1/2 -translate-y-1/2 -ml-12 p-4 text-[var(--text)] hover:text-[var(--accent)] transition-colors"

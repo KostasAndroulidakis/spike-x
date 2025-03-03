@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Palette, Brain, Settings, LogOut, UserCircle, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Sun, Moon, Palette, Settings, LogOut, UserCircle, ChevronRight, ChevronLeft } from 'lucide-react';
+import { useTheme } from '../theme/ThemeProvider';
 
 export default function UserMenu() {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isThemeSubMenuOpen, setThemeSubMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark' | 'brain'>('dark');
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'brain' | null;
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const initialTheme = savedTheme || systemTheme;
-
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
-  }, []);
-
-  const handleThemeChange = (selectedTheme: 'light' | 'dark' | 'brain') => {
+  const handleThemeChange = (selectedTheme: 'light' | 'dark') => {
     setTheme(selectedTheme);
-    localStorage.setItem('theme', selectedTheme);
-    document.documentElement.setAttribute('data-theme', selectedTheme);
   };
 
   const toggleUserMenu = () => {
@@ -52,7 +42,7 @@ export default function UserMenu() {
     <div className="relative user-menu">
       <button
         onClick={toggleUserMenu}
-        className="w-10 h-10 rounded-full overflow-hidden hover:ring-2 hover:ring-blue-500 transition-all duration-200"
+        className="w-10 h-10 rounded-full overflow-hidden hover:ring-2 hover:ring-[var(--primary)] transition-all duration-200"
       >
         <UserCircle className="w-full h-full text-[var(--text)]" />
       </button>
@@ -61,7 +51,7 @@ export default function UserMenu() {
         <div className="absolute right-0 mt-2 bg-[var(--menu-bg)] rounded shadow-lg p-2 min-w-[200px] z-50">
           <div className="px-4 py-2 border-b border-[var(--nav-hover)]">
             <p className="font-semibold">User Name</p>
-            <p className="text-sm text-gray-500">@usename</p>
+            <p className="text-sm text-[var(--secondary)]">@usename</p>
           </div>
           
           {/* Appearance Section */}
@@ -98,16 +88,6 @@ export default function UserMenu() {
                   <Moon className="w-5 h-5 mr-2" />
                   Dark theme
                 </button>
-
-                <button
-                  onClick={() => handleThemeChange('brain')}
-                  className={`w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200 ${
-                    theme === 'brain' ? 'bg-[var(--nav-hover)]' : ''
-                  }`}
-                >
-                  <Brain className="w-5 h-5 mr-2" />
-                  Brain theme
-                </button>
               </div>
             )}
           </div>
@@ -128,7 +108,7 @@ export default function UserMenu() {
 
           <button
             onClick={handleLogout}
-            className="w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200 text-red-500"
+            className="w-full flex items-center px-4 py-2 hover:bg-[var(--menu-hover)] rounded transition-colors duration-200 text-[var(--error)]"
           >
             <LogOut className="w-5 h-5 mr-2" />
             Log Out

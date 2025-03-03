@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaBrain, FaProjectDiagram, FaStream, FaShareAlt } from "react-icons/fa";
 import LibraryLayout from "../components/library/LibraryLayout";
 import LibraryColumn from "../components/library/LibraryColumn";
+import { useTheme } from "../components/theme/ThemeProvider";
 
 interface Model {
   id: string;
@@ -22,7 +23,7 @@ interface Section {
 
 export default function Library() {
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const { theme } = useTheme();
   const [sections, setSections] = useState<Section[]>([
     {
       title: "Neural Components",
@@ -58,26 +59,7 @@ export default function Library() {
   const [currentSection, setCurrentSection] = useState(0);
   const [searchTerms, setSearchTerms] = useState<{ [key: string]: string }>({});
 
-  // Watch for theme changes
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-theme') {
-          const newTheme = document.documentElement.getAttribute('data-theme') as 'light' | 'dark';
-          setTheme(newTheme || 'dark');
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
-
-    setTheme(document.documentElement.getAttribute('data-theme') as 'light' | 'dark' || 'dark');
-
-    return () => observer.disconnect();
-  }, []);
+  // Theme is now managed by ThemeProvider
 
   useEffect(() => {
     const fetchData = async () => {
@@ -127,7 +109,6 @@ export default function Library() {
 
   return (
     <LibraryLayout
-      theme={theme}
       currentSection={currentSection}
       totalSections={sections.length}
       onNavigateSection={navigateSection}

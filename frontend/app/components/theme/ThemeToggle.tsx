@@ -1,13 +1,13 @@
 // File: spike-x/frontend/app/components/theme/ThemeToggle.tsx - start
 
-import { Moon, Sun, Brain } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   const cycleTheme = () => {
-    const themes: Array<'light' | 'dark' | 'brain'> = ['light', 'dark', 'brain'];
+    const themes: Array<'light' | 'dark'> = ['light', 'dark'];
     const currentIndex = themes.indexOf(theme);
     const nextTheme = themes[(currentIndex + 1) % themes.length];
     setTheme(nextTheme);
@@ -21,8 +21,6 @@ export function ThemeToggle() {
     >
       {theme === 'dark' ? (
         <Sun className="w-5 h-5" />
-      ) : theme === 'brain' ? (
-        <Brain className="w-5 h-5" />
       ) : (
         <Moon className="w-5 h-5" />
       )}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaBrain, FaProjectDiagram, FaStream, FaShareAlt } from "react-icons/fa";
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface Model {
   id: string;
@@ -58,29 +59,8 @@ const initialSections: Section[] = [
 
 export const useLibraryData = () => {
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const { theme } = useTheme();
   const [sections, setSections] = useState<Section[]>(initialSections);
-
-  // Watch for theme changes
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-theme') {
-          const newTheme = document.documentElement.getAttribute('data-theme') as 'light' | 'dark';
-          setTheme(newTheme || 'dark');
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
-
-    setTheme(document.documentElement.getAttribute('data-theme') as 'light' | 'dark' || 'dark');
-
-    return () => observer.disconnect();
-  }, []);
 
   // Fetch data for all sections
   useEffect(() => {

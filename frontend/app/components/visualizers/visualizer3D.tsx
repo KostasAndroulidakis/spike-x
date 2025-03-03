@@ -7,7 +7,16 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 const visualizer3d: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    // Get CSS variables for theming
+    const getThemeColor = (varName: string): number => {
+      const color = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+      // Convert CSS hex to THREE.js hex
+      return parseInt(color.replace('#', '0x'));
+    };
+    
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(getThemeColor('--visualizer-bg'));
+    
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
 
@@ -16,13 +25,13 @@ const visualizer3d: React.FC = () => {
       mountRef.current.appendChild(renderer.domElement);
     }
 
-    // Προσθήκη OrbitControls
+    // OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
 
-    const geometry = new THREE.SphereGeometry(0.1, 8, 8); // Χαμηλότερη ανάλυση
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const geometry = new THREE.SphereGeometry(0.1, 8, 8);
+    const material = new THREE.MeshBasicMaterial({ color: getThemeColor('--visualizer-neuron-input') });
 
     // Λειτουργία για δημιουργία στρώσεων ως πλέγμα
     const createLayer = (count: number, x: number, gridSize: number) => {
@@ -69,7 +78,9 @@ const visualizer3d: React.FC = () => {
       });
 
       lineGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
+      const lineMaterial = new THREE.LineBasicMaterial({ 
+        color: getThemeColor('--visualizer-connection') 
+      });
       const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
       scene.add(lineMesh);
     };
@@ -100,7 +111,7 @@ const visualizer3d: React.FC = () => {
     };
   }, []);
 
-  return <div ref={mountRef} />;
+  return <div ref={mountRef} className="w-full h-[600px] border border-[var(--visualizer-border)] rounded-lg" />;
 };
 
 export default visualizer3d;

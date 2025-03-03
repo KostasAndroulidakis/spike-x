@@ -35,9 +35,16 @@ const visualizer2d: React.FC<visualizer2dProps> = ({ layers }) => {
     const currentMount = mountRef.current;
     if (!currentMount) return;
 
+    // Get CSS variables for theming
+    const getThemeColor = (varName: string): number => {
+      const color = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+      // Convert CSS hex to THREE.js hex
+      return parseInt(color.replace('#', '0x'));
+    };
+
     // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf0f0f0);
+    scene.background = new THREE.Color(getThemeColor('--visualizer-bg'));
 
     // Camera
     const camera = new THREE.PerspectiveCamera(
@@ -59,10 +66,11 @@ const visualizer2d: React.FC<visualizer2dProps> = ({ layers }) => {
     controls.dampingFactor = 0.05;
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const lightColor = getThemeColor('--visualizer-light');
+    const ambientLight = new THREE.AmbientLight(lightColor, 0.6);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    const directionalLight = new THREE.DirectionalLight(lightColor, 0.6);
     directionalLight.position.set(0, 1, 1);
     scene.add(directionalLight);
 
@@ -94,12 +102,14 @@ const visualizer2d: React.FC<visualizer2dProps> = ({ layers }) => {
 
         // Neuron Geometry and Material
         const geometry = new THREE.SphereGeometry(2, 16, 16);
-        let materialColor = 0x0000ff; // Default blue for hidden layers
+        let materialColor: number;
 
         if (layerIndex === 0) {
-          materialColor = 0x00ff00; // Green for Input Layer
+          materialColor = getThemeColor('--visualizer-neuron-input'); // Input Layer
         } else if (layerIndex === layers.length - 1) {
-          materialColor = 0xff0000; // Red for Output Layer
+          materialColor = getThemeColor('--visualizer-neuron-output'); // Output Layer
+        } else {
+          materialColor = getThemeColor('--visualizer-neuron-hidden'); // Hidden layers
         }
 
         const material = new THREE.MeshStandardMaterial({ color: materialColor });
@@ -125,7 +135,9 @@ const visualizer2d: React.FC<visualizer2dProps> = ({ layers }) => {
           const targetNeuron = nextLayerNeurons[Math.floor(Math.random() * nextLayerNeurons.length)];
           const points = [startPos, targetNeuron];
 
-          const materialColor = layer.synapticConnectionType === "Excitation" ? 0x00ff00 : 0xff0000;
+          const materialColor = layer.synapticConnectionType === "Excitation" 
+            ? getThemeColor('--visualizer-synapse-excitatory')
+            : getThemeColor('--visualizer-synapse-inhibitory');
 
           const material = new THREE.LineBasicMaterial({ color: materialColor, opacity: 0.5 });
           const geometry = new THREE.BufferGeometry().setFromPoints(points);
@@ -153,7 +165,7 @@ const visualizer2d: React.FC<visualizer2dProps> = ({ layers }) => {
   return (
     <div
       ref={mountRef}
-      style={{ width: "100%", height: "600px", border: "1px solid #ccc", borderRadius: "8px" }}
+      className="w-full h-[600px] border border-[var(--visualizer-border)] rounded-lg"
     />
   );
 };

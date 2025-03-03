@@ -8,6 +8,12 @@ import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 
+// Set default theme to dark initially to prevent flash
+const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const savedTheme = localStorage.getItem('theme');
+const initialTheme = savedTheme || (darkModeMediaQuery.matches ? 'dark' : 'light');
+document.documentElement.setAttribute('data-theme', initialTheme);
+
 startTransition(() => {
   hydrateRoot(
     document,

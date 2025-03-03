@@ -2,30 +2,47 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-type Theme = 'light' | 'dark' | 'brain';
+type Theme = 'light' | 'dark';
 
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType>({
-  theme: 'light',
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: 'dark',
   setTheme: () => {},
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Check for saved theme preference or system preference
+  // Immediately get the initial theme to prevent white flash
+  const getInitialTheme = (): Theme => {
+    // For SSR, always default to dark
+    if (typeof window === 'undefined') return 'dark';
+    
     const savedTheme = localStorage.getItem('theme') as Theme;
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const initialTheme = savedTheme || systemTheme;
+    return savedTheme || systemTheme || 'dark';
+  };
 
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
+  // Default to dark theme initially to prevent white flash
+  const [theme, setTheme] = useState<Theme>(getInitialTheme());
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Set the theme attribute immediately
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+
+  useEffect(() => {
+    // Sync with system theme changes
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    
+    if (!savedTheme) {
+      setTheme(systemTheme);
+      document.documentElement.setAttribute('data-theme', systemTheme);
+    }
     
     // Add system theme change listener
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

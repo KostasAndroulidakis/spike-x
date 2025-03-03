@@ -3,76 +3,379 @@
 @tailwind utilities;
 
 :root {
+  /* Core colors */
   --background: #ffffff;
   --text: #000000;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --text-disabled: #9ca3af;
+  
+  /* Navigation */
   --nav-bg: #f3f4f6;
   --nav-hover: #e5e7eb;
   --menu-bg: #f3f4f6;
   --menu-hover: #e5e7eb;
+  
+  /* Brand colors */
   --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #dbeafe;
   --secondary: #4b5563;
   --accent: #3b82f6;
+  
+  /* State colors */
   --success: #22c55e;
+  --success-hover: #16a34a;
+  --success-light: #dcfce7;
   --warning: #eab308;
+  --warning-hover: #ca8a04;
+  --warning-light: #fef9c3;
   --error: #ef4444;
+  --error-hover: #dc2626;
+  --error-light: #fee2e2;
+  --info: #0ea5e9;
+  --info-hover: #0284c7;
+  --info-light: #e0f2fe;
+  
+  /* THREE.js visualization colors */
+  --visualizer-bg: #f0f0f0;
+  --visualizer-light: #ffffff;
+  --visualizer-neuron-input: #00ff00;
+  --visualizer-neuron-hidden: #0000ff;
+  --visualizer-neuron-output: #ff0000;
+  --visualizer-synapse-excitatory: #00ff00;
+  --visualizer-synapse-inhibitory: #ff0000;
+  --visualizer-connection: #ffffff;
+  --visualizer-border: #cccccc;
+  
+  /* UI Elements */
+  --border: #e5e7eb;
+  --border-dark: #d1d5db;
+  --card-bg: #ffffff;
   --code-bg: #f8fafc;
+  --tooltip-bg: #111827;
+  --tooltip-text: #ffffff;
+  
+  /* Form Controls */
+  --input-bg: #ffffff;
+  --input-text: #000000;
+  --input-border: #d1d5db;
+  --input-focus-border: #3b82f6;
+  --input-disabled-bg: #f3f4f6;
+  --input-disabled-text: #9ca3af;
+  
+  /* Charts & Graphs */
+  --chart-grid: rgba(0, 0, 0, 0.1);
+  --chart-tick: rgba(0, 0, 0, 0.7);
+  --chart-line-1: #3b82f6; /* blue */
+  --chart-line-2: #ef4444; /* red */
+  --chart-line-3: #22c55e; /* green */
+  --chart-line-4: #eab308; /* yellow */
+  --chart-line-5: #8b5cf6; /* purple */
+  
+  /* Specific chart colors */
+  --chart-accuracy: rgb(75, 192, 192);
+  --chart-accuracy-bg: rgba(75, 192, 192, 0.1);
+  --chart-loss: rgb(255, 99, 132);
+  --chart-loss-bg: rgba(255, 99, 132, 0.1);
+  
+  /* Progress Bars */
+  --progress-bg: #e5e7eb;
+  --progress-primary: #3b82f6; /* blue */
+  --progress-success: #22c55e; /* green */
+  --progress-warning: #eab308; /* yellow */
+  --progress-error: #ef4444; /* red */
+  --progress-info: #0ea5e9; /* sky blue */
+  --progress-secondary: #8b5cf6; /* purple */
 }
 
 [data-theme='dark'] {
+  /* Core colors */
   --background: #111827;
   --text: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --text-disabled: #6b7280;
+  
+  /* Navigation */
   --nav-bg: #1f2937;
   --nav-hover: #374151;
   --menu-bg: #1f2937;
   --menu-hover: #374151;
+  
+  /* Brand colors */
   --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-light: #1e3a8a;
   --secondary: #9ca3af;
   --accent: #60a5fa;
+  
+  /* State colors */
   --success: #34d399;
+  --success-hover: #10b981;
+  --success-light: #065f46;
   --warning: #fbbf24;
+  --warning-hover: #d97706;
+  --warning-light: #78350f;
   --error: #f87171;
+  --error-hover: #ef4444;
+  --error-light: #7f1d1d;
+  --info: #38bdf8;
+  --info-hover: #0ea5e9;
+  --info-light: #075985;
+  
+  /* UI Elements */
+  --border: #1f2937;
+  --border-dark: #374151;
+  --card-bg: #1f2937;
   --code-bg: #1e293b;
-}
-
-[data-theme='brain'] {
-  --background: #f5f5dc; /* Beige */
-  --text: #5b4636; /* Dark Brown */
-  --nav-bg: #ede6d6; /* Light Beige */
-  --nav-hover: #e1d7c6; /* Slightly Darker Beige */
-  --menu-bg: #ede6d6; /* Light Beige */
-  --menu-hover: #e1d7c6; /* Slightly Darker Beige */
-  --primary: #d2b48c; /* Tan */
-  --secondary: #a0522d; /* Sienna */
-  --accent: #deb887; /* Burlywood */
-  --success: #8fbc8f; /* Dark Sea Green */
-  --warning: #f0e68c; /* Khaki */
-  --error: #cd5c5c; /* Indian Red */
-  --code-bg: #faf0e6; /* Linen */
+  --tooltip-bg: #e5e7eb;
+  --tooltip-text: #111827;
+  
+  /* Form Controls */
+  --input-bg: #1f2937;
+  --input-text: #ffffff;
+  --input-border: #374151;
+  --input-focus-border: #60a5fa;
+  --input-disabled-bg: #111827;
+  --input-disabled-text: #6b7280;
+  
+  /* THREE.js visualization colors */
+  --visualizer-bg: #1a202c;
+  --visualizer-light: #a0aec0;
+  --visualizer-neuron-input: #34d399;
+  --visualizer-neuron-hidden: #60a5fa;
+  --visualizer-neuron-output: #f87171;
+  --visualizer-synapse-excitatory: #34d399;
+  --visualizer-synapse-inhibitory: #f87171;
+  --visualizer-connection: #a0aec0;
+  --visualizer-border: #4a5568;
+  
+  /* Charts & Graphs */
+  --chart-grid: rgba(255, 255, 255, 0.1);
+  --chart-tick: rgba(255, 255, 255, 0.7);
+  --chart-line-1: #60a5fa; /* blue */
+  --chart-line-2: #f87171; /* red */
+  --chart-line-3: #34d399; /* green */
+  --chart-line-4: #fbbf24; /* yellow */
+  --chart-line-5: #a78bfa; /* purple */
+  
+  /* Specific chart colors */
+  --chart-accuracy: rgb(75, 192, 192);
+  --chart-accuracy-bg: rgba(75, 192, 192, 0.1);
+  --chart-loss: rgb(255, 99, 132);
+  --chart-loss-bg: rgba(255, 99, 132, 0.1);
+  
+  /* Progress Bars */
+  --progress-bg: #374151;
+  --progress-primary: #3b82f6; /* blue */
+  --progress-success: #34d399; /* green */
+  --progress-warning: #fbbf24; /* yellow */
+  --progress-error: #f87171; /* red */
+  --progress-info: #38bdf8; /* sky blue */
+  --progress-secondary: #a78bfa; /* purple */
 }
 
 html,
 body {
   @apply bg-[var(--background)] text-[var(--text)] transition-colors duration-200;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
+/* Form Controls */
 input[type="text"],
 input[type="search"] {
-  @apply bg-[var(--background)] border-gray-300 dark:border-gray-700;
+  @apply bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)];
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus {
+  @apply border-[var(--input-focus-border)] outline-none;
+  box-shadow: 0 0 0 1px var(--input-focus-border);
+}
+
+/* For backward compatibility with existing code */
+input[type="number"],
+input[type="file"] {
+  @apply bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)];
+}
+
+/* Select Dropdowns - Use theme variables for consistent styling */
+select {
+  @apply bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)];
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  transition: border-color 0.2s;
+}
+
+select:focus {
+  @apply outline-none border-[var(--input-focus-border)];
+  box-shadow: 0 0 0 1px var(--input-focus-border);
 }
 
 /* Scientific UI elements */
 .neuron-node {
-  @apply bg-[var(--primary)] dark:bg-[var(--accent)] rounded-full shadow-lg;
+  @apply rounded-full shadow-lg;
+  background-color: var(--primary);
+}
+
+.neuron-input {
+  background-color: var(--success);
+}
+
+.neuron-output {
+  background-color: var(--error);
+}
+
+.neuron-hidden {
+  background-color: var(--primary);
 }
 
 .synapse-connection {
-  @apply stroke-[var(--secondary)] dark:stroke-[var(--secondary)] stroke-2;
+  @apply stroke-2;
+  stroke: var(--secondary);
 }
+
+.synapse-excitatory {
+  stroke: var(--success);
+}
+
+.synapse-inhibitory {
+  stroke: var(--error);
+}
+
+/* Add THREE.js visualization colors to :root in the general CSS variables section */
 
 .visualization-canvas {
-  @apply bg-[var(--code-bg)] rounded-lg shadow-md;
+  @apply rounded-lg shadow-md;
+  background-color: var(--code-bg);
 }
 
+/* UI Components */
+.panel {
+  @apply rounded border p-3;
+  background-color: var(--card-bg);
+  border-color: var(--border);
+}
+
+.panel-header {
+  @apply text-lg font-semibold mb-3;
+  color: var(--text);
+}
+
+.panel-content {
+  color: var(--text);
+}
+
+/* Buttons */
+.btn {
+  @apply rounded px-3 py-1.5 transition-colors duration-200 font-medium text-sm focus:outline-none focus:ring-2;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  filter: brightness(90%);
+}
+
+.btn-success {
+  background-color: var(--success);
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: var(--success-hover);
+}
+
+.btn-danger {
+  background-color: var(--error);
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--error-hover);
+}
+
+.btn-warning {
+  background-color: var(--warning);
+  color: white;
+}
+
+.btn-warning:hover:not(:disabled) {
+  background-color: var(--warning-hover);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Progress bars */
+.progress-container {
+  @apply w-full rounded-full overflow-hidden;
+  background-color: var(--progress-bg);
+  height: 0.75rem;
+}
+
+.progress-bar {
+  @apply h-full rounded-full;
+  transition: width 0.3s ease;
+}
+
+.progress-primary {
+  background-color: var(--progress-primary);
+}
+
+.progress-success {
+  background-color: var(--progress-success);
+}
+
+.progress-warning {
+  background-color: var(--progress-warning);
+}
+
+.progress-error {
+  background-color: var(--progress-error);
+}
+
+.progress-secondary {
+  background-color: var(--progress-secondary);
+}
+
+/* Data graphs and visualizations */
 .data-graph {
-  @apply border border-gray-200 dark:border-gray-700 rounded-lg p-4;
+  @apply rounded-lg p-4;
+  border: 1px solid var(--border);
+  background-color: var(--card-bg);
+}
+
+/* Text variants */
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.text-disabled {
+  color: var(--text-disabled);
 }
