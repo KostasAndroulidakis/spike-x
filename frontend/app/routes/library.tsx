@@ -29,25 +29,25 @@ export default function Library() {
       title: "Neural Components",
       columns: [
         {
-          icon: <FaBrain className="text-4xl text-blue-500" />,
+          icon: <FaBrain className="text-4xl text-[var(--icon-blue)]" />,
           title: "Neurons",
           items: [],
           endpoint: "/api/models/neurons"
         },
         {
-          icon: <FaProjectDiagram className="text-4xl text-green-500" />,
+          icon: <FaProjectDiagram className="text-4xl text-[var(--icon-green)]" />,
           title: "Synapses",
           items: [],
           endpoint: "/api/models/synapses"
         },
         {
-          icon: <FaStream className="text-4xl text-purple-500" />,
+          icon: <FaStream className="text-4xl text-[var(--icon-purple)]" />,
           title: "Axons",
           items: [],
           endpoint: "/api/models/axons"
         },
         {
-          icon: <FaShareAlt className="text-4xl text-red-500" />,
+          icon: <FaShareAlt className="text-4xl text-[var(--icon-red)]" />,
           title: "Dendrites",
           items: [],
           endpoint: "/api/models/dendrites"

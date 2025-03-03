@@ -20,7 +20,7 @@ const NeuronControls: React.FC<NeuronControlsProps> = ({
         <label className="block mb-1 text-[var(--text)]">Total Neurons:</label>
         <input
           type="number"
-          className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+          className="w-full p-2 rounded"
           value={neurons}
           onChange={(e) =>
             onUpdate("neurons", parseInt(e.target.value, 10))
@@ -32,7 +32,7 @@ const NeuronControls: React.FC<NeuronControlsProps> = ({
       <div>
         <label className="block mb-1 text-[var(--text)]">Neuron Type:</label>
         <select
-          className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+          className="w-full p-2 rounded"
           value={neuronType}
           onChange={(e) =>
             onUpdate("neuronType", e.target.value)

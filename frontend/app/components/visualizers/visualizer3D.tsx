@@ -1,117 +1,154 @@
-// spike-x/frontend/app/components/visualizers/visualizer2d.tsx
-
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { 
+  useThreeSetup 
+} from "../../hooks/visualizer/useThreeSetup";
+import {
+  createNeuron,
+  getThemeColor,
+  clearScene,
+  generateNeuronGrid
+} from "../../hooks/visualizer/visualizerUtils";
 
-const visualizer3d: React.FC = () => {
-  const mountRef = useRef<HTMLDivElement>(null);
+interface NetworkLayer {
+  count: number;
+  position: number;
+  size: number;
+  type: 'input' | 'hidden' | 'output';
+}
+
+interface Visualizer3DProps {
+  customLayers?: NetworkLayer[];
+}
+
+/**
+ * 3D visualization of neural network architecture
+ * Uses Three.js to render neurons and connections in 3D space
+ */
+export function Visualizer3D({ customLayers }: Visualizer3DProps) {
+  // Use the shared Three.js setup hook
+  const { scene, camera, containerRef, animate } = useThreeSetup({
+    cameraPosition: [0, 0, 20],
+    backgroundColor: getThemeColor('--visualizer-bg')
+  });
+
+  // Reference for animation frame
+  const animationRef = useRef<number | null>(null);
+
+  // Effect to render the network
   useEffect(() => {
-    // Get CSS variables for theming
-    const getThemeColor = (varName: string): number => {
-      const color = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-      // Convert CSS hex to THREE.js hex
-      return parseInt(color.replace('#', '0x'));
-    };
-    
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(getThemeColor('--visualizer-bg'));
-    
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    if (!scene) return;
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    if (mountRef.current) {
-      mountRef.current.appendChild(renderer.domElement);
-    }
+    // Clear any existing objects from the scene
+    clearScene(scene);
 
-    // OrbitControls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+    // Define default layers if none provided
+    const layers: NetworkLayer[] = customLayers || [
+      { count: 784, position: -10, size: 10, type: 'input' },
+      { count: 128, position: -5, size: 5, type: 'hidden' },
+      { count: 64, position: 0, size: 4, type: 'hidden' },
+      { count: 10, position: 5, size: 2, type: 'output' }
+    ];
 
-    const geometry = new THREE.SphereGeometry(0.1, 8, 8);
-    const material = new THREE.MeshBasicMaterial({ color: getThemeColor('--visualizer-neuron-input') });
+    // Store all neurons for connections
+    const layerNeurons: THREE.Mesh[][] = [];
 
-    // Λειτουργία για δημιουργία στρώσεων ως πλέγμα
-    const createLayer = (count: number, x: number, gridSize: number) => {
-      const layer: THREE.Mesh[] = [];
-      const side = Math.ceil(Math.sqrt(count)); // Υπολογισμός πλευράς τετραγώνου
-      const spacing = gridSize / side; // Απόσταση μεταξύ νευρώνων
-      for (let i = 0; i < count; i++) {
-        const row = Math.floor(i / side); // Σειρά
-        const col = i % side; // Στήλη
-        const y = (row - side / 2) * spacing; // Θέση στον άξονα y
-        const z = (col - side / 2) * spacing; // Θέση στον άξονα z
-        const neuron = new THREE.Mesh(geometry, material);
-        neuron.position.set(x, y, z);
-        scene.add(neuron);
-        layer.push(neuron);
+    // Create each layer
+    layers.forEach((layer, layerIndex) => {
+      const neuronSize = 0.1; // Small neurons for 3D view
+      
+      // Choose color based on layer type
+      let colorVar: string;
+      if (layer.type === 'input') {
+        colorVar = '--visualizer-neuron-input';
+      } else if (layer.type === 'output') {
+        colorVar = '--visualizer-neuron-output';
+      } else {
+        colorVar = '--visualizer-neuron-hidden';
       }
-      return layer;
-    };
-
-    // Δημιουργία στρώσεων ως τετράγωνα
-    const inputLayer = createLayer(784, -10, 10); // Input Layer
-    const hiddenLayer1 = createLayer(128, -5, 5); // Hidden Layer 1
-    const hiddenLayer2 = createLayer(64, 0, 4); // Hidden Layer 2
-    const outputLayer = createLayer(10, 5, 2); // Output Layer
-
-    const layers = [inputLayer, hiddenLayer1, hiddenLayer2, outputLayer];
-
-    // Δημιουργία γραμμών με BufferGeometry
-    const connectLayers = (layer1: THREE.Mesh[], layer2: THREE.Mesh[]) => {
+      
+      const neuronColor = getThemeColor(colorVar);
+      const layerMeshes: THREE.Mesh[] = [];
+      
+      // Create layer neurons
+      const side = Math.ceil(Math.sqrt(layer.count));
+      const spacing = layer.size / side;
+      
+      for (let i = 0; i < layer.count; i++) {
+        const row = Math.floor(i / side);
+        const col = i % side;
+        
+        const x = layer.position;
+        const y = (row - side / 2) * spacing;
+        const z = (col - side / 2) * spacing;
+        
+        const neuron = createNeuron(scene, [x, y, z], neuronColor, neuronSize);
+        layerMeshes.push(neuron);
+      }
+      
+      layerNeurons.push(layerMeshes);
+    });
+    
+    // Connect layers with lines
+    for (let i = 0; i < layerNeurons.length - 1; i++) {
+      const currentLayer = layerNeurons[i];
+      const nextLayer = layerNeurons[i + 1];
+      
+      // Create efficient connections using BufferGeometry
       const lineGeometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(layer1.length * layer2.length * 6);
+      const positions = new Float32Array(currentLayer.length * nextLayer.length * 6);
       let index = 0;
-
-      layer1.forEach((neuron1) => {
-        layer2.forEach((neuron2) => {
+      
+      currentLayer.forEach((neuron1) => {
+        nextLayer.forEach((neuron2) => {
           positions[index++] = neuron1.position.x;
           positions[index++] = neuron1.position.y;
           positions[index++] = neuron1.position.z;
-
+          
           positions[index++] = neuron2.position.x;
           positions[index++] = neuron2.position.y;
           positions[index++] = neuron2.position.z;
         });
       });
-
+      
       lineGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       const lineMaterial = new THREE.LineBasicMaterial({ 
-        color: getThemeColor('--visualizer-connection') 
+        color: getThemeColor('--visualizer-connection'),
+        opacity: 0.3,
+        transparent: true
       });
+      
       const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
       scene.add(lineMesh);
-    };
-
-    connectLayers(inputLayer, hiddenLayer1);
-    connectLayers(hiddenLayer1, hiddenLayer2);
-    connectLayers(hiddenLayer2, outputLayer);
-
-    // Τοποθέτηση κάμερας για πλάγια όψη
-    camera.position.set(0, 0, 20); // Τοποθέτηση κάμερας στον άξονα z
-    camera.lookAt(0, 0, 0); // Εστίαση στο κέντρο του δικτύου
-
-    // Περιστροφή 90 μοιρών γύρω από τον άξονα y
+    }
+    
+    // Set camera position for side view
+    camera.position.set(0, 0, 20);
+    camera.lookAt(0, 0, 0);
     camera.rotateY(-Math.PI / 2);
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
+    
+    // Start animation loop
+    const runAnimation = () => {
+      animate();
+      animationRef.current = requestAnimationFrame(runAnimation);
     };
-
-    animate();
-
+    
+    runAnimation();
+    
+    // Cleanup animation on unmount
     return () => {
-      if (mountRef.current) {
-        mountRef.current.removeChild(renderer.domElement);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [scene, animate, customLayers]);
 
-  return <div ref={mountRef} className="w-full h-[600px] border border-[var(--visualizer-border)] rounded-lg" />;
-};
+  return (
+    <div
+      ref={containerRef}
+      className="w-full h-[600px] border border-[var(--visualizer-border)] rounded-lg"
+    />
+  );
+}
 
-export default visualizer3d;
+export default Visualizer3D;

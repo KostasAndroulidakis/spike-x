@@ -42,7 +42,7 @@ const LayerVariables: React.FC<LayerVariablesProps> = ({
             <label className="block mb-1 text-[var(--text)]">Membrane Potential Value:</label>
             <input
               type="number"
-              className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+              className="w-full p-2 rounded"
               value={membranePotential}
               onChange={(e) =>
                 onUpdate("membranePotential", parseFloat(e.target.value))
@@ -70,7 +70,7 @@ const LayerVariables: React.FC<LayerVariablesProps> = ({
             <label className="block mb-1 text-[var(--text)]">Synaptic Constants Value:</label>
             <input
               type="number"
-              className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+              className="w-full p-2 rounded"
               value={synapticConstants}
               onChange={(e) =>
                 onUpdate("synapticConstants", parseFloat(e.target.value))
@@ -97,7 +97,7 @@ const LayerVariables: React.FC<LayerVariablesProps> = ({
           <div>
             <label className="block mb-1 text-[var(--text)]">Connection Type:</label>
             <select
-              className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+              className="w-full p-2 rounded"
               value={synapticConnectionType}
               onChange={(e) =>
                 onUpdate("synapticConnectionType", e.target.value)

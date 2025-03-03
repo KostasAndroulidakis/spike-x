@@ -10,9 +10,9 @@ export default function ColumnHeader({
   title 
 }: ColumnHeaderProps) {
   return (
-    <div className="flex items-center mb-4">
+    <div className="flex items-center">
       <div className="mr-4">{icon}</div>
-      <h2 className="text-2xl font-semibold text-[var(--text)]">{title}</h2>
+      <h2 className="panel-header">{title}</h2>
     </div>
   );
 }

@@ -25,8 +25,7 @@ export default function LibraryColumn({
   onItemClick
 }: LibraryColumnProps) {
   return (
-    <div className="flex flex-col p-6 border rounded shadow hover:shadow-lg transition-shadow duration-300 
-      bg-[var(--menu-bg)] border-[var(--nav-hover)]">
+    <div className="panel flex flex-col hover:shadow-md transition-shadow duration-300">
       <ColumnHeader 
         icon={icon}
         title={title}

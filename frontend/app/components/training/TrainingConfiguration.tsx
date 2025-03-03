@@ -20,13 +20,13 @@ export function TrainingConfiguration({
   onProcessorChange
 }: TrainingConfigurationProps) {
   return (
-    <div className="p-3 border border-gray-300 rounded flex-shrink-0 text-[var(--text)]">
-      <h2 className="text-lg font-semibold mb-3">Training Configuration</h2>
+    <div className="panel flex-shrink-0">
+      <h2 className="panel-header">Training Configuration</h2>
       {/* Training Algorithm */}
       <div className="mb-3">
-        <label className="block font-medium text-sm mb-1">Training Algorithm:</label>
+        <label className="block font-medium text-sm mb-1 text-[var(--text)]">Training Algorithm:</label>
         <select
-          className="w-full p-1.5 border rounded text-sm appearance-none"
+          className="w-full p-1.5 rounded text-sm"
           value={trainingAlgorithm}
           onChange={(e) => onTrainingAlgorithmChange(e.target.value)}
         >
@@ -37,33 +37,33 @@ export function TrainingConfiguration({
       </div>
       {/* Learning Rate */}
       <div className="mb-3">
-        <label className="block font-medium text-sm mb-1">Learning Rate:</label>
+        <label className="block font-medium text-sm mb-1 text-[var(--text)]">Learning Rate:</label>
         <input
           type="number"
           step="0.001"
           min="0"
-          className="w-full p-1.5 border rounded text-sm"
+          className="w-full p-1.5 rounded text-sm"
           value={learningRate}
           onChange={(e) => onLearningRateChange(parseFloat(e.target.value))}
         />
       </div>
       {/* Number of Epochs */}
       <div className="mb-3">
-        <label className="block font-medium text-sm mb-1">Number of Epochs:</label>
+        <label className="block font-medium text-sm mb-1 text-[var(--text)]">Number of Epochs:</label>
         <input
           type="number"
           step="1"
           min="1"
-          className="w-full p-1.5 border rounded text-sm"
+          className="w-full p-1.5 rounded text-sm"
           value={numberOfEpochs}
           onChange={(e) => onNumberOfEpochsChange(parseInt(e.target.value) || 1)}
         />
       </div>
       {/* Select Processor */}
       <div className="mb-3">
-        <label className="block font-medium text-sm mb-1">Processor:</label>
+        <label className="block font-medium text-sm mb-1 text-[var(--text)]">Processor:</label>
         <select
-          className="w-full p-1.5 border rounded text-sm appearance-none"
+          className="w-full p-1.5 rounded text-sm"
           value={selectedProcessor}
           onChange={(e) => onProcessorChange(e.target.value)}
         >

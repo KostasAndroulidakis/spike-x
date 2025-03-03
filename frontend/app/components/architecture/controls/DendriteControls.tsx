@@ -35,7 +35,7 @@ const DendritesControls: React.FC<DendritesControlsProps> = ({
             <label className="block mb-1 text-[var(--text)]">Total Dendrites:</label>
             <input
               type="number"
-              className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+              className="w-full p-2 rounded"
               value={dendrites}
               onChange={(e) =>
                 onUpdate("dendrites", parseInt(e.target.value, 10))
@@ -45,7 +45,7 @@ const DendritesControls: React.FC<DendritesControlsProps> = ({
           <div>
             <label className="block mb-1 text-[var(--text)]">Dendrite Type:</label>
             <select
-              className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+              className="w-full p-2 rounded"
               value={dendriteType}
               onChange={(e) =>
                 onUpdate("dendriteType", e.target.value)

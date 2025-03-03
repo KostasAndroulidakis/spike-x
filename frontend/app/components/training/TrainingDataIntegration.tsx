@@ -23,13 +23,13 @@ export function TrainingDataIntegration({
   };
 
   return (
-    <div className="p-3 border border-gray-300 rounded flex-shrink-0 text-[var(--text)]">
-      <h2 className="text-lg font-semibold mb-3">Data Integration</h2>
+    <div className="panel flex-shrink-0">
+      <h2 className="panel-header">Data Integration</h2>
       {/* Ready-Made Datasets */}
       <div className="mb-3">
-        <label className="block font-medium text-sm mb-1">Select Dataset:</label>
+        <label className="block font-medium text-sm mb-1 text-[var(--text)]">Select Dataset:</label>
         <select
-          className="w-full p-1.5 border rounded text-sm appearance-none"
+          className="w-full p-1.5 rounded text-sm"
           value={selectedDataset}
           onChange={(e) => onSelectDataset(e.target.value)}
         >
@@ -40,12 +40,12 @@ export function TrainingDataIntegration({
       </div>
       {/* Custom Dataset Upload */}
       <div>
-        <label className="block font-medium text-sm mb-1">Upload Custom Dataset:</label>
+        <label className="block font-medium text-sm mb-1 text-[var(--text)]">Upload Custom Dataset:</label>
         <input
           type="file"
           accept=".csv,.json,.txt"
           onChange={handleDatasetUpload}
-          className="w-full p-1 border rounded text-sm"
+          className="w-full p-1 rounded text-sm"
         />
         {customDataset && (
           <p className="mt-1 text-xs text-[var(--success)]">Selected: {customDataset.name}</p>

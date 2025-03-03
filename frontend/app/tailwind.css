@@ -10,6 +10,12 @@
   --text-tertiary: #6b7280;
   --text-disabled: #9ca3af;
   
+  /* Text colors for icons */
+  --icon-blue: #3b82f6;
+  --icon-green: #22c55e;
+  --icon-purple: #8b5cf6;
+  --icon-red: #ef4444;
+  
   /* Navigation */
   --nav-bg: #f3f4f6;
   --nav-hover: #e5e7eb;
@@ -51,7 +57,7 @@
   /* UI Elements */
   --border: #e5e7eb;
   --border-dark: #d1d5db;
-  --card-bg: #ffffff;
+  --card-bg: var(--nav-bg);
   --code-bg: #f8fafc;
   --tooltip-bg: #111827;
   --tooltip-text: #ffffff;
@@ -73,11 +79,17 @@
   --chart-line-4: #eab308; /* yellow */
   --chart-line-5: #8b5cf6; /* purple */
   
-  /* Specific chart colors */
-  --chart-accuracy: rgb(75, 192, 192);
-  --chart-accuracy-bg: rgba(75, 192, 192, 0.1);
-  --chart-loss: rgb(255, 99, 132);
-  --chart-loss-bg: rgba(255, 99, 132, 0.1);
+  /* Specific chart colors - consistent across themes */
+  --chart-accuracy: #20abad; /* turquoise - more vibrant */
+  --chart-accuracy-bg: rgba(32, 171, 173, 0.15);
+  --chart-loss: #ff4979; /* pinkish - more vibrant */
+  --chart-loss-bg: rgba(255, 73, 121, 0.15);
+  
+  /* Chart grid colors - theme specific */
+  --chart-grid-light: rgba(0, 0, 0, 0.25); /* Darker grid in light theme - increased opacity for visibility */
+  --chart-grid-dark: rgba(255, 255, 255, 0.25); /* Lighter grid in dark theme - increased opacity for visibility */
+  --chart-tick-light: rgba(0, 0, 0, 0.7);
+  --chart-tick-dark: rgba(255, 255, 255, 0.8);
   
   /* Progress Bars */
   --progress-bg: #e5e7eb;
@@ -96,6 +108,12 @@
   --text-secondary: #d1d5db;
   --text-tertiary: #9ca3af;
   --text-disabled: #6b7280;
+  
+  /* Text colors for icons */
+  --icon-blue: #60a5fa;
+  --icon-green: #34d399;
+  --icon-purple: #a78bfa;
+  --icon-red: #f87171;
   
   /* Navigation */
   --nav-bg: #1f2937;
@@ -152,19 +170,19 @@
   --visualizer-border: #4a5568;
   
   /* Charts & Graphs */
-  --chart-grid: rgba(255, 255, 255, 0.1);
-  --chart-tick: rgba(255, 255, 255, 0.7);
+  --chart-grid: rgba(255, 255, 255, 0.2); /* Brighter grid lines for dark theme */
+  --chart-tick: rgba(255, 255, 255, 0.8);
   --chart-line-1: #60a5fa; /* blue */
   --chart-line-2: #f87171; /* red */
   --chart-line-3: #34d399; /* green */
   --chart-line-4: #fbbf24; /* yellow */
   --chart-line-5: #a78bfa; /* purple */
   
-  /* Specific chart colors */
-  --chart-accuracy: rgb(75, 192, 192);
-  --chart-accuracy-bg: rgba(75, 192, 192, 0.1);
-  --chart-loss: rgb(255, 99, 132);
-  --chart-loss-bg: rgba(255, 99, 132, 0.1);
+  /* Specific chart colors - consistent across themes */
+  --chart-accuracy: #20abad; /* turquoise - more vibrant */
+  --chart-accuracy-bg: rgba(32, 171, 173, 0.15);
+  --chart-loss: #ff4979; /* pinkish - more vibrant */
+  --chart-loss-bg: rgba(255, 73, 121, 0.15);
   
   /* Progress Bars */
   --progress-bg: #374151;
@@ -184,28 +202,51 @@ body {
   overflow-x: hidden;
 }
 
-/* Form Controls */
+/* Form Controls - Always black text on white background */
 input[type="text"],
-input[type="search"] {
-  @apply bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)];
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="file"],
+textarea {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--input-border);
   transition: border-color 0.2s;
 }
 
 input[type="text"]:focus,
-input[type="search"]:focus {
-  @apply border-[var(--input-focus-border)] outline-none;
+input[type="search"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+textarea:focus {
+  border-color: var(--input-focus-border);
+  outline: none;
   box-shadow: 0 0 0 1px var(--input-focus-border);
 }
 
-/* For backward compatibility with existing code */
-input[type="number"],
-input[type="file"] {
-  @apply bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)];
-}
-
-/* Select Dropdowns - Use theme variables for consistent styling */
+/* Select Dropdowns - Custom styling with single arrow */
 select {
-  @apply bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)];
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--input-border);
+  appearance: none;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
@@ -215,7 +256,8 @@ select {
 }
 
 select:focus {
-  @apply outline-none border-[var(--input-focus-border)];
+  outline: none;
+  border-color: var(--input-focus-border);
   box-shadow: 0 0 0 1px var(--input-focus-border);
 }
 
@@ -259,9 +301,8 @@ select:focus {
 
 /* UI Components */
 .panel {
-  @apply rounded border p-3;
+  @apply rounded p-3 shadow-sm; /* Added subtle shadow instead of border */
   background-color: var(--card-bg);
-  border-color: var(--border);
 }
 
 .panel-header {
@@ -280,7 +321,7 @@ select:focus {
 
 .btn-primary {
   background-color: var(--primary);
-  color: white;
+  color: var(--tooltip-text);
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -289,7 +330,7 @@ select:focus {
 
 .btn-secondary {
   background-color: var(--secondary);
-  color: white;
+  color: var(--tooltip-text);
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -298,7 +339,7 @@ select:focus {
 
 .btn-success {
   background-color: var(--success);
-  color: white;
+  color: var(--tooltip-text);
 }
 
 .btn-success:hover:not(:disabled) {
@@ -307,7 +348,7 @@ select:focus {
 
 .btn-danger {
   background-color: var(--error);
-  color: white;
+  color: var(--tooltip-text);
 }
 
 .btn-danger:hover:not(:disabled) {
@@ -316,7 +357,7 @@ select:focus {
 
 .btn-warning {
   background-color: var(--warning);
-  color: white;
+  color: var(--tooltip-text);
 }
 
 .btn-warning:hover:not(:disabled) {

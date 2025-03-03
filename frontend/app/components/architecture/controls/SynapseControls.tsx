@@ -19,7 +19,7 @@ const SynapsesControls: React.FC<SynapsesControlsProps> = ({
         <label className="block mb-1 text-[var(--text)]">Total Synapses:</label>
         <input
           type="number"
-          className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+          className="w-full p-2 rounded"
           value={synapses}
           onChange={(e) =>
             onUpdate("synapses", parseInt(e.target.value, 10))
@@ -31,7 +31,7 @@ const SynapsesControls: React.FC<SynapsesControlsProps> = ({
       <div>
         <label className="block mb-1 text-[var(--text)]">Synapse Type:</label>
         <select
-          className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+          className="w-full p-2 rounded"
           value={synapseType}
           onChange={(e) =>
             onUpdate("synapseType", e.target.value)

@@ -35,7 +35,7 @@ const AxonControls: React.FC<AxonControlsProps> = ({
             <label className="block mb-1 text-[var(--text)]">Total Axons:</label>
             <input
               type="number"
-              className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+              className="w-full p-2 rounded"
               value={axons}
               onChange={(e) =>
                 onUpdate("axons", parseInt(e.target.value, 10))
@@ -45,7 +45,7 @@ const AxonControls: React.FC<AxonControlsProps> = ({
           <div>
             <label className="block mb-1 text-[var(--text)]">Axon Type:</label>
             <select
-              className="w-full p-2 border rounded bg-[var(--background)] text-[var(--text)] border-[var(--secondary)]"
+              className="w-full p-2 rounded"
               value={axonType}
               onChange={(e) =>
                 onUpdate("axonType", e.target.value)
