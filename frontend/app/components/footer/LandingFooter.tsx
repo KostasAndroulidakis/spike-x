@@ -2,8 +2,10 @@
 import React from "react";
 import { Link } from "@remix-run/react";
 import { Twitter, Linkedin, Youtube } from "lucide-react";
+import { useMarketingTheme } from "~/hooks/useMarketingTheme";
 
 export default function LandingFooter() {
+  const theme = useMarketingTheme();
   const currentYear = new Date().getFullYear();
 
   const footerSections = [
@@ -76,13 +78,13 @@ export default function LandingFooter() {
   ];
 
   return (
-    <footer className="bg-[var(--footer-bg)] border-t border-[var(--border)]">
+    <footer className={`${theme.footer.bg} border-t ${theme.footer.border}`}>
       <div className="w-full pl-9 pr-7 py-12">
         {/* Main footer content */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-8">
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-[var(--text)] font-semibold mb-4 text-sm uppercase tracking-wide">
+              <h3 className={`${theme.footer.text} font-semibold mb-4 text-sm uppercase tracking-wide`}>
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -93,14 +95,14 @@ export default function LandingFooter() {
                         href={link.path}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors text-sm"
+                        className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
                       >
                         {link.text}
                       </a>
                     ) : (
                       <Link
                         to={link.path}
-                        className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors text-sm"
+                        className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
                       >
                         {link.text}
                       </Link>
@@ -113,9 +115,9 @@ export default function LandingFooter() {
         </div>
 
         {/* Bottom section */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-[var(--border)]">
+        <div className={`flex flex-col md:flex-row justify-between items-center pt-8 border-t ${theme.footer.border}`}>
           {/* Copyright */}
-          <div className="text-[var(--text-muted)] text-sm mb-4 md:mb-0">
+          <div className={`${theme.footer.textMuted} text-sm mb-4 md:mb-0`}>
             © {currentYear} SPIKE-X. All rights reserved.
           </div>
 
@@ -127,7 +129,7 @@ export default function LandingFooter() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors p-2 rounded-md hover:bg-[var(--nav-hover)]"
+                className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors p-2 rounded-md ${theme.footer.navHover}`}
                 aria-label={label}
               >
                 <Icon size={20} />
@@ -137,28 +139,28 @@ export default function LandingFooter() {
         </div>
 
         {/* Legal links */}
-        <div className="flex flex-wrap justify-center md:justify-start items-center gap-6 pt-6 border-t border-[var(--border)] mt-6">
+        <div className={`flex flex-wrap justify-center md:justify-start items-center gap-6 pt-6 border-t ${theme.footer.border} mt-6`}>
           <Link
             to="/privacy"
-            className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors text-sm"
+            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
           >
             Privacy Policy
           </Link>
           <Link
             to="/terms"
-            className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors text-sm"
+            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
           >
             Terms of Service
           </Link>
           <Link
             to="/cookies"
-            className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors text-sm"
+            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
           >
             Cookie Policy
           </Link>
           <Link
             to="/security"
-            className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors text-sm"
+            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
           >
             Security
           </Link>
