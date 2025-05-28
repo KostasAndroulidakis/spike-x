@@ -3,7 +3,7 @@
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
-export function ThemeToggle() {
+function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   const cycleTheme = () => {
@@ -30,5 +30,7 @@ export function ThemeToggle() {
     </button>
   );
 }
+
+export default ThemeToggle;
 
 // File: spike-x/frontend/app/components/theme/ThemeToggle.tsx - end

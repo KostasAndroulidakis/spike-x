@@ -8,7 +8,10 @@
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "services:start": "brew services start postgresql@15 && brew services start redis",
+    "services:stop": "brew services stop postgresql@15 && brew services stop redis",
+    "dev:full": "npm run services:start && npm run dev"
   },
   "dependencies": {
     "@react-spring/web": "^9.7.5",

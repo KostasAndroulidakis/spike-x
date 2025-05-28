@@ -2,7 +2,6 @@
 
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import { useContext } from "react";
-import Navbar from "./components/navbar/Navbar";
 import { ThemeProvider, ThemeContext } from "./components/theme/ThemeProvider";
 import "./tailwind.css";
 
@@ -19,8 +18,7 @@ function Document({ children }: { children: React.ReactNode }) {
           html, body {
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden;
+            min-height: 100%;
           }
         `}</style>
       </head>
@@ -35,10 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
       <Document>
-        <Navbar />
-        <div className="app-content">
-          {children}
-        </div>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </Document>
