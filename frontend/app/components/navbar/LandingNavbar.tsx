@@ -1,14 +1,14 @@
 // File: app/components/navbar/LandingNavbar.tsx
 import React from "react";
 import { Link, useLocation } from "@remix-run/react";
-import { Zap, Info, LogIn, UserPlus } from "lucide-react";
+import { LogIn, UserPlus } from "lucide-react";
 
 export default function LandingNavbar() {
   const location = useLocation();
 
   const menuItems = [
-    { icon: Info, text: "About", path: "/about" },
-    { icon: Zap, text: "Features", path: "/features" },
+    { text: "About", path: "/about" },
+    { text: "Features", path: "/features" },
     { text: "Solutions", path: "/solutions" },
     { text: "Pricing", path: "/pricing" },
     { text: "News", path: "/news" },
