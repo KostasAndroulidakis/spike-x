@@ -84,7 +84,7 @@ export default function LandingFooter() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-8">
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className={`${theme.footer.text} font-semibold mb-4 text-sm uppercase tracking-wide`}>
+              <h3 className={`${theme.footer.text} font-semibold mb-4 text-sm tracking-wide`}>
                 {section.title}
               </h3>
               <ul className="space-y-3">
