@@ -1,8 +1,10 @@
 // File: app/components/navbar/LandingNavbar.tsx
 import React from "react";
 import { Link } from "@remix-run/react";
+import { useMarketingTheme } from "~/hooks/useMarketingTheme";
 
 export default function LandingNavbar() {
+  const theme = useMarketingTheme();
   const menuItems = [
     { text: "About", path: "/about" },
     { text: "Features", path: "/features" },
@@ -12,11 +14,11 @@ export default function LandingNavbar() {
   ];
 
   return (
-    <nav className="bg-[var(--nav-bg)] border-b border-[var(--border)] pl-9 pr-7 py-4">
+    <nav className={`${theme.navbar.bg} border-b ${theme.navbar.border} pl-9 pr-7 py-4`}>
       <div className="w-full flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Link to="/" className="text-2xl font-bold text-[var(--text)]">
+          <Link to="/" className={`text-2xl font-bold ${theme.navbar.logo}`}>
             SPIKE-X
           </Link>
         </div>
@@ -27,7 +29,7 @@ export default function LandingNavbar() {
             <Link
               key={text}
               to={path}
-              className="px-4 py-2 text-[var(--text)] hover:underline transition-all"
+              className={`px-4 py-2 ${theme.navbar.text} ${theme.navbar.menuHover} transition-all`}
             >
               {text}
             </Link>
@@ -35,7 +37,7 @@ export default function LandingNavbar() {
           
           <Link
             to="/login"
-            className="ml-11 px-4 py-2 bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] rounded-md transition-colors"
+            className={`ml-11 px-4 py-2 ${theme.navbar.button.default} ${theme.navbar.button.hover} rounded-md transition-colors`}
           >
             Try SPIKE-X
           </Link>
