@@ -9,7 +9,7 @@ export function useMarketingTheme() {
       bg: 'bg-white',
       text: 'text-black',
       logo: 'text-black',
-      menuHover: 'hover:text-gray-600',
+      menuHover: 'hover:text-gray-600 hover:underline',
       border: 'border-transparent',
       button: {
         default: 'bg-black text-white',

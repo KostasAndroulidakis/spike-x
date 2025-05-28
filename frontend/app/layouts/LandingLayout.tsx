@@ -16,8 +16,8 @@ export default function LandingLayout({ children }: LandingLayoutProps) {
       {/* Landing Navigation */}
       <LandingNavbar />
       
-      {/* Main Content */}
-      <main className="flex-1">
+      {/* Main Content with top padding to account for fixed navbar */}
+      <main className="flex-1 pt-20">
         {children}
       </main>
       

@@ -14,7 +14,7 @@ export default function LandingNavbar() {
   ];
 
   return (
-    <nav className={`${theme.navbar.bg} border-b ${theme.navbar.border} pl-9 pr-7 py-4`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 ${theme.navbar.bg} pl-9 pr-7 py-4`}>
       <div className="w-full flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
