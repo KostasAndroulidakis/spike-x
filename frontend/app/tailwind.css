@@ -204,20 +204,26 @@ body {
 
 /* Custom scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 14px; /* Thicker but not overdone */
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #2c2c2c; /* Dark background */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-dark);
-  border-radius: 4px;
+  background: #6b6b6b; /* Gray scroll handle */
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
+  background: #808080; /* Lighter on hover */
+}
+
+/* Firefox scrollbar styling */
+html {
+  scrollbar-width: thick;
+  scrollbar-color: #6b6b6b #2c2c2c;
 }
 
 /* Form Controls - Theme-aware styling */
