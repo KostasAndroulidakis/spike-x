@@ -68,6 +68,15 @@ export default function LandingFooter() {
         { text: "Community", path: "/community" },
         { text: "Bug reports", path: "/bugs" },
       ]
+    },
+    {
+      title: "Terms and policies",
+      links: [
+        { text: "Privacy Policy", path: "/privacy" },
+        { text: "Terms of Service", path: "/terms" },
+        { text: "Cookie Policy", path: "/cookies" },
+        { text: "Security", path: "/security" },
+      ]
     }
   ];
 
@@ -81,7 +90,7 @@ export default function LandingFooter() {
     <footer className={`${theme.footer.bg} border-t ${theme.footer.border}`}>
       <div className="w-full pl-9 pr-7 py-12">
         {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 gap-y-12 mb-8">
           {footerSections.map((section) => (
             <div key={section.title}>
               <h3 className={`${theme.footer.text} font-semibold mb-4 text-sm tracking-wide`}>
@@ -136,34 +145,6 @@ export default function LandingFooter() {
               </a>
             ))}
           </div>
-        </div>
-
-        {/* Legal links */}
-        <div className={`flex flex-wrap justify-center md:justify-start items-center gap-6 pt-6 border-t ${theme.footer.border} mt-6`}>
-          <Link
-            to="/privacy"
-            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            to="/terms"
-            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
-          >
-            Terms of Service
-          </Link>
-          <Link
-            to="/cookies"
-            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
-          >
-            Cookie Policy
-          </Link>
-          <Link
-            to="/security"
-            className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors text-sm`}
-          >
-            Security
-          </Link>
         </div>
       </div>
     </footer>
