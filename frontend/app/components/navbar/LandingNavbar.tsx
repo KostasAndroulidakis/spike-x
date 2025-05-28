@@ -1,7 +1,6 @@
 // File: app/components/navbar/LandingNavbar.tsx
 import React from "react";
 import { Link, useLocation } from "@remix-run/react";
-import { LogIn, UserPlus } from "lucide-react";
 
 export default function LandingNavbar() {
   const location = useLocation();
@@ -26,39 +25,27 @@ export default function LandingNavbar() {
           </Link>
         </div>
 
-        {/* Center menu */}
+        {/* Right side - Menu items and Auth button */}
         <div className="hidden md:flex items-center space-x-1">
-          {menuItems.map(({ icon: Icon, text, path }) => (
+          {menuItems.map(({ text, path }) => (
             <Link
               key={text}
               to={path}
-              className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+              className={`px-4 py-2 rounded-md transition-colors ${
                 isActive(path)
                   ? 'bg-[var(--primary)] text-white'
                   : 'text-[var(--text)] hover:bg-[var(--nav-hover)]'
               }`}
             >
-              {Icon && <Icon size={18} />}
-              <span>{text}</span>
+              {text}
             </Link>
           ))}
-        </div>
-
-        {/* Right side - Auth buttons */}
-        <div className="flex items-center space-x-3">
+          
           <Link
             to="/login"
-            className="flex items-center gap-2 px-4 py-2 text-[var(--text)] hover:bg-[var(--nav-hover)] rounded-md transition-colors"
+            className="ml-2 px-4 py-2 bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] rounded-md transition-colors"
           >
-            <LogIn size={18} />
-            <span>Login</span>
-          </Link>
-          <Link
-            to="/signup"
-            className="flex items-center gap-2 px-4 py-2 bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] rounded-md transition-colors"
-          >
-            <UserPlus size={18} />
-            <span>Sign Up</span>
+            Try SPIKE-X
           </Link>
         </div>
       </div>
