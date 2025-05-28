@@ -1,12 +1,15 @@
 import LandingLayout from "~/layouts/LandingLayout";
 import { Brain, Zap, Eye, Users, Database, Cloud } from "lucide-react";
+import { useMarketingTheme } from "~/hooks/useMarketingTheme";
 
 export default function Features() {
+  const theme = useMarketingTheme();
+  
   return (
     <LandingLayout>
-      <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
+      <div className={`min-h-screen ${theme.page.bg} ${theme.page.text}`}>
         <div className="max-w-7xl mx-auto px-6 py-20">
-          <h1 className="text-5xl font-bold text-[var(--text)] mb-8">
+          <h1 className={`text-5xl font-bold ${theme.page.text} mb-8`}>
             Platform Features
           </h1>
           
@@ -20,7 +23,7 @@ export default function Features() {
               <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mb-6">
                 <Brain size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>
                 Visual Model Builder
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -38,7 +41,7 @@ export default function Features() {
               <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-6">
                 <Zap size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>
                 Advanced Training Engine
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -56,7 +59,7 @@ export default function Features() {
               <div className="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-6">
                 <Eye size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>
                 3D Visualization
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -74,7 +77,7 @@ export default function Features() {
               <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6">
                 <Users size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>
                 Research Collaboration
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -92,7 +95,7 @@ export default function Features() {
               <div className="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center mb-6">
                 <Database size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>
                 Extensive Component Library
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -110,7 +113,7 @@ export default function Features() {
               <div className="w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center mb-6">
                 <Cloud size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>
                 Flexible Compute Resources
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">

@@ -1,13 +1,16 @@
 import LandingLayout from "~/layouts/LandingLayout";
 import { Link } from "@remix-run/react";
 import { Calendar, User, ArrowRight } from "lucide-react";
+import { useMarketingTheme } from "~/hooks/useMarketingTheme";
 
 export default function News() {
+  const theme = useMarketingTheme();
+  
   return (
     <LandingLayout>
-      <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
+      <div className={`min-h-screen ${theme.page.bg} ${theme.page.text}`}>
         <div className="max-w-7xl mx-auto px-6 py-20">
-          <h1 className="text-5xl font-bold text-[var(--text)] mb-8">
+          <h1 className={`text-5xl font-bold ${theme.page.text} mb-8`}>
             SPIKE-X News & Updates
           </h1>
           
@@ -24,7 +27,7 @@ export default function News() {
                 <User size={16} />
                 <span>SPIKE-X Team</span>
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 SPIKE-X 2.0 Released with Enhanced Visualization
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -47,7 +50,7 @@ export default function News() {
                 <User size={16} />
                 <span>Research Team</span>
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 New Neuromorphic Hardware Support
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -70,7 +73,7 @@ export default function News() {
                 <User size={16} />
                 <span>Community</span>
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 Community Spotlight: 10,000 Models Shared
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -93,7 +96,7 @@ export default function News() {
                 <User size={16} />
                 <span>Product Team</span>
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 New Training Algorithms: STDP and BCM
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -116,7 +119,7 @@ export default function News() {
                 <User size={16} />
                 <span>Research Team</span>
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 Partnership with Top Universities
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -139,7 +142,7 @@ export default function News() {
                 <User size={16} />
                 <span>SPIKE-X Team</span>
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 SPIKE-X Platform Launch
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">

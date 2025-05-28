@@ -1,14 +1,17 @@
 import LandingLayout from "~/layouts/LandingLayout";
 import { Link } from "@remix-run/react";
 import { Check } from "lucide-react";
+import { useMarketingTheme } from "~/hooks/useMarketingTheme";
 
 export default function Pricing() {
+  const theme = useMarketingTheme();
+  
   return (
     <LandingLayout>
-      <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
+      <div className={`min-h-screen ${theme.page.bg} ${theme.page.text}`}>
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold text-[var(--text)] mb-4">
+            <h1 className={`text-5xl font-bold ${theme.page.text} mb-4`}>
               Pricing Plans
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -18,9 +21,9 @@ export default function Pricing() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">Student</h3>
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>Student</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-[var(--text)]">Free</span>
+                <span className={`text-4xl font-bold ${theme.page.text}`}>Free</span>
                 <span className="text-gray-600 dark:text-gray-300">/month</span>
               </div>
               <ul className="space-y-3 mb-8">
@@ -51,9 +54,9 @@ export default function Pricing() {
                   Most Popular
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">Researcher</h3>
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>Researcher</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-[var(--text)]">$29</span>
+                <span className={`text-4xl font-bold ${theme.page.text}`}>$29</span>
                 <span className="text-gray-600 dark:text-gray-300">/month</span>
               </div>
               <ul className="space-y-3 mb-8">
@@ -83,9 +86,9 @@ export default function Pricing() {
             </div>
             
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-4">Enterprise</h3>
+              <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>Enterprise</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-[var(--text)]">Custom</span>
+                <span className={`text-4xl font-bold ${theme.page.text}`}>Custom</span>
               </div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-2">

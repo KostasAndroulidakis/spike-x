@@ -2,13 +2,15 @@
 import LandingLayout from "~/layouts/LandingLayout";
 import { Link } from "@remix-run/react";
 import { Brain, Zap, Eye, Users, ArrowRight, CheckCircle } from "lucide-react";
+import { useMarketingTheme } from "~/hooks/useMarketingTheme";
 
 export default function Index() {
+  const theme = useMarketingTheme();
   console.log("Landing page component loaded!");
   
   return (
     <LandingLayout>
-      <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
+      <div className={`min-h-screen ${theme.page.bg} ${theme.page.text}`}>
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-6 pt-20 pb-16">
           <div className="text-center mb-16">
@@ -17,7 +19,7 @@ export default function Index() {
                 🚀 Introducing the future of neural networks
               </span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-bold text-[var(--text)] mb-6 tracking-tight">
+            <h1 className={`text-6xl md:text-7xl font-bold ${theme.page.text} mb-6 tracking-tight`}>
               SPIKE-X
             </h1>
             <p className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
@@ -46,7 +48,7 @@ export default function Index() {
               <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Brain size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 Neural Network Design
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -58,7 +60,7 @@ export default function Index() {
               <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Zap size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 Advanced Training
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -70,7 +72,7 @@ export default function Index() {
               <div className="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Eye size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 3D Visualization
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -82,7 +84,7 @@ export default function Index() {
               <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Users size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--text)] mb-3">
+              <h3 className={`text-xl font-bold ${theme.page.text} mb-3`}>
                 Research Community
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -95,7 +97,7 @@ export default function Index() {
           <div className="bg-gradient-to-br from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 rounded-3xl p-12 mb-20">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-[var(--text)] mb-4">
+                <h2 className={`text-4xl font-bold ${theme.page.text} mb-4`}>
                   Everything you need for neural network research
                 </h2>
                 <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -105,27 +107,27 @@ export default function Index() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex items-center gap-3">
                   <CheckCircle size={24} className="text-green-500 flex-shrink-0" />
-                  <span className="text-[var(--text)] font-medium">Complete neural network spectrum support</span>
+                  <span className={`${theme.page.text} font-medium`}>Complete neural network spectrum support</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle size={24} className="text-green-500 flex-shrink-0" />
-                  <span className="text-[var(--text)] font-medium">Visual model building interface</span>
+                  <span className={`${theme.page.text} font-medium`}>Visual model building interface</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle size={24} className="text-green-500 flex-shrink-0" />
-                  <span className="text-[var(--text)] font-medium">Flexible compute resources (CPU, GPU, TPU)</span>
+                  <span className={`${theme.page.text} font-medium`}>Flexible compute resources (CPU, GPU, TPU)</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle size={24} className="text-green-500 flex-shrink-0" />
-                  <span className="text-[var(--text)] font-medium">Extensive component library</span>
+                  <span className={`${theme.page.text} font-medium`}>Extensive component library</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle size={24} className="text-green-500 flex-shrink-0" />
-                  <span className="text-[var(--text)] font-medium">Real-time collaboration tools</span>
+                  <span className={`${theme.page.text} font-medium`}>Real-time collaboration tools</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle size={24} className="text-green-500 flex-shrink-0" />
-                  <span className="text-[var(--text)] font-medium">Advanced analytics and evaluation</span>
+                  <span className={`${theme.page.text} font-medium`}>Advanced analytics and evaluation</span>
                 </div>
               </div>
             </div>
@@ -133,7 +135,7 @@ export default function Index() {
 
           {/* CTA Section */}
           <div className="text-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-12">
-            <h2 className="text-3xl font-bold text-[var(--text)] mb-4">
+            <h2 className={`text-3xl font-bold ${theme.page.text} mb-4`}>
               Ready to revolutionize your research?
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">

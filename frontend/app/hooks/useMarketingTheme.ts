@@ -1,12 +1,16 @@
 // Marketing layout theme hook - Single theme only (no dark/light variants)
 export function useMarketingTheme() {
   return {
+    page: {
+      bg: 'bg-white',
+      text: 'text-black'
+    },
     navbar: {
       bg: 'bg-white',
       text: 'text-black',
       logo: 'text-black',
-      menuHover: 'hover:text-gray-600 hover:underline',
-      border: 'border-gray-200',
+      menuHover: 'hover:text-gray-600',
+      border: 'border-transparent',
       button: {
         default: 'bg-black text-white',
         hover: 'hover:bg-[#333333]'
