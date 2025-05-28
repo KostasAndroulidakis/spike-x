@@ -14,17 +14,17 @@ export default function Pricing() {
             <h1 className={`text-5xl font-bold ${theme.page.text} mb-4`}>
               Pricing Plans
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className={`text-xl ${theme.content.textSecondary}`}>
               Choose the plan that fits your research needs
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
+            <div className={`${theme.content.cardBg} rounded-2xl p-8 border ${theme.content.cardBorder}`}>
               <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>Student</h3>
               <div className="mb-6">
                 <span className={`text-4xl font-bold ${theme.page.text}`}>Free</span>
-                <span className="text-gray-600 dark:text-gray-300">/month</span>
+                <span className={`${theme.content.textSecondary}`}>/month</span>
               </div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-2">
@@ -42,13 +42,13 @@ export default function Pricing() {
               </ul>
               <Link
                 to="/signup"
-                className="w-full inline-flex items-center justify-center bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-3 px-6 rounded-lg font-semibold transition-all"
+                className={`w-full inline-flex items-center justify-center ${theme.content.buttonSecondary} py-3 px-6 rounded-lg font-semibold transition-all`}
               >
                 Get Started
               </Link>
             </div>
             
-            <div className="bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-500 rounded-2xl p-8 relative">
+            <div className="bg-blue-50 border-2 border-blue-500 rounded-2xl p-8 relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
                   Most Popular
@@ -57,7 +57,7 @@ export default function Pricing() {
               <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>Researcher</h3>
               <div className="mb-6">
                 <span className={`text-4xl font-bold ${theme.page.text}`}>$29</span>
-                <span className="text-gray-600 dark:text-gray-300">/month</span>
+                <span className={`${theme.content.textSecondary}`}>/month</span>
               </div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-2">
@@ -85,7 +85,7 @@ export default function Pricing() {
               </Link>
             </div>
             
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
+            <div className={`${theme.content.cardBg} rounded-2xl p-8 border ${theme.content.cardBorder}`}>
               <h3 className={`text-2xl font-bold ${theme.page.text} mb-4`}>Enterprise</h3>
               <div className="mb-6">
                 <span className={`text-4xl font-bold ${theme.page.text}`}>Custom</span>
@@ -110,7 +110,7 @@ export default function Pricing() {
               </ul>
               <Link
                 to="/signup"
-                className="w-full inline-flex items-center justify-center bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-3 px-6 rounded-lg font-semibold transition-all"
+                className={`w-full inline-flex items-center justify-center ${theme.content.buttonSecondary} py-3 px-6 rounded-lg font-semibold transition-all`}
               >
                 Contact Sales
               </Link>

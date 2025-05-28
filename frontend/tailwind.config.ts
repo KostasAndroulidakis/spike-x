@@ -11,7 +11,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'footer-dark': '#141413',
         'scrollbar': {
           'thumb': '#6b6b6b',
           'track': '#2c2c2c',

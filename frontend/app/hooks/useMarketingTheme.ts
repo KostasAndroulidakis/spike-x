@@ -17,14 +17,23 @@ export function useMarketingTheme() {
       }
     },
     footer: {
-      bg: 'bg-footer-dark',
+      bg: 'bg-[#141413]', // Direct color instead of custom class
       text: 'text-white',
       textMuted: 'text-[#a9a9a9]',
-      border: 'border-transparent', // Remove blue lines
+      border: 'border-transparent',
       primaryHover: 'hover:text-white hover:underline',
       navHover: 'hover:bg-slate-800',
       iconDefault: 'text-[#a9a9a9]',
       iconHover: 'hover:text-white'
+    },
+    content: {
+      // Marketing-specific content styling (no dark variants)
+      cardBg: 'bg-white',
+      cardBorder: 'border-gray-200',
+      textSecondary: 'text-gray-600',
+      gradientFrom: 'from-blue-50',
+      gradientTo: 'to-green-50',
+      buttonSecondary: 'bg-gray-200 hover:bg-gray-300 text-gray-800'
     }
   };
 }
