@@ -1,20 +1,12 @@
 import LandingLayout from "~/layouts/LandingLayout";
 import { Link } from "@remix-run/react";
-import { ArrowLeft, Calendar, User, ArrowRight } from "lucide-react";
+import { Calendar, User, ArrowRight } from "lucide-react";
 
 export default function News() {
   return (
     <LandingLayout>
       <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-8"
-          >
-            <ArrowLeft size={20} />
-            Back to Home
-          </Link>
-          
+        <div className="max-w-7xl mx-auto px-6 py-20">
           <h1 className="text-5xl font-bold text-[var(--text)] mb-8">
             SPIKE-X News & Updates
           </h1>

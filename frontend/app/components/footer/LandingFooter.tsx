@@ -1,7 +1,7 @@
 // File: app/components/footer/LandingFooter.tsx
 import React from "react";
 import { Link } from "@remix-run/react";
-import { Github, Twitter, Linkedin, Youtube, Mail } from "lucide-react";
+import { Twitter, Linkedin, Youtube } from "lucide-react";
 
 export default function LandingFooter() {
   const currentYear = new Date().getFullYear();
@@ -70,16 +70,14 @@ export default function LandingFooter() {
   ];
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/spike-x", label: "GitHub" },
     { icon: Twitter, href: "https://twitter.com/spikex", label: "Twitter" },
     { icon: Linkedin, href: "https://linkedin.com/company/spike-x", label: "LinkedIn" },
     { icon: Youtube, href: "https://youtube.com/@spikex", label: "YouTube" },
-    { icon: Mail, href: "mailto:hello@spikex.com", label: "Email" },
   ];
 
   return (
     <footer className="bg-[var(--footer-bg)] border-t border-[var(--border)]">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="w-full pl-9 pr-7 py-12">
         {/* Main footer content */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-8">
           {footerSections.map((section) => (

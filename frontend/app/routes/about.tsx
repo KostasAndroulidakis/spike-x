@@ -1,20 +1,10 @@
 import LandingLayout from "~/layouts/LandingLayout";
-import { Link } from "@remix-run/react";
-import { ArrowLeft } from "lucide-react";
 
 export default function About() {
   return (
     <LandingLayout>
       <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
-        <div className="max-w-4xl mx-auto px-6 py-20">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-8"
-          >
-            <ArrowLeft size={20} />
-            Back to Home
-          </Link>
-          
+        <div className="max-w-7xl mx-auto px-6 py-20">
           <h1 className="text-5xl font-bold text-[var(--text)] mb-8">
             About SPIKE-X
           </h1>

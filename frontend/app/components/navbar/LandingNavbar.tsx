@@ -1,10 +1,8 @@
 // File: app/components/navbar/LandingNavbar.tsx
 import React from "react";
-import { Link, useLocation } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 
 export default function LandingNavbar() {
-  const location = useLocation();
-
   const menuItems = [
     { text: "About", path: "/about" },
     { text: "Features", path: "/features" },
@@ -13,11 +11,9 @@ export default function LandingNavbar() {
     { text: "News", path: "/news" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
-
   return (
-    <nav className="bg-[var(--nav-bg)] border-b border-[var(--border)] px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <nav className="bg-[var(--nav-bg)] border-b border-[var(--border)] pl-9 pr-7 py-4">
+      <div className="w-full flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="text-2xl font-bold text-[var(--text)]">
@@ -31,11 +27,7 @@ export default function LandingNavbar() {
             <Link
               key={text}
               to={path}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                isActive(path)
-                  ? 'bg-[var(--primary)] text-white'
-                  : 'text-[var(--text)] hover:bg-[var(--nav-hover)]'
-              }`}
+              className="px-4 py-2 text-[var(--text)] hover:underline transition-all"
             >
               {text}
             </Link>
@@ -43,7 +35,7 @@ export default function LandingNavbar() {
           
           <Link
             to="/login"
-            className="ml-2 px-4 py-2 bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] rounded-md transition-colors"
+            className="ml-11 px-4 py-2 bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] rounded-md transition-colors"
           >
             Try SPIKE-X
           </Link>
