@@ -17,7 +17,7 @@ export function useMarketingTheme() {
       }
     },
     footer: {
-      bg: 'bg-[#222222]',
+      bg: 'bg-[#141413]',
       text: 'text-white',
       textMuted: 'text-[#a9a9a9]',
       border: 'border-transparent', // Remove blue lines
