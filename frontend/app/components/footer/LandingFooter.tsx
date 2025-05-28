@@ -72,9 +72,9 @@ export default function LandingFooter() {
   ];
 
   const socialLinks = [
-    { icon: Twitter, href: "https://twitter.com/spikex", label: "Twitter" },
-    { icon: Linkedin, href: "https://linkedin.com/company/spike-x", label: "LinkedIn" },
     { icon: Youtube, href: "https://youtube.com/@spikex", label: "YouTube" },
+    { icon: Linkedin, href: "https://linkedin.com/company/spike-x", label: "LinkedIn" },
+    { icon: Twitter, href: "https://twitter.com/spikex", label: "X" },
   ];
 
   return (
@@ -129,7 +129,7 @@ export default function LandingFooter() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${theme.footer.textMuted} ${theme.footer.primaryHover} transition-colors p-2 rounded-md ${theme.footer.navHover}`}
+                className={`${theme.footer.iconDefault} ${theme.footer.iconHover} transition-colors p-1`}
                 aria-label={label}
               >
                 <Icon size={20} />
