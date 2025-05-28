@@ -6,10 +6,12 @@
   --foreground: #0a0a0a;
   --text: #0a0a0a;
   --text-secondary: #6b7280;
+  --text-muted: #6b7280;
   --border: #e5e7eb;
   --input: #ffffff;
   --primary: #3b82f6;
   --primary-foreground: #ffffff;
+  --primary-hover: #2563eb;
   --secondary: #f3f4f6;
   --secondary-foreground: #374151;
   --accent: #f9fafb;
@@ -22,6 +24,9 @@
   --card-foreground: #0a0a0a;
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
+  --nav-bg: #ffffff;
+  --nav-hover: #f3f4f6;
+  --footer-bg: #fafafa;
   --radius: 0.5rem;
 }
 
@@ -30,10 +35,12 @@
   --foreground: #fafafa;
   --text: #fafafa;
   --text-secondary: #9ca3af;
+  --text-muted: #9ca3af;
   --border: #27272a;
   --input: #27272a;
   --primary: #3b82f6;
   --primary-foreground: #ffffff;
+  --primary-hover: #2563eb;
   --secondary: #27272a;
   --secondary-foreground: #fafafa;
   --accent: #27272a;
@@ -46,6 +53,9 @@
   --card-foreground: #fafafa;
   --popover: #0a0a0a;
   --popover-foreground: #fafafa;
+  --nav-bg: #0a0a0a;
+  --nav-hover: #27272a;
+  --footer-bg: #111111;
 }
 
 /* Base styles */

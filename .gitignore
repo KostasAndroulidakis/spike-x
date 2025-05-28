@@ -33,3 +33,7 @@
 
 # macOS metadata files
 .DS_Store
+
+# minio data
+.meta
+.bkp
