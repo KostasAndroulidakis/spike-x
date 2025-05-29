@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "@remix-run/react";
 import { useMarketingTheme } from "~/hooks/useMarketingTheme";
+import { Logo } from "~/components/common";
 
 export default function LandingNavbar() {
   const theme = useMarketingTheme();
@@ -18,9 +19,7 @@ export default function LandingNavbar() {
       <div className="w-full flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Link to="/" className={`text-2xl font-bold ${theme.navbar.logo}`}>
-            SPIKE-X
-          </Link>
+          <Logo className={theme.navbar.logo} to="/" />
         </div>
 
         {/* Right side - Menu items and Auth button */}
@@ -36,7 +35,7 @@ export default function LandingNavbar() {
           ))}
           
           <Link
-            to="/login"
+            to="/console/login"
             className={`ml-11 px-4 py-2 ${theme.navbar.button.default} ${theme.navbar.button.hover} rounded-md transition-colors`}
           >
             Try SPIKE-X

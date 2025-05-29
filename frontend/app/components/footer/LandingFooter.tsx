@@ -18,7 +18,7 @@ export default function LandingFooter() {
         { text: "Model training", path: "/features" },
         { text: "Visualization", path: "/features" },
         { text: "Neuromorphic computing", path: "/features" },
-        { text: "Console login", path: "/login" },
+        { text: "Console login", path: "/console/login" },
       ]
     },
     {
