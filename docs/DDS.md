@@ -32,11 +32,12 @@
         3.3.2. [Landing Page Layout (`spikex.com`)](#332-landing-page-layout-spikexcom)
         3.3.3. [Console Layout (`console.spikex.com`)](#333-console-layout-consolespikexcom)
         3.3.4. [Lab Layout (`lab.spikex.com`)](#334-lab-layout-labspikexcom)
-        3.3.5. [Key User Flows](#335-key-user-flows)
-        3.3.6. [Visualization](#336-visualization)
-        3.3.7. [Monitoring & Metrics Display](#337-monitoring--metrics-display)
-        3.3.8. [Debugging Features](#338-debugging-features)
-        3.3.9. [Training Interface Elements](#339-training-interface-elements)
+        3.3.5. [Auth Layout (`console.spikex.com/login`, `console.spikex.com/signup`)](#335-auth-layout-consolespikexcomlogin-consolespikexcomsignup)
+        3.3.6. [Key User Flows](#336-key-user-flows)
+        3.3.7. [Visualization](#337-visualization)
+        3.3.8. [Monitoring & Metrics Display](#338-monitoring--metrics-display)
+        3.3.9. [Debugging Features](#339-debugging-features)
+        3.3.10. [Training Interface Elements](#3310-training-interface-elements)
     3.4. [Processor and Compute Resource Management](#34-processor-and-compute-resource-management)
 4. [Technology Stack Summary](#4-technology-stack-summary)
 5. [Proposed File Structure](#5-proposed-file-structure)
@@ -206,6 +207,14 @@ Conceptual Diagram:
 
 The UI will be clean, modern, and intuitive, prioritizing ease of use for both novice and expert users. A consistent visual language will be maintained across different sections. The design will be responsive and visually appealing.
 
+**SPIKE-X implements four distinct layouts:**
+- **Landing Layout**: Public marketing and information pages
+- **Console Layout**: User dashboard with collapsible sidebar navigation
+- **Lab Layout**: Dedicated model workspace with horizontal navigation  
+- **Auth Layout**: Clean authentication interface with minimal chrome
+
+**Reusable Components**: Key UI elements like Logo and Footer are extracted as reusable components, ensuring consistency across all layouts while maintaining independent layout architectures.
+
 #### 3.3.2. Landing Page Layout (`spikex.com`)
 
 - **Purpose:** Introduce SPIKE-X, highlight key features, provide news/updates, and call to action (login/signup).
@@ -240,7 +249,21 @@ The UI will be clean, modern, and intuitive, prioritizing ease of use for both n
   - Evaluation (View detailed reports, metrics, confusion matrices)
   - Model Name (Displayed prominently)
 
-#### 3.3.5. Key User Flows
+#### 3.3.5. Auth Layout (`console.spikex.com/login`, `console.spikex.com/signup`)
+
+- **Purpose:** Clean authentication interface for user login and registration, isolated from main application chrome.
+- **Design Philosophy:** Minimal, focused design that removes distractions during authentication flow.
+- **Components:**
+  - **Header:** Simple header with SPIKE-X logo (top-left), links back to landing page
+  - **Content Area:** Centered authentication forms with consistent styling
+  - **Footer:** Same footer as landing page for consistency and additional navigation
+- **Routes:**
+  - `/console/login` - User sign-in form with email, password, "remember me" option
+  - `/console/signup` - User registration form with name, email, password, organization fields
+- **Navigation:** Cross-links between login and signup forms, "Back to Home" via logo
+- **Layout Independence:** Operates as standalone layout, not nested within Console layout
+
+#### 3.3.6. Key User Flows
 
 - **New Model Creation:**
     1. User clicks "New Model" (e.g., from Console > Models).
@@ -250,7 +273,7 @@ The UI will be clean, modern, and intuitive, prioritizing ease of use for both n
 - **Model Parameter Storage:** All model parameters (architecture, layers, training algorithm, etc.) are saved in the relational database (PostgreSQL).
 - **Model Export/Download:** When a user clicks "Export Model," "Download Weights," etc., a native browser/OS save dialog will prompt for a local save location.
 
-#### 3.3.6. Visualization (within Lab Layout > Visualization Tab)
+#### 3.3.7. Visualization (within Lab Layout > Visualization Tab)
 
 - Real-time 2D/3D network graph visualization (Three.js).
 - Spiking activity visualization (e.g., raster plots, neuron state indicators).
@@ -260,20 +283,20 @@ The UI will be clean, modern, and intuitive, prioritizing ease of use for both n
 - Training replay functionality.
 - Performance plots (accuracy, loss over time).
 
-#### 3.3.7. Monitoring & Metrics Display (within Lab Layout > Evaluation/Training Tabs)
+#### 3.3.8. Monitoring & Metrics Display (within Lab Layout > Evaluation/Training Tabs)
 
 - Confusion matrix.
 - Performance metrics (throughput, latency).
 - Resource utilization (CPU, GPU, memory – if accessible).
 
-#### 3.3.8. Debugging Features (within Lab Layout)
+#### 3.3.9. Debugging Features (within Lab Layout)
 
 - Step-by-step execution (if feasible for the chosen backend simulator).
 - Breakpoints in model definition or training loop (conceptual).
 - Display of intermediate values (e.g., neuron membrane potentials, synaptic weights).
 - Integrated log viewer for training and simulation messages.
 
-#### 3.3.9. Training Interface Elements (within Lab Layout > Training Tab)
+#### 3.3.10. Training Interface Elements (within Lab Layout > Training Tab)
 
 - Buttons/Controls for:
   - Start/Stop/Pause Training
@@ -336,6 +359,15 @@ spike-x/
 ├── frontend/             # Remix/React application code
 │   │   └── app/
 │   │   ├── components/      # SHARED UI components (Button.tsx, Modal.tsx, etc.)
+│   │   │   ├── common/      # Reusable components (Logo.tsx, etc.)
+│   │   │   ├── footer/      # Footer components (LandingFooter.tsx)
+│   │   │   ├── navbar/      # Navigation components
+│   │   │   └── ...         # Other UI components
+│   │   ├── layouts/        # Layout components
+│   │   │   ├── LandingLayout.tsx
+│   │   │   ├── ConsoleLayout.tsx
+│   │   │   ├── LabLayout.tsx
+│   │   │   └── AuthLayout.tsx
 │   │   ├── styles/          # SHARED global styles, Tailwind config (tailwind.config.js)
 │   │   ├── utils/           # SHARED utility functions
 │   │   ├── routes/
@@ -365,8 +397,8 @@ spike-x/
 │   │   │   │   │   └── evaluation.tsx
 │   │   │   │   └── (layout.tsx for lab specific layout with top nav)
 │   │   │   │
-│   │   │   ├── login.tsx        # Shared login page (Try SPIKE-X could point here)
-│   │   │   ├── signup.tsx       # Shared signup page
+│   │   │   ├── console_.login.tsx  # Independent auth routes (console.spikex.com/login)
+│   │   │   ├── console_.signup.tsx # Independent auth routes (console.spikex.com/signup)
 │   │   │   └── ...
 │   │   │
 │   │   ├── root.tsx             # Overall root layout (can be minimal)

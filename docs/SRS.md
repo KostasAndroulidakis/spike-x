@@ -151,7 +151,7 @@ The major features of SPIKE-X include:
 
 * **Technology Stack:** As defined in the DDS (Remix/React, Python/FastAPI, PostgreSQL, etc.).
 * **Programming Languages:** TypeScript, Python, C++ (for core neural components).
-* **UI/UX:** Adherence to the three distinct layouts (`spikex.com`, `console.spikex.com`, `lab.spikex.com`) with a shared color palette.
+* **UI/UX:** Adherence to the four distinct layouts (`spikex.com`, `console.spikex.com`, `lab.spikex.com`, and authentication layouts) with a shared color palette and reusable components.
 * **Security:** Standard web security practices (HTTPS, input validation, protection against common vulnerabilities like XSS, CSRF, SQLi).
 * **Open Source Libraries:** Preference for well-maintained and permissively licensed open-source libraries.
 
@@ -319,13 +319,16 @@ The system shall provide:
 
 ### 4.1. User Interfaces
 
-* `REQ-EXT-UI-001` (H): The platform shall provide three distinct web-based UIs:
+* `REQ-EXT-UI-001` (H): The platform shall provide four distinct web-based UIs:
   * `spikex.com`: Public marketing and information site.
   * `console.spikex.com`: User dashboard for managing models, library, datasets, settings.
   * `lab.spikex.com`: Dedicated environment for model building, training, and analysis.
+  * `console.spikex.com/login` and `console.spikex.com/signup`: Clean authentication interfaces.
 * `REQ-EXT-UI-002` (H): All UIs shall use a consistent color palette and branding elements.
-* `REQ-EXT-UI-003` (H): The UIs shall be responsive and usable on common desktop screen resolutions.
-* `REQ-EXT-UI-004` (M): Navigation within each layout shall be intuitive and follow the specified menu structures.
+* `REQ-EXT-UI-003` (H): Key UI components (Logo, Footer) shall be reusable across different layouts to ensure consistency.
+* `REQ-EXT-UI-004` (H): Authentication routes shall operate as independent layouts, not nested within other application layouts.
+* `REQ-EXT-UI-005` (H): The UIs shall be responsive and usable on common desktop screen resolutions.
+* `REQ-EXT-UI-006` (M): Navigation within each layout shall be intuitive and follow the specified menu structures.
 
 ### 4.2. Hardware Interfaces
 

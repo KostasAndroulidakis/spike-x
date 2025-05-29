@@ -24,9 +24,20 @@
           [Login/Signup]     |
                  |           |
                  v           |
-         [Authentication]    |
-                 |           |
-                 v           |
+    ┌─────────────────────────────────────┐
+    │          AUTH LAYOUT                │
+    │   (console.spikex.com/login or     │
+    │    console.spikex.com/signup)      │
+    │                                    │
+    │  • Clean Authentication Interface  │
+    │  • Logo + Form + Footer Only       │
+    │  • No Sidebar or App Chrome        │
+    └─────────────────┬───────────────────┘
+                      |
+                      v
+         [Authentication]
+                 |
+                 v
                  └───────────┘
                              |
                              v
@@ -149,19 +160,29 @@
 
 ## Layout Transitions
 
-- **Landing → Console**: Via authentication
+- **Landing → Auth**: Via login/signup buttons (independent AuthLayout)
+- **Auth → Console**: Via successful authentication
 - **Console → Lab**: Via model creation/opening (new tab)
 - **Lab ↔ Console**: Data synchronization (not navigation)
+- **Auth ↔ Auth**: Cross-navigation between login and signup forms
 
 ## **Critical Design Decisions Shown:**
 
 1. **Landing Page** - Public entry point with marketing focus
-2. **Authentication Gate** - Clear separation between public and private areas
+2. **Auth Layout** - Clean, independent authentication interface (no console sidebar)
 3. **Console as Hub** - Central management dashboard after login
 4. **Lab in New Tab** - Dedicated workspace that doesn't disrupt console navigation
 5. **Data Synchronization** - Changes in Lab automatically reflect in Console
+6. **Component Reusability** - Logo and Footer shared across layouts for consistency
 
 ## **User Experience Flow:**
 - **Discover** → **Authenticate** → **Manage** → **Create/Work** → **Save/Export**
 
-The diagram shows how each layout serves its specific purpose while maintaining smooth transitions and data consistency across the platform.
+The diagram shows how each of the four layouts serves its specific purpose while maintaining smooth transitions and data consistency across the platform:
+
+- **Landing Layout**: Marketing and discovery
+- **Auth Layout**: Clean authentication experience  
+- **Console Layout**: Management hub with sidebar navigation
+- **Lab Layout**: Dedicated model workspace
+
+All layouts share reusable components (Logo, Footer) for visual consistency while maintaining independent architectures.
